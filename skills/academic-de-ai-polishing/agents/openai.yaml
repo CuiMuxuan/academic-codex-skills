@@ -1,0 +1,7 @@
+interface:
+  display_name: "Academic De-AI Polishing"
+  short_description: "De-template academic prose without weakening rigor."
+  default_prompt: "Use $academic-de-ai-polishing to revise this academic text so it keeps its meaning, evidence, and rigor but loses mechanical, AI-like cadence."
+
+policy:
+  allow_implicit_invocation: true

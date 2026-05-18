@@ -1,0 +1,4 @@
+interface:
+  display_name: "PDF DOCX Parsing Workflow"
+  short_description: "Parse PDFs, tables, OCR, and Word documents."
+  default_prompt: "Use $pdf-docx-parsing-workflow to extract structured evidence, page text, tables, OCR recovery notes, headings, comments, and revision metadata from my PDFs and DOCX files."

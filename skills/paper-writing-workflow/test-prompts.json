@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $paper-writing-workflow to create a chapter-by-chapter writing plan for a review paper after I provide a verified evidence register. Include gates and evidence-gap handling.",
+    "expected": "Creates a writing plan focused on outline, synthesis, chapter drafting, evidence gaps, and gates without doing DOI verification itself."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $paper-writing-workflow 根据已核验文献证据，为毕业论文第二章“相关理论与研究现状”设计结构并写一个小节草稿。",
+    "expected": "Responds in Chinese, drafts from verified evidence only, marks missing evidence, and produces a stage report."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $paper-writing-workflow to revise an existing experimental paper discussion section. The results are fixed; improve logic and cautious academic tone without inventing new findings.",
+    "expected": "Uses revision mode, preserves fixed results, improves argument and tone, and flags claims needing support."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $paper-writing-workflow to check whether my chapter draft cites only sources from a verified evidence register and whether any claims still say needs evidence.",
+    "expected": "Requests the draft and evidence register if missing, uses or recommends the evidence alignment audit script, treats missing/unverified citations and needs-evidence markers as blocking unless the user approves a provisional draft."
+  },
+  {
+    "id": 5,
+    "prompt": "Use $paper-writing-workflow to draft an Introduction subsection after I provide five benchmark papers from the target journal. First infer the target writing pattern, then draft from my verified evidence register.",
+    "expected": "Builds a target/benchmark writing-alignment brief, calibrates section job, evidence density, citation pattern, claim strength, and figure/table callouts before drafting, and avoids generic academic prose or copied benchmark wording."
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $academic-figure-workflow to decide how to create three thesis figures: a mechanism diagram, a software workflow, and a photorealistic cover-like illustration. Include confirmation gates.",
+    "expected": "Chooses SVG for the mechanism, Draw.io for workflow, OpenAI image generation only after explicit confirmation and API availability check."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $academic-figure-workflow 为论文画一个稍复杂的机理图，要求默认可编辑、适合投稿、先给出图规格而不是直接生成图片。",
+    "expected": "Responds in Chinese, selects SVG, creates a figure spec, and asks for confirmation before complex drawing."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $academic-figure-workflow to create a draw.io architecture diagram from a real codebase summary. Avoid invented services and list validation checks.",
+    "expected": "Selects Draw.io, requires code-backed nodes/edges, avoids unsupported architecture, and defines validation checks."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $academic-figure-workflow to generate a Nature-grade multi-panel Matplotlib figure from a panel spec and source CSV files. I need editable SVG/PDF, PNG preview, and QA evidence that panel claims are non-redundant.",
+    "expected": "Requests source data and panel spec if missing, uses the Nature multi-panel generator when available, exports editable SVG/PDF/PNG, and reports QA issues such as duplicate claims, missing data, outlined text, or label overlap."
+  },
+  {
+    "id": 5,
+    "prompt": "Use $academic-figure-workflow to review a manuscript figure plan with six panels and decide whether any panels are redundant or unsupported by evidence before drawing.",
+    "expected": "Creates a figure argument contract, checks panel necessity and evidence traceability, flags redundant or unsupported panels, and stops at a spec/storyboard when evidence is incomplete."
+  }
+]

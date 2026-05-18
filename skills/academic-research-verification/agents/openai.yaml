@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Research Verification"
+  short_description: "Verify literature across multiple sources."
+  default_prompt: "Use $academic-research-verification to verify the DOI, source trail, title agreement, and citation status for my literature list."

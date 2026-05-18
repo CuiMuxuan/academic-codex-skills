@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $academic-de-ai-polishing to revise this review-paper paragraph so it sounds less AI-generated while preserving the meaning, citation logic, and technical scope. First diagnose the mechanical patterns, then provide a revised paragraph and a brief change note.",
+    "expected": "Diagnoses connector/cadence/template risks, rewrites locally rather than regenerating the whole section, preserves meaning and citations, and explains cadence/vocabulary/judgment changes without claiming detector scores."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $academic-de-ai-polishing 帮我润色毕业论文第二章的一段中文学术文字，目标是降低机械感和模板感，但不能改变原意、术语、证据强度或参考文献逻辑。",
+    "expected": "Responds in Chinese, identifies high-risk academic-template patterns, rewrites at paragraph level, preserves terminology/evidence/citation logic, and states what changed."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $academic-de-ai-polishing to assess whether a rebuttal paragraph sounds AI-like. I want a qualitative risk assessment, not a rewrite yet. Do not invent AI-detector percentages.",
+    "expected": "Provides qualitative reviewer-facing AI-trace assessment, separates human-noticeable templating from under-edited/mass-generated feel, points to exact residual-risk patterns, and avoids fabricated detector scores."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $academic-de-ai-polishing on a discussion paragraph that sounds polished but overclaims a causal mechanism. Preserve citations and fix the claim boundary before improving style.",
+    "expected": "Applies the argument-first gate, flags overclaiming, softens or requests evidence before cadence polishing, and keeps citation and terminology boundaries visible."
+  }
+]

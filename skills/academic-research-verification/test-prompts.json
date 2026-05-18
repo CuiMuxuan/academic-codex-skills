@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $academic-research-verification to audit this short bibliography for a thesis literature review. Identify which entries are verified, unresolved, or suspicious, and define the evidence register fields I should keep.",
+    "expected": "Separates verification from writing, defines trust states, lists DOI/title checks, flags unresolved items, and proposes an evidence register schema."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $academic-research-verification 为我的综述论文设计一轮文献检索和 DOI 核验流程，主题是钠离子电池正极材料，要求近五年文献优先。",
+    "expected": "Responds in Chinese, designs a search and DOI verification workflow, records candidate/verified states, and avoids claiming sources are verified without source checks."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $academic-research-verification to check whether every in-body citation in a draft has a bibliography entry and whether every bibliography entry is cited. I cannot browse right now.",
+    "expected": "Provides an offline citation-audit procedure, marks DOI identity checks as pending/manual, and outputs mismatch/unresolved lists."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $academic-research-verification to verify a CSV bibliography across multiple sources. Prefer DOI/title agreement across Crossref, OpenAlex, Semantic Scholar, and PubMed when applicable, and do not silently repair mismatches.",
+    "expected": "Uses or recommends the multi-source verification script, treats script output as an audit queue, records source URLs/title similarity/DOI agreement, and requires user review before changing trust states."
+  }
+]

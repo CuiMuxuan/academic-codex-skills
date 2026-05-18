@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $academic-formatting-workflow to plan formatting normalization for a thesis DOCX using a provided school handbook and Word template. Explain the passes and manual Word checks.",
+    "expected": "Prioritizes handbook/template rules, separates formatting from content writing, lists passes, safe output naming, and Word-only checks."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $academic-formatting-workflow 帮我检查毕业论文格式：目前没有学校手册，只有一个旧版 Word 文件。请说明你会如何建立临时排版基线。",
+    "expected": "Responds in Chinese, uses existing DOCX then provisional general baseline, states uncertainty, and avoids final-rule claims."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $academic-formatting-workflow to format a bilingual journal manuscript after content is stable. I need margins, headings, captions, references, and abstract formatting checked.",
+    "expected": "Creates a formatting checklist and output report plan, covering bilingual abstracts, captions, references, and stable output copies."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $academic-formatting-workflow to do the final Word-only refresh for a thesis DOCX: update TOC, fields, tables of figures, cross-references, and pagination. Ask before opening Word.",
+    "expected": "Requires explicit Word COM permission and output-copy confirmation, uses or recommends the refresh script, saves a new DOCX plus report, and lists any manual Word checks that remain."
+  }
+]

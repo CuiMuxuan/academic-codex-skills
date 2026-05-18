@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $post-manuscript-benchmark-review to assess whether this completed journal manuscript draft is ready for a Q1 target. I have five benchmark papers, a reference list, figures, and results tables.",
+    "expected": "Confirms the post-draft gate, uses 3-10 benchmark papers, compares the draft against target-level evidence, gives a readiness level, and produces P0/P1/P2 next-version actions."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $post-manuscript-benchmark-review 评审我的初版论文，对标3篇Water Research论文，指出当前稿件和目标期刊之间的差距，并给下一版优化方案。",
+    "expected": "用中文输出，说明对标文献选择依据，按四项标准逐项评价，包含benchmark gap表、claim triage、P0/P1/P2下一版优化方案、资料清单和是否达到目标档位的判定。"
+  },
+  {
+    "id": 3,
+    "prompt": "Use $post-manuscript-benchmark-review for my topic idea. I do not have a full draft yet, but I want a benchmark review and SCI readiness score.",
+    "expected": "Declines the full post-draft review because the activation gate is not met, routes upstream to planning/research/writing, and asks for a complete draft or suitable materials before giving a readiness score."
+  }
+]

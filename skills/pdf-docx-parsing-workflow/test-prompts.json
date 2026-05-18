@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $pdf-docx-parsing-workflow to parse a folder of academic PDFs into an evidence CSV for later writing. I need page numbers, findings, methods, limitations, and quality flags.",
+    "expected": "Plans inventory, parser choice, structured evidence fields, quality labels, and manual recovery list without claiming DOI verification."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $pdf-docx-parsing-workflow 解析一个带批注和修订痕迹的 DOCX 论文草稿，输出标题结构、批注、修订摘要和后续写作可用的信息。",
+    "expected": "Responds in Chinese, chooses DOCX XML/python-docx inspection, extracts headings/comments/revisions, and preserves source locations."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $pdf-docx-parsing-workflow to inspect a Word thesis template and produce a formatting-template inventory for another skill to apply later.",
+    "expected": "Separates parsing from formatting, captures styles/page setup signals, and produces a structured template inventory."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $pdf-docx-parsing-workflow to parse a scanned or table-heavy PDF into page text, table cells, OCR recovery notes, and a manual recovery list. Ask before OCR or dependency installation.",
+    "expected": "Requests OCR/dependency permission, uses the table/OCR inventory script when suitable, outputs text/table CSVs plus recovery notes, and marks low-quality extraction zones instead of treating them as reliable evidence."
+  }
+]

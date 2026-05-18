@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Figure Workflow"
+  short_description: "Create academic figures with QA."
+  default_prompt: "Use $academic-figure-workflow to create SVG mechanism figures, Nature-grade multi-panel Matplotlib figures, draw.io engineering diagrams, or confirmed OpenAI image assets."

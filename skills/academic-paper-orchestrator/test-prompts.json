@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "Use $academic-paper-orchestrator to plan an end-to-end workflow for my bilingual master's thesis. I have a topic, 25 PDFs, an older DOCX draft with comments, and a school formatting handbook. Tell me the stages, gates, and which focused skill should handle each part.",
+    "expected": "Creates a staged bilingual thesis workflow, routes research verification, parsing, writing, figures, and formatting to the focused skills, and defines user confirmation gates."
+  },
+  {
+    "id": 2,
+    "prompt": "用 $academic-paper-orchestrator 帮我判断现在应该先做什么：我有论文题目、一些PDF文献、实验数据、还没有学校模板，导师让我两周内交第一版正文。",
+    "expected": "Responds in Chinese, performs minimal intake, identifies missing formatting baseline, prioritizes evidence verification/parsing and design document before chapter drafting."
+  },
+  {
+    "id": 3,
+    "prompt": "Use $academic-paper-orchestrator to resume a thesis project after a month. I have chapter 1-3 drafts, unverified references, and a diagram request. Build a current project state and next gate report.",
+    "expected": "Builds project state, separates unverified research, writing, and figure work, and produces a gate report with risks and next steps."
+  },
+  {
+    "id": 4,
+    "prompt": "Use $academic-paper-orchestrator to create a durable project_state.json for a thesis and validate whether the project can move from research/parsing into chapter drafting.",
+    "expected": "Uses or recommends the project-state checker, records required handoff packets, blocks drafting if evidence readiness is insufficient, and produces a validation report with next gate decisions."
+  },
+  {
+    "id": 5,
+    "prompt": "Use $academic-paper-orchestrator after I have a complete first manuscript draft and want an SCI readiness review against benchmark papers before the next revision.",
+    "expected": "Routes the post-draft readiness task to $post-manuscript-benchmark-review, identifies the needed draft/benchmark/evidence handoff packet, and keeps formatting or de-AI polishing as later or separate passes."
+  }
+]
