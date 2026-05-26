@@ -1,4 +1,4 @@
 interface:
   display_name: "Academic Formatting Workflow"
-  short_description: "Format and finalize manuscripts."
-  default_prompt: "Use $academic-formatting-workflow to format my thesis according to the provided school handbook or Word template, then plan any Word-only final refresh steps."
+  short_description: "Format manuscripts and Markdown-to-DOCX outputs."
+  default_prompt: "Use $academic-formatting-workflow to format my thesis according to the provided school handbook or Word template, preserving Markdown formulas as readable LaTeX-derived Word equations, superscripts/subscripts, citations, and cross-references."
