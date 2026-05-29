@@ -1,3 +1,6 @@
 # Ignore root-level Markdown working notes, but keep the project README.
 /*.md
 !/README.md
+/tmp/
+__pycache__/
+*.pyc

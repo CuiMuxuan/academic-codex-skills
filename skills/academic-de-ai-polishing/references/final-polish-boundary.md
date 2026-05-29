@@ -53,3 +53,7 @@ Allowed edit intensity:
 ```
 
 If the handoff is missing, keep edits conservative and list user-review items.
+
+## Claim Strength Audit Hook
+
+When polishing a claim-heavy section, run or emulate the claim-anchor audit before and after editing. In this repository, `scripts/audit_claim_anchors.py` can check that central claim anchors still have writing-ready evidence and allowed claim strength.

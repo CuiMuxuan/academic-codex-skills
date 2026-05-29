@@ -28,5 +28,10 @@
     "id": 6,
     "prompt": "用 $academic-paper-orchestrator 规划论文写作流程：研究领域还没确认，大纲里有待补证据，后续还要根据导师意见修改并最终降AI润色。",
     "expected": "Responds in Chinese, routes field confirmation and drafting to $paper-writing-workflow, LIT_GAP verification to $academic-research-verification, ordinary comment-response planning to writing, final polish to $academic-de-ai-polishing, and identifies confirmation gates before each major transition."
+  },
+  {
+    "id": 7,
+    "prompt": "Use $academic-paper-orchestrator for a manuscript project with Markdown sources, DOCX submission files, draw.io figures, PNG exports, evidence CSVs, and code-generated results. Identify dependencies, handoff fields, confirmation gates, and which QA scripts or focused skills should be used.",
+    "expected": "Routes the mixed project through parsing, verification, writing, figure QA, benchmark review, polishing, and formatting; names likely dependencies such as Pandoc, Word, draw.io, Matplotlib, and Python packages; uses material passports and claim anchors; asks before installation or lossy conversion."
   }
 ]

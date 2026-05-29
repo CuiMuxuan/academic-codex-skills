@@ -39,6 +39,16 @@ Open decisions:
 | Editability | Source files remain editable and text is not unnecessarily outlined. |
 | Submission fit | Size, typography, colour, and annotation density fit the target journal or thesis context. |
 
+## Package QA Hook
+
+When maintaining this skills repository or checking a figure package, use:
+
+```bash
+python scripts/figure_package_check.py --package figures --captions captions.md --output-md figure_package_check.md
+```
+
+Treat missing editable sources, missing exports, and captions without claim anchors as issues to resolve or explicitly waive.
+
 ## Output Packet
 
 ```text

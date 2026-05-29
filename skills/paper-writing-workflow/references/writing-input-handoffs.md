@@ -30,3 +30,9 @@ python scripts/audit_evidence_alignment.py --draft chapter_02.md --evidence-regi
 Treat `citation_missing_from_register`, `citation_not_writing_ready`, unresolved `needs evidence`, and unresolved `LIT_GAP` markers as blocking unless the user explicitly approves a provisional draft.
 
 For claim-heavy sections, also check that central claims have anchors or appear in the unresolved claim list.
+
+When maintaining this skills repository, use `scripts/audit_claim_anchors.py` as a deterministic smoke test for claim-anchor handoffs:
+
+```bash
+python scripts/audit_claim_anchors.py --draft draft.md --evidence-register evidence_register.csv --output-md claim_anchor_audit.md
+```

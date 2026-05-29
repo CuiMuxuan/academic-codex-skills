@@ -28,5 +28,10 @@
     "id": 6,
     "prompt": "用 $academic-figure-workflow 为一张投稿用工程架构图制定 draw.io 制图规范，要求检查最终栏宽可读性、颜色可访问性、导出可编辑性和来源依据。",
     "expected": "Responds in Chinese, selects Draw.io, applies visual standards, accessibility/color standards, export/editability standards, draw.io engineering standards, and uses the publisher source map rather than inventing venue rules."
+  },
+  {
+    "id": 7,
+    "prompt": "Use $academic-figure-workflow to QA a figure package with editable draw.io/SVG sources, PNG/PDF exports, captions, and claim anchors before submission.",
+    "expected": "Checks source/export/caption completeness, maps panels or figure IDs to claim anchors, flags missing editable sources or exports, and recommends the figure package QA hook."
   }
 ]

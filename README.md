@@ -1,154 +1,124 @@
 # Academic Codex Skills
 
-High-quality Codex skills for academic papers, theses, dissertations, literature verification, manuscript writing, academic figures, DOCX formatting, and post-draft benchmark review.
+一套面向论文、学位论文、综述、投稿稿件和技术报告的 Codex academic workflow skills。目标是让 AI 协助写作时仍然保留证据纪律、引用可追溯、图表可验证、格式可检查、阶段可确认。
 
-This repository packages an end-to-end academic writing workflow as portable Codex skills. It is designed for researchers, graduate students, supervisors, and technical writers who want AI assistance without losing evidence discipline, citation traceability, or manuscript-quality gates.
+## 包含的 Skill
 
-## Why This Exists
-
-Generic AI writing help often drifts into smooth but unsupported academic prose. This skill pack is built around a stricter workflow:
-
-1. Verify sources before using them.
-2. Parse PDFs and DOCX files into reusable structured evidence.
-3. Draft only from verified or explicitly approved evidence.
-4. Design figures from claims, data, and source facts.
-5. Polish prose without changing claim boundaries.
-6. Format only after content is stable.
-7. Review the full draft against real benchmark papers before final revision.
-
-## Included Skills
-
-| Skill | Use For |
+| Skill | 主要用途 |
 |---|---|
-| `academic-paper-orchestrator` | Coordinate the full thesis or paper workflow and route work to focused skills. |
-| `academic-research-verification` | Verify DOI/title matches, bibliography quality, citation authenticity, and evidence registers. |
-| `pdf-docx-parsing-workflow` | Parse PDFs, DOCX drafts, comments, tracked changes, formatting templates, and evidence notes. |
-| `paper-writing-workflow` | Plan, draft, revise, and integrate academic sections from verified evidence and benchmark writing patterns. |
-| `academic-figure-workflow` | Plan and create academic figures, mechanism diagrams, draw.io diagrams, and Nature-style multi-panel plots. |
-| `academic-de-ai-polishing` | Reduce mechanical AI-like academic prose while preserving evidence, citations, and technical scope. |
-| `academic-formatting-workflow` | Normalize DOCX formatting against school handbooks, templates, or journal guides. |
-| `post-manuscript-benchmark-review` | Review a complete first draft against 3-10 benchmark papers and produce a next-version plan. |
+| `academic-paper-orchestrator` | 论文全流程总控，路由到检索、解析、写作、图表、润色、后评审和格式化 skill。 |
+| `academic-research-verification` | 文献检索、DOI/title 核验、引用真实性检查、证据表和 `LIT_GAP` 处理。 |
+| `pdf-docx-parsing-workflow` | 解析 PDF/DOCX、批注、修订痕迹、样式、参考文献和结构化证据。 |
+| `paper-writing-workflow` | 从已验证证据出发，规划、撰写、修订和整合论文章节。 |
+| `academic-figure-workflow` | 论文图表、SVG、draw.io、Matplotlib 多面板图、caption 和投稿级图件 QA。 |
+| `academic-de-ai-polishing` | 在内容稳定后降低机械感和 AI 痕迹，同时保护 claim strength、引用和术语。 |
+| `academic-formatting-workflow` | 学校/期刊模板、DOCX 排版、Markdown-to-DOCX、公式、上下标、交叉引用和参考文献格式。 |
+| `post-manuscript-benchmark-review` | 完整初稿后的 benchmark review、质量评估、claim triage 和下一版 P0/P1/P2 计划。 |
 
-## Install
+## 共享协议层
 
-Clone the repository:
+跨 skill 的字段和边界放在 [shared](shared/)：
 
-```powershell
-git clone https://github.com/CuiMuxuan/academic-codex-skills.git
-cd academic-codex-skills
-```
+- `workflow-protocol-index.md`：跨 skill 协议索引。
+- `trigger-conflict-matrix.md`：触发冲突与路由优先级。
+- `handoff-field-schema.md`：`material_passport`、`claim_anchor`、`LIT_GAP`、benchmark report 等共享字段。
+- `validation-policy.md`：error/warning 与 strict 验证策略。
 
-Install on Windows:
+原则：总控 skill 直接读取 `shared/`；其它 skill 的 `SKILL.md` 尽量保持自包含，通过本地 references 与共享字段对齐。
+
+## 安装
+
+Windows:
 
 ```powershell
 .\install.ps1
 ```
 
-Or copy manually:
+安装脚本只替换本仓库管理的 8 个同名 skill，并同步 `shared/` 到：
+
+```text
+C:\Users\<you>\.codex\skills
+C:\Users\<you>\.codex\shared
+```
+
+不会删除 `.system` 或其它非本仓库 skill。
+
+## 验证
+
+本地严格验证：
 
 ```powershell
-Copy-Item -Recurse -Force .\skills\* $env:USERPROFILE\.codex\skills
+python scripts/validate_skills.py --strict
 ```
 
-On macOS/Linux:
+全局安装后验证：
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/* ~/.codex/skills/
+```powershell
+python scripts/validate_skills.py --root C:\Users\<you>\.codex --strict
 ```
 
-Restart Codex after installation so the skills are discovered.
+仓库级 QA 脚本：
 
-## Recommended Workflow
+```powershell
+python scripts/audit_claim_anchors.py --help
+python scripts/validate_markdown_docx_package.py --help
+python scripts/figure_package_check.py --help
+```
 
-For a full paper or thesis project, start with:
+这些 `scripts/` 是仓库维护工具，不复制到全局 `.codex`。
+
+## 依赖与软件
+
+不同阶段可能用到：
+
+- 文献核验：网络、Crossref/OpenAlex/Semantic Scholar/PubMed。
+- PDF/DOCX：PyMuPDF、pdfplumber、pypdf、python-docx、Microsoft Word COM。
+- Markdown-to-DOCX：Pandoc、CSL、BibTeX/BibLaTeX、Word 字段刷新。
+- 图表：Matplotlib、draw.io/diagrams.net、Inkscape、Graphviz、CairoSVG、Pillow。
+- 数据/结果核验：项目代码、Python 科学计算栈、CSV/Parquet reader。
+
+原则：skill 会明确指出可能需要的依赖，并引导用户确认安装或选择替代方案；不会静默安装或静默接受有损转换。
+
+## 推荐流程
+
+完整项目从总控开始：
 
 ```text
-Use $academic-paper-orchestrator to plan an end-to-end workflow for my thesis/paper.
+Use $academic-paper-orchestrator to plan an end-to-end workflow for my paper/thesis.
 ```
 
-Typical sequence:
+常见顺序：
 
-1. `$academic-paper-orchestrator`
-2. `$academic-research-verification`
-3. `$pdf-docx-parsing-workflow`
-4. `$paper-writing-workflow`
-5. `$academic-figure-workflow`
-6. `$academic-de-ai-polishing`
-7. `$post-manuscript-benchmark-review`
-8. `$academic-formatting-workflow`
+1. `academic-paper-orchestrator`
+2. `academic-research-verification`
+3. `pdf-docx-parsing-workflow`
+4. `paper-writing-workflow`
+5. `academic-figure-workflow`
+6. `post-manuscript-benchmark-review`
+7. `academic-de-ai-polishing`
+8. `academic-formatting-workflow`
 
-The order is flexible, but source verification and evidence preparation should happen before serious drafting.
+顺序可以根据项目状态调整，但正式写作前应优先完成证据核验；最终润色和格式化应在内容、结构、证据和 claim strength 稳定后进行。
 
-## Example Prompts
+## 质量原则
 
-Full project:
+- 不伪造文献、DOI、实验结果、图表内容或格式规则。
+- 对无法判断的边界性选择先询问用户。
+- 若用户不设定研究领域，默认领域为计算机与电子信息，并标记该假设。
+- 写作 claim 通过 `claim_anchor` 与证据、代码、结果或用户决策连接。
+- 图表 panel、caption、正文 claim 和 evidence register 应保持可追溯。
+- Markdown-to-DOCX 时保护 LaTeX 公式、上下标、交叉引用和参考文献。
 
-```text
-Use $academic-paper-orchestrator to plan an end-to-end workflow for my master's thesis. I have a topic, 25 PDFs, an old DOCX draft with supervisor comments, and a school formatting guide.
-```
-
-Literature verification:
-
-```text
-Use $academic-research-verification to verify this bibliography, check DOI/title matches, and create an evidence register for chapter drafting.
-```
-
-Benchmark-calibrated writing:
-
-```text
-Use $paper-writing-workflow to draft an Introduction subsection after I provide five benchmark papers from the target journal and a verified evidence register.
-```
-
-Figure planning:
-
-```text
-Use $academic-figure-workflow to design a Nature-grade multi-panel figure from my panel claims and source data.
-```
-
-Post-draft review:
-
-```text
-Use $post-manuscript-benchmark-review to evaluate my complete first manuscript draft against 3-10 benchmark papers and give a P0/P1/P2 next-version plan.
-```
-
-More examples are in [examples/prompts.md](examples/prompts.md).
-
-## Quality Principles
-
-- Do not fabricate papers, DOIs, results, figures, or claims.
-- Treat verified evidence as the source of truth.
-- Ask for missing materials when quality would materially improve.
-- Keep target-paper and benchmark comparisons evidence-based.
-- Separate drafting, polishing, formatting, and post-draft review.
-- Preserve user data boundaries and local files.
-
-## Repository Layout
+## 目录
 
 ```text
 academic-codex-skills/
-  README.md
-  CHANGELOG.md
-  LICENSE
   install.ps1
-  examples/
-    prompts.md
+  scripts/
+  shared/
   skills/
-    academic-paper-orchestrator/
-    academic-research-verification/
-    pdf-docx-parsing-workflow/
-    paper-writing-workflow/
-    academic-figure-workflow/
-    academic-de-ai-polishing/
-    academic-formatting-workflow/
-    post-manuscript-benchmark-review/
+  examples/
 ```
-
-## Version
-
-Current release: `v0.1.0`
-
-See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ## License
 

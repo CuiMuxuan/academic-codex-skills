@@ -23,7 +23,11 @@ For evidence extraction, add:
 - `limitation`
 - `target_chapter`
 - `citation_key`
+- `claim_anchor_id`
+- `allowed_claim_strength`
 - `verification_state`
+
+When a project uses material passports, also preserve `material_id` so downstream stages can trace the parsed artifact.
 
 ## Downstream Gates
 
@@ -35,3 +39,5 @@ For evidence extraction, add:
 | `$academic-figure-workflow` | Send figure/table captions or extracted figure references as planning inputs, not as confirmed visual assets |
 
 Do not treat parsed bibliography metadata as verified literature identity. Route DOI/title checks to `$academic-research-verification`.
+
+Parsed outputs may populate evidence registers, but they should enter as `candidate` or `parsed` rather than `writing_ready` until source identity and claim support are checked.

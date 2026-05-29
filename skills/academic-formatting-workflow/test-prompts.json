@@ -18,5 +18,10 @@
     "id": 4,
     "prompt": "Use $academic-formatting-workflow to do the final Word-only refresh for a thesis DOCX: update TOC, fields, tables of figures, cross-references, and pagination. Ask before opening Word.",
     "expected": "Requires explicit Word COM permission and output-copy confirmation, uses or recommends the refresh script, saves a new DOCX plus report, and lists any manual Word checks that remain."
+  },
+  {
+    "id": 5,
+    "prompt": "Use $academic-formatting-workflow to validate a Markdown-to-DOCX conversion package with LaTeX formulas, superscripts/subscripts, figure/equation cross-references, Pandoc citations, and a DOCX output. Do not treat missing Pandoc or Word checks as silently acceptable.",
+    "expected": "Uses the Markdown-to-DOCX conversion reference, checks formula readability, subscript/superscript preservation, bibliography metadata, cross-reference anchors, Word refresh needs, and recommends the package validation QA hook."
   }
 ]

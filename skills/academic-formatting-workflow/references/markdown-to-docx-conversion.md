@@ -54,6 +54,16 @@ Preserve semantic grouping. Do not let grouped indices, exponents, chemical form
 | cross-reference validation | check figure/table/equation labels and targets | cross-reference issue list |
 | final formatting | apply template, styles, captions, page setup, and Word refresh plan | formatted DOCX and report |
 
+## Package QA Hook
+
+When maintaining this skills repository or validating a conversion package, use:
+
+```bash
+python scripts/validate_markdown_docx_package.py --markdown manuscript.md --docx manuscript.docx --output-md markdown_docx_validation.md
+```
+
+If Pandoc or Word is unavailable, report the missing dependency and keep the output provisional rather than silently accepting lossy conversion.
+
 ## QA Packet
 
 ```text

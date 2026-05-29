@@ -46,6 +46,13 @@ REQUIRED_SHARED_FILES = {
     "validation-policy.md",
 }
 
+REQUIRED_REPO_SCRIPTS = {
+    "validate_skills.py",
+    "audit_claim_anchors.py",
+    "validate_markdown_docx_package.py",
+    "figure_package_check.py",
+}
+
 CANONICAL_FIELD_TOKENS = {
     "current_mode",
     "material_id",
@@ -236,6 +243,23 @@ def check_shared(root: Path, findings: list[Finding]) -> None:
                 add(findings, "error", schema, f"canonical field token missing: {token}", root)
 
 
+def check_repo_scripts(root: Path, findings: list[Finding]) -> None:
+    scripts = root / "scripts"
+    if not scripts.exists():
+        repo_root = Path(__file__).resolve().parents[1]
+        if root.resolve() == repo_root.resolve():
+            add(findings, "error", scripts, "scripts directory is missing", root)
+        return
+    for name in sorted(REQUIRED_REPO_SCRIPTS):
+        path = scripts / name
+        if not path.exists():
+            add(findings, "error", path, "required repository QA script is missing", root)
+            continue
+        result = subprocess.run([sys.executable, "-X", "utf8", str(path), "--help"], text=True, capture_output=True, check=False)
+        if result.returncode != 0:
+            add(findings, "error", path, f"--help smoke test failed: {(result.stdout + result.stderr).strip()}", root)
+
+
 def check_core_alignment(root: Path, findings: list[Finding]) -> None:
     shared_ref = "../../../shared/handoff-field-schema.md"
     expected_refs = [
@@ -287,6 +311,7 @@ def validate(root: Path, strict: bool) -> int:
     findings: list[Finding] = []
     root = root.resolve()
     check_shared(root, findings)
+    check_repo_scripts(root, findings)
     check_skills(root, findings)
     check_markdown_links(root, findings)
     check_yaml_and_json(root, findings)

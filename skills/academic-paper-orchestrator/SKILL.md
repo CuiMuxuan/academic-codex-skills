@@ -62,8 +62,9 @@ Fallback if unavailable:
 5. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
 6. Apply [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before drafting, benchmark review, final polish, formatting, or any claim about code/data/results.
 7. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
-8. Route execution to the focused skill that owns the current stage.
-9. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+8. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
+9. Route execution to the focused skill that owns the current stage.
+10. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -103,6 +104,8 @@ Read [project-gates-and-phases.md](references/project-gates-and-phases.md) for s
 Read [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before accepting claims about sources, code, data, experiments, benchmarks, figures, or final deliverables.
 
 Read [writing-chain-gates.md](references/writing-chain-gates.md) for field confirmation, `LIT_GAP` handling, reviewer-comment revision planning, post-draft review routing, and final de-AI polishing gates.
+
+Read [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a workflow stage may require external software, Python packages, Word automation, Pandoc, draw.io, image conversion tools, or network APIs.
 
 ## Bundled Utilities
 

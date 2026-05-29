@@ -62,3 +62,4 @@ Severity must use `blocking`, `major`, `moderate`, or `minor`. Do not mark gaps 
 - Tie each P0/P1 action to a manuscript location, claim anchor, benchmark pressure, or evidence gap.
 - Do not give a final target-readiness judgment when the draft, benchmark set, or evidence base is too incomplete; use `cannot_judge_from_materials`.
 - Route literature identity problems to `$academic-research-verification` and confirmed writing revisions to `$paper-writing-workflow`.
+- Route final language polishing to `$academic-de-ai-polishing` only after claim triage, P0/P1 revisions, and evidence boundaries are stable.

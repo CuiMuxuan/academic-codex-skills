@@ -48,3 +48,7 @@ Target manuscript location:
 Allowed claim strength:
 Verification state:
 ```
+
+## Claim Anchor Audit Hook
+
+When a writing workflow provides claim anchors, make the evidence register auditable by including `claim_anchor_id`, `verification_state`, and `allowed_claim_strength`. In this repository, `scripts/audit_claim_anchors.py` can be used as a maintenance smoke test for that handoff.
