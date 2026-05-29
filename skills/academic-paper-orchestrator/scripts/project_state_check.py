@@ -16,9 +16,11 @@ from typing import Any
 
 
 REQUIRED_FIELDS = [
+    "current_mode",
     "paper_type",
     "language",
     "target_standard",
+    "material_passports",
     "materials",
     "evidence_status",
     "draft_status",
@@ -40,6 +42,21 @@ EXPECTED_HANDOFFS = [
 ]
 
 VALID_EVIDENCE_STATES = {"none", "candidate", "verified", "downloaded", "parsed", "cited", "rejected", "unresolved", "mixed"}
+VALID_MODES = {
+    "intake_inventory",
+    "target_baseline",
+    "research_verify",
+    "parse_materials",
+    "field_terms",
+    "design_outline",
+    "draft_section",
+    "gap_resolution",
+    "figure_plan_build",
+    "integrated_draft",
+    "benchmark_review",
+    "final_polish",
+    "format_delivery",
+}
 VALID_GATES = {
     "intake",
     "target_baseline",
@@ -57,13 +74,21 @@ VALID_GATES = {
     "pre_final",
     "user_decision",
 }
+VALID_ACCESS_LEVELS = {"raw", "redacted", "verified_only"}
+VALID_TASK_TYPES = {"open_ended", "outcome_gradable"}
+VALID_MATERIAL_STATES = {"unknown", "candidate", "verified", "parsed", "writing_ready", "rejected", "unresolved"}
+VALID_HANDOFF_STATUSES = {"missing", "candidate", "ready", "blocked", "complete"}
 
 
 def template() -> dict[str, Any]:
     return {
+        "current_mode": "intake_inventory",
         "paper_type": "",
         "language": "",
         "target_standard": "",
+        "current_field": "",
+        "target_venue_field": "",
+        "material_passports": [],
         "materials": {
             "source_pdfs": [],
             "docx_drafts": [],
@@ -109,6 +134,42 @@ def validate(state: dict[str, Any]) -> list[dict[str, str]]:
     if current_gate and current_gate not in VALID_GATES:
         issues.append({"level": "warning", "field": "current_gate", "issue": f"unexpected_gate:{current_gate}", "action": "map to a standard project gate"})
 
+    current_mode = str(state.get("current_mode", "")).lower()
+    if current_mode and current_mode not in VALID_MODES:
+        issues.append({"level": "warning", "field": "current_mode", "issue": f"unexpected_mode:{current_mode}", "action": "map to workflow-mode-registry.md"})
+
+    passports = state.get("material_passports", [])
+    if not isinstance(passports, list):
+        issues.append({"level": "error", "field": "material_passports", "issue": "not_a_list", "action": "replace with material passport array"})
+    else:
+        seen_ids: set[str] = set()
+        for index, passport in enumerate(passports):
+            field_prefix = f"material_passports[{index}]"
+            if not isinstance(passport, dict):
+                issues.append({"level": "error", "field": field_prefix, "issue": "not_an_object", "action": "replace item with a material passport object"})
+                continue
+            material_id = str(passport.get("material_id", "")).strip()
+            if not material_id:
+                issues.append({"level": "warning", "field": f"{field_prefix}.material_id", "issue": "missing_material_id", "action": "add a stable material id"})
+            elif material_id in seen_ids:
+                issues.append({"level": "warning", "field": f"{field_prefix}.material_id", "issue": f"duplicate_material_id:{material_id}", "action": "make material ids unique"})
+            seen_ids.add(material_id)
+            for required in ("artifact_type", "path_or_source", "stage_owner", "data_access_level", "task_type", "verification_state", "handoff_status"):
+                if not str(passport.get(required, "")).strip():
+                    issues.append({"level": "warning", "field": f"{field_prefix}.{required}", "issue": "missing_passport_field", "action": "complete material passport before relying on this artifact"})
+            access_level = str(passport.get("data_access_level", "")).lower()
+            if access_level and access_level not in VALID_ACCESS_LEVELS:
+                issues.append({"level": "warning", "field": f"{field_prefix}.data_access_level", "issue": f"unexpected_access_level:{access_level}", "action": "use raw, redacted, or verified_only"})
+            task_type = str(passport.get("task_type", "")).lower()
+            if task_type and task_type not in VALID_TASK_TYPES:
+                issues.append({"level": "warning", "field": f"{field_prefix}.task_type", "issue": f"unexpected_task_type:{task_type}", "action": "use open_ended or outcome_gradable"})
+            verification_state = str(passport.get("verification_state", "")).lower()
+            if verification_state and verification_state not in VALID_MATERIAL_STATES:
+                issues.append({"level": "warning", "field": f"{field_prefix}.verification_state", "issue": f"unexpected_verification_state:{verification_state}", "action": "normalize material verification state"})
+            handoff_status = str(passport.get("handoff_status", "")).lower()
+            if handoff_status and handoff_status not in VALID_HANDOFF_STATUSES:
+                issues.append({"level": "warning", "field": f"{field_prefix}.handoff_status", "issue": f"unexpected_handoff_status:{handoff_status}", "action": "use missing, candidate, ready, blocked, or complete"})
+
     handoffs = state.get("handoff_packets", {})
     if not isinstance(handoffs, dict):
         issues.append({"level": "error", "field": "handoff_packets", "issue": "not_an_object", "action": "replace with handoff packet object"})
@@ -125,8 +186,14 @@ def validate(state: dict[str, Any]) -> list[dict[str, str]]:
     if state.get("current_gate") in {"chapter_drafting", "integrated_manuscript"} and evidence_status not in {"verified", "parsed", "mixed"}:
         issues.append({"level": "error", "field": "evidence_status", "issue": "drafting_gate_without_verified_evidence", "action": "route to research verification or get explicit user approval"})
 
+    if current_mode in {"draft_section", "integrated_draft"} and evidence_status not in {"verified", "parsed", "mixed"}:
+        issues.append({"level": "error", "field": "current_mode", "issue": "writing_mode_without_verified_evidence", "action": "resolve evidence readiness or record explicit user approval"})
+
     if state.get("current_gate") == "formatting" and str(state.get("draft_status", "")).lower() not in {"stable", "integrated", "approved"}:
         issues.append({"level": "warning", "field": "draft_status", "issue": "formatting_before_stable_draft", "action": "confirm user accepts rework risk"})
+
+    if current_mode == "format_delivery" and str(state.get("draft_status", "")).lower() not in {"stable", "integrated", "approved"}:
+        issues.append({"level": "warning", "field": "current_mode", "issue": "format_delivery_before_stable_draft", "action": "confirm the manuscript version is final enough to format"})
 
     return issues
 

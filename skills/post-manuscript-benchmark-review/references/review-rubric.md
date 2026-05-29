@@ -141,6 +141,8 @@ For each benchmark, write:
 - evidence required to close the gap;
 - whether the gap blocks the target journal/quality tier.
 
+For formal reports, use [benchmark-report-schema.md](benchmark-report-schema.md) so benchmark access level, facts used, inference, gap severity, and next-version actions remain auditable.
+
 Use this gap severity scale:
 
 | Severity | Meaning |

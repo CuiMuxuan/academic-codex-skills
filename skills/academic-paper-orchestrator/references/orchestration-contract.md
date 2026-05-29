@@ -21,11 +21,13 @@ Use compact tables when the project has multiple materials or skills.
 
 Track:
 
+- `current_mode`
 - `paper_type`
 - `language`
 - `target_standard`
 - `current_field`
 - `target_venue_field`
+- `material_passports`
 - `materials`
 - `evidence_status`
 - `draft_status`
@@ -35,20 +37,23 @@ Track:
 
 The route plan must map each stage to one focused skill or to the orchestrator itself.
 
+Read [workflow-protocol-index.md](../../../shared/workflow-protocol-index.md) and [handoff-field-schema.md](../../../shared/handoff-field-schema.md) before setting `current_mode`, `material_passports`, claim anchors, literature gaps, or benchmark report fields.
+Read [integrity-gate-patterns.md](integrity-gate-patterns.md) before allowing transitions into drafting, benchmark review, final polish, formatting, or delivery.
+
 ## Handoff Packets
 
 | Handoff | Required packet |
 |---|---|
 | Parsing -> research | extracted DOI strings, bibliography entries, source metadata, low-confidence flags |
-| Research -> writing | verified evidence register, unresolved items, rejected or downgraded sources |
-| Writing -> research | `LIT_GAP` ids, target claims, field, evidence type, search/download targets, intended manuscript use |
+| Research -> writing | verified evidence register, unresolved items, rejected or downgraded sources, writing-ready evidence with evidence locations and allowed claim strength |
+| Writing -> research | `LIT_GAP` ids, target claims, field, evidence type, search/download targets, intended manuscript use, claim-anchor ids when available |
 | Parsing -> writing | evidence CSV, headings, comments, tracked-change summaries, extracted notes |
 | Writing -> figures | figure purpose, target section, factual content, caption intent |
 | Writing -> formatting | stable manuscript version, target guide, figure/table list, bibliography status |
 | Writing -> de-AI polishing | stable manuscript text, fixed claims/citations, section roles, do-not-change terms, allowed edit intensity |
-| Writing -> post-draft review | complete draft, target standard, benchmark set, evidence register, figures/tables, unresolved claims |
+| Writing -> post-draft review | complete draft, target standard, benchmark set, evidence register, figures/tables, unresolved claims, claim-anchor summary |
 | Figures -> formatting | source figure files, exports, captions, placement notes, unresolved assumptions |
-| Post-draft review -> writing | P0/P1/P2 revision plan, claim triage, benchmark gap table, missing evidence list |
+| Post-draft review -> writing | P0/P1/P2 revision plan, claim triage, benchmark gap table, benchmark report schema, missing evidence list |
 
 ## State File
 

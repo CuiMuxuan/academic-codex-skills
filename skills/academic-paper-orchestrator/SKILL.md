@@ -56,12 +56,14 @@ Fallback if unavailable:
 ## Workflow
 
 1. Rebuild or create the project state.
-2. Decide the current route using the routing map.
-3. Apply [orchestration-contract.md](references/orchestration-contract.md) for substantial projects, state files, and handoff packets.
-4. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
-5. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
-6. Route execution to the focused skill that owns the current stage.
-7. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+2. Decide the current mode and route using the routing map.
+3. Apply [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) and [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request spans stages or the owner skill is ambiguous.
+4. Apply [orchestration-contract.md](references/orchestration-contract.md) for substantial projects, state files, material passports, and handoff packets.
+5. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
+6. Apply [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before drafting, benchmark review, final polish, formatting, or any claim about code/data/results.
+7. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
+8. Route execution to the focused skill that owns the current stage.
+9. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -69,6 +71,7 @@ For narrow requests, run only the relevant stage and state what was intentionall
 
 - Keep a single evidence register or literature master list for the project.
 - Mark items as `candidate`, `verified`, `downloaded`, `parsed`, `cited`, `rejected`, or `unresolved`.
+- Track major project inputs with material passports when multiple stages depend on them.
 - Keep paired Markdown and DOCX outputs at the same semantic version when both exist.
 - Save new outputs with explicit suffixes; do not overwrite the only working draft unless the user explicitly requests it.
 - Validate `project_state.json` before moving from research/parsing into drafting, and before moving from writing into formatting.
@@ -85,11 +88,19 @@ For narrow requests, run only the relevant stage and state what was intentionall
 
 Read [stage-map.md](references/stage-map.md) when a full project needs a compact stage checklist or when resuming a long-running thesis workflow.
 
+Read [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) before selecting shared protocol references for cross-skill coordination.
+
+Read [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request could trigger multiple academic skills or when deciding whether the orchestrator should own the task.
+
+Read [handoff-field-schema.md](../../shared/handoff-field-schema.md) when checking field names for workflow modes, material passports, claim anchors, literature gaps, writing-ready handoffs, or benchmark reports.
+
 Read [project-artifact-templates.md](references/project-artifact-templates.md) when creating a project state file, handoff packet, or target-baseline note.
 
 Read [orchestration-contract.md](references/orchestration-contract.md) for project-state output, route plan, handoff packets, and state-file use.
 
 Read [project-gates-and-phases.md](references/project-gates-and-phases.md) for standard phases, required gates, and stage execution notes.
+
+Read [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before accepting claims about sources, code, data, experiments, benchmarks, figures, or final deliverables.
 
 Read [writing-chain-gates.md](references/writing-chain-gates.md) for field confirmation, `LIT_GAP` handling, reviewer-comment revision planning, post-draft review routing, and final de-AI polishing gates.
 

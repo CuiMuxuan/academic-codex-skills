@@ -2,13 +2,17 @@
 
 Use this reference for complex, submission-bound, multi-panel, data-backed, code-backed, or evidence-sensitive figures.
 
+Use the canonical `material_passport` and `claim_anchor` field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md) when figures consume shared project artifacts or support central manuscript claims.
+
 ## Contract
 
 Before drawing, define:
 
 ```text
 Main claim:
+Claim anchor id:
 Evidence hierarchy:
+Material passports:
 Panel roles:
 Non-redundant message per panel:
 Drawing method:
@@ -43,6 +47,7 @@ Export file:
 Caption draft:
 Placement recommendation:
 Evidence trace:
+Related claim anchors:
 Assumptions:
 Manual checks:
 Unresolved issues:

@@ -132,6 +132,12 @@ Next gate:
 |---|---|---|---|---|---|
 | Introduction | frame problem | source ids | claim | missing/ready | verify/draft/ask user |
 
+## Claim Anchor List
+
+| claim_anchor_id | claim summary | manuscript location | support locator | allowed claim strength | verification state | open risk |
+|---|---|---|---|---|---|---|
+| C1 | central claim | section/paragraph | evidence key, file, result, or DOI location | moderate | writing_ready | none |
+
 ## Section Draft Packet
 
 ```text
@@ -142,6 +148,7 @@ Section purpose:
 Current field:
 Target/benchmark alignment:
 Evidence used:
+Claim anchors:
 Evidence gaps:
 Draft:
 Citation placeholders:

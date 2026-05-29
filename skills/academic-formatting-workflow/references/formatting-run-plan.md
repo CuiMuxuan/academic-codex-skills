@@ -2,6 +2,8 @@
 
 Use this reference when planning or reporting a manuscript formatting pass.
 
+Use the canonical `material_passport` field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md) when tracking the stable manuscript, template, bibliography, figure files, and final outputs across stages.
+
 ## Rule Table
 
 When the guide or template is long, create a compact rule table before editing:
@@ -17,6 +19,8 @@ Before editing, map rules to formatting passes:
 | pass | scope | rule sources | tool | output copy | manual check |
 |---|---|---|---|---|---|
 | page setup | sections, margins, headers, page numbering | handbook/template/provisional | python-docx/Word COM/manual | `_pre_final` or planned suffix | Word refresh needed? |
+
+If formatting consumes a manuscript or template from another stage, include the relevant `material_id` in the pass notes.
 
 Use one row per pass from page setup through final validation. Mark any pass as `manual` when it depends on Word-only behavior, template attachment, TOC refresh, field updates, or visual page inspection.
 
@@ -49,6 +53,7 @@ Return:
 
 - source rules used;
 - output file path;
+- material ids for source document, template, bibliography, figures, and output copy when available;
 - formatting changes applied;
 - rule-table items still marked `unresolved` or `needs Word refresh`;
 - items requiring manual Word check;

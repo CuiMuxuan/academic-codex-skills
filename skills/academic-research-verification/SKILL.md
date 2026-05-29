@@ -54,7 +54,7 @@ Fallback if unavailable:
 4. Apply [literature-search-and-identity-workflow.md](references/literature-search-and-identity-workflow.md) for discovery, DOI/title matching, and identity checks.
 5. Apply [trust-state-decision-gates.md](references/trust-state-decision-gates.md) before changing trust state or marking a source writing-ready.
 6. Apply [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when auditing an existing manuscript or bibliography.
-7. Return writing handoff evidence with claim/topic, source, finding, method context, limitation, target chapter, citation key, and verification state.
+7. Return writing handoff evidence with claim/topic, claim-anchor id when provided, source, finding, method context, limitation, target chapter, citation key, verification state, support locator, and allowed claim strength.
 
 ## Network And API Boundaries
 
@@ -84,6 +84,7 @@ Read [verification-output-templates.md](references/verification-output-templates
 - Verified sources include a stable source trail.
 - Mismatches and unresolved items are explicit.
 - The user can see which claims or chapters each source supports.
+- Writing handoffs include evidence locations and allowed claim strength for central claims.
 - No `candidate` or `unresolved` item is presented as writing-ready without an explicit user decision.
 
 ## Reference

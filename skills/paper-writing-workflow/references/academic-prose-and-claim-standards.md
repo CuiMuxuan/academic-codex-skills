@@ -47,6 +47,12 @@ Do not make these claims without verified literature, data, analysis output, cod
 
 If the required support is missing, mark the location with `LIT_GAP` and continue with other draftable sections.
 
+For central claims, maintain a claim anchor with support locator and allowed claim strength. Do not phrase the claim more strongly than the anchor permits.
+
+## Code, Data, And Result Claims
+
+When the manuscript describes implementation details, datasets, experiments, baselines, or metrics, the support must be traceable to a user-provided artifact, inspected code, a result table, a script/notebook output, or verified literature. If the artifact is unavailable or ambiguous, ask the user before asserting the claim or mark it as `LIT_GAP`.
+
 ## Writing Completion Check
 
 Before calling prose complete:
@@ -55,6 +61,7 @@ Before calling prose complete:
 - paragraph jobs are visible;
 - abbreviations are defined on first use;
 - major claims have verified evidence or `LIT_GAP` markers;
+- central claims have evidence anchors or are explicitly unresolved;
 - terminology matches the confirmed field;
 - contribution claims emphasize completed work rather than unsupported promise;
 - final style polish has not changed claim strength.

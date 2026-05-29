@@ -48,9 +48,10 @@ If key inputs are unavailable, produce a provisional review plan and materials r
 1. Confirm the post-draft gate and review target.
 2. Build or validate the 3-10 benchmark set with [benchmark-selection-and-extraction.md](references/benchmark-selection-and-extraction.md).
 3. Apply the four-criterion review and claim triage in [review-rubric.md](references/review-rubric.md).
-4. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
-5. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
-6. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
+4. Use [benchmark-report-schema.md](references/benchmark-report-schema.md) to keep benchmark facts, access limits, manuscript claim records, gap severity, and next-version actions auditable.
+5. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
+6. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
+7. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
 
 ## Quality Gate
 
@@ -67,6 +68,8 @@ The review is high quality only if it:
 Read [benchmark-selection-and-extraction.md](references/benchmark-selection-and-extraction.md) when selecting or extracting benchmark papers.
 
 Read [review-rubric.md](references/review-rubric.md) when scoring, gap-analyzing, judging readiness, or triaging claims.
+
+Read [benchmark-report-schema.md](references/benchmark-report-schema.md) when producing benchmark material records, manuscript claim records, benchmark gap tables, or next-version action tables.
 
 Read [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) when user-provided review comments must be accepted, partly accepted, rejected with reasons, prioritized, and turned into a next-stage plan.
 

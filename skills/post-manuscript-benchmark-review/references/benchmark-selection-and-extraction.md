@@ -2,6 +2,8 @@
 
 Use this reference for benchmark set construction and extraction during post-draft review.
 
+Use the canonical benchmark-report field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md).
+
 ## Benchmark Paper Rule
 
 Require 3-10 benchmark papers.
@@ -49,6 +51,8 @@ What reviewers would expect the current manuscript to match:
 Gap pressure on current manuscript:
 Access level: full text / abstract / metadata only
 ```
+
+When producing the final review, convert each benchmark into the material record defined in [benchmark-report-schema.md](benchmark-report-schema.md), keeping `facts_used` separate from `inferences_made`.
 
 ## Manual Download List
 

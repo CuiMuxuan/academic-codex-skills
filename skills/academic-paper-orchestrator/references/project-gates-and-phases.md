@@ -57,6 +57,9 @@ Recommended next step:
 ## Stage Execution Notes
 
 - Inventory: track materials, trusted evidence, unverified items, outputs, and decisions.
+- Mode tracking: read [workflow-mode-registry.md](workflow-mode-registry.md) when setting the current stage or resuming after a long gap.
+- Material handoffs: read [material-passport-schema.md](material-passport-schema.md) when the same draft, PDF, dataset, code output, figure, template, comment set, or benchmark paper will be used by multiple stages.
+- Integrity: read [integrity-gate-patterns.md](integrity-gate-patterns.md) before letting source, data, code, benchmark, figure, or final-delivery claims move forward.
 - Research: require DOI/title matching or another explicit source trail before trusting a source.
 - Parsing: ask `$pdf-docx-parsing-workflow` for structured outputs that writing and formatting can reuse.
 - Writing: confirm field/terminology, draft one chapter or section at a time after outline and evidence baseline are clear, and mark unsupported required claims with `LIT_GAP`.

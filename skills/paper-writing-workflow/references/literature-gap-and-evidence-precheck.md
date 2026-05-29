@@ -2,6 +2,8 @@
 
 Use this reference during outline planning, drafting, revision, and polishing whenever a claim needs more support than the current materials provide.
 
+Use the canonical `lit_gap` and writing-ready handoff field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md).
+
 ## Evidence Precheck
 
 Before drafting from an outline, inspect each core claim and mark whether it is:
@@ -15,6 +17,8 @@ Before drafting from an outline, inspect each core claim and mark whether it is:
 - descriptive text that can be drafted without external support.
 
 For every claim that needs support, record whether verified evidence, data, code output, or user-approved material is already available.
+
+For central claims, contribution claims, result claims, benchmark comparisons, and code/data/experiment claims, also create or update a claim anchor using [claim-evidence-anchor-protocol.md](claim-evidence-anchor-protocol.md).
 
 ## Gap Marker
 
@@ -63,6 +67,7 @@ Route unresolved literature gaps to `$academic-research-verification` when the t
 Handoff packet:
 
 ```text
+claim_anchor_id:
 LIT_GAP id:
 Target claim:
 Field and target venue:
@@ -70,6 +75,8 @@ Evidence type:
 Candidate search terms:
 Required recency or source type:
 How the evidence will be used in the manuscript:
+Minimum support needed:
+Allowed claim strength if resolved:
 ```
 
 Only after the new source is verified or user-approved should the gap be backfilled into prose.

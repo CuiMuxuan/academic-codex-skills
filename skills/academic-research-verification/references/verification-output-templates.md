@@ -2,6 +2,8 @@
 
 Use these templates when creating audit outputs or manual queues.
 
+Use the canonical cross-skill field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md).
+
 ## Target Exemplar Intake
 
 Ask whether the user can provide 3-10 target papers, approved theses, or accepted manuscripts from the intended field/outlet. Use them only to infer expected source types, recency range, citation style, and evidence density; do not treat their references as verified until checked.
@@ -26,13 +28,14 @@ Ask whether the user can provide 3-10 target papers, approved theses, or accepte
 
 ## Literature Gap Resolution Report
 
-| gap id | target claim | status | source/material | evidence use | limitation | next action |
-|---|---|---|---|---|---|---|
-| LIT_GAP-001 | claim needing support | resolved_verified/candidate_needs_download/requires_user_data_or_analysis/unresolved_search_more/delete_or_soften_claim | DOI/link/file needed | how it supports writing | scope limit | backfill/search/ask user |
+| gap id | claim anchor id | target claim | status | source/material | evidence use | limitation | allowed claim strength | next action |
+|---|---|---|---|---|---|---|---|---|
+| LIT_GAP-001 | C1 | claim needing support | resolved_verified/candidate_needs_download/requires_user_data_or_analysis/unresolved_search_more/delete_or_soften_claim | DOI/link/file needed | how it supports writing | scope limit | cautious/moderate/strong | backfill/search/ask user |
 
 ## Writing-Ready Evidence Handoff
 
 ```text
+Claim anchor id:
 LIT_GAP id:
 Claim supported:
 Recommended citation key:
@@ -43,4 +46,5 @@ Method/context:
 Limitation:
 Target manuscript location:
 Allowed claim strength:
+Verification state:
 ```

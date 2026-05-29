@@ -2,11 +2,14 @@
 
 Use this reference when `$paper-writing-workflow` or `$academic-paper-orchestrator` passes `LIT_GAP`, 待补证据, or an evidence-gap list.
 
+Use the canonical `lit_gap` and writing-ready handoff field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md).
+
 ## Intake
 
 For each gap, capture:
 
 ```text
+Claim anchor id:
 LIT_GAP id:
 Target claim:
 Current field:
@@ -16,6 +19,8 @@ Manuscript location:
 Preferred recency/source type:
 Existing candidate sources:
 How the evidence will be used:
+Minimum support needed:
+Allowed claim strength if resolved:
 ```
 
 If the target claim is too broad, split it into smaller verifiable claims before searching.
@@ -60,6 +65,7 @@ Status values:
 Only for verified or explicitly user-approved evidence:
 
 ```text
+Claim anchor id:
 LIT_GAP id:
 Claim supported:
 Recommended citation key:
@@ -70,6 +76,7 @@ Method/context:
 Limitation:
 Target manuscript location:
 Allowed claim strength:
+Verification state:
 ```
 
 Route back to `$paper-writing-workflow` for prose backfill after this handoff is complete.

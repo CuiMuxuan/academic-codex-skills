@@ -2,6 +2,8 @@
 
 Use this schema for literature master lists, citation audits, and evidence registers.
 
+Use the canonical `claim_anchor`, `lit_gap`, and writing-ready handoff field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md).
+
 ## Core Literature Fields
 
 | Field | Required | Notes |
@@ -18,6 +20,7 @@ Use this schema for literature master lists, citation audits, and evidence regis
 | `verification_source` | no | Link or database used to verify identity |
 | `intended_use` | no | Claim, section, or chapter |
 | `lit_gap_id` | no | Links the source to a writing `LIT_GAP` or evidence-gap item |
+| `claim_anchor_id` | no | Links the source to a writing claim anchor when available |
 | `notes` | no | Gaps, doubts, or user decisions |
 
 ## Evidence Fields
@@ -32,6 +35,8 @@ Use this schema for literature master lists, citation audits, and evidence regis
 | `limitation` | no | Scope limits or uncertainty |
 | `target_chapter` | no | Where this evidence may be used |
 | `lit_gap_id` | no | Gap marker this evidence resolves, if any |
+| `claim_anchor_id` | no | Claim anchor this evidence supports, if any |
+| `allowed_claim_strength` | no | strong, moderate, cautious, descriptive_only, unresolved |
 | `quote` | no | Keep short and copyright-compliant |
 | `verification_state` | yes | verified, unresolved, rejected |
 
@@ -50,3 +55,4 @@ Create separate lists when useful:
 - Do not move `candidate` sources into writing without a visible warning.
 - Keep rejected records with a reason when they were previously considered.
 - Do not store long copyrighted passages in the register.
+- Do not mark a claim as writing-ready unless the evidence location and allowed claim strength are clear enough for the writing workflow.

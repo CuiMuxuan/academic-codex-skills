@@ -2,11 +2,14 @@
 
 Use this schema when exporting parsed PDF or DOCX content.
 
+Use the canonical `material_passport`, `claim_anchor`, and writing-ready evidence field names in [handoff-field-schema.md](../../../shared/handoff-field-schema.md) when parsed outputs feed later research, writing, figure, formatting, or review stages.
+
 ## Document Inventory
 
 | Field | Notes |
 |---|---|
 | `source_path` | Original file path |
+| `material_id` | Stable artifact id when the project uses material passports |
 | `source_type` | pdf, docx, template, unknown |
 | `role` | source paper, thesis draft, review file, template, appendix |
 | `size_bytes` | File size |
@@ -19,6 +22,7 @@ Use this schema when exporting parsed PDF or DOCX content.
 | Field | Notes |
 |---|---|
 | `source_path` | Original file path |
+| `material_id` | Stable artifact id when available |
 | `source_type` | pdf or docx |
 | `location` | Page, paragraph index, heading path, table index, comment id |
 | `heading` | Nearest heading if known |
@@ -39,6 +43,8 @@ Add these fields when the output feeds academic writing:
 | `limitation` | Scope and uncertainty |
 | `target_chapter` | Suggested destination |
 | `citation_key` | Local source key |
+| `claim_anchor_id` | Claim anchor supported by this extracted evidence, if known |
+| `allowed_claim_strength` | strong, moderate, cautious, descriptive_only, unresolved |
 | `verification_state` | candidate, verified, unresolved |
 
 ## Quality Labels

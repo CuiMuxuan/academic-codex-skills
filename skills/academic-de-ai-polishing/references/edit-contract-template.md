@@ -22,6 +22,7 @@ Section type:
 Paragraph role:
 Target exemplar pattern:
 Fixed claims:
+Claim anchors:
 Fixed citations:
 Do-not-change terms:
 Unresolved evidence gaps:

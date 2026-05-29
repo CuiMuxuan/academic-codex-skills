@@ -52,9 +52,9 @@ Use this template when producing a full Chinese post-draft benchmark review. Kee
 
 ## 4. 对标文献选择依据
 
-| 编号 | 对标文献 | 选择理由 | 对标角色 | 可比性 | 证据状态 |
-|---|---|---|---|---|---|
-| B1 | 作者-年份-题名-期刊-DOI | 任务/方法/验证/目标期刊相似 | 直接竞争/方法标杆/验证标杆/写作标杆 | 高/中/低 | 全文/摘要/元数据 |
+| 编号 | 对标文献 | 选择理由 | 对标角色 | 可比性 | 访问级别 | 已使用事实 | 推断边界 |
+|---|---|---|---|---|---|---|---|
+| B1 | 作者-年份-题名-期刊-DOI | 任务/方法/验证/目标期刊相似 | 直接竞争/方法标杆/验证标杆/写作标杆 | 高/中/低 | full_text/abstract_only/metadata_only/user_supplied_summary | 已核验事实 | 不能判断的内容 |
 
 选择逻辑：
 - 为什么这些文献足以构成 benchmark set：
@@ -94,9 +94,9 @@ Use this template when producing a full Chinese post-draft benchmark review. Kee
 
 ## 7. Claim Triage
 
-| 中心 claim | 当前证据 | 建议状态 | 修改方式 | 对应位置 |
-|---|---|---|---|---|
-| claim 原文或摘要 | 图/表/数据/文献 | promote/soften/move_to_supplement/hold_for_more_evidence/remove | 保留、收窄、移至补充、暂缓或删除 | 摘要/引言/讨论 |
+| claim anchor | 中心 claim | 当前证据 | benchmark 压力 | 建议状态 | 修改方式 | 对应位置 |
+|---|---|---|---|---|---|---|
+| C1/无 | claim 原文或摘要 | 图/表/数据/文献 | B1/B2 或无 | promote/soften/move_to_supplement/hold_for_more_evidence/remove | 保留、收窄、移至补充、暂缓或删除 | 摘要/引言/讨论 |
 
 安全可声称：
 - 

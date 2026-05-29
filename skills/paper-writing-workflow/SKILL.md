@@ -63,12 +63,13 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 3. Normalize inputs and downstream handoffs with [writing-input-handoffs.md](references/writing-input-handoffs.md).
 4. Build or confirm the design document: problem, scope, contribution, section map, evidence needed, figures/tables, and risks.
 5. Run outline-level evidence precheck with [literature-gap-and-evidence-precheck.md](references/literature-gap-and-evidence-precheck.md) before drafting substantive claims.
-6. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
-7. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
-8. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
-9. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
-10. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
-11. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) when the user provides supervisor, reviewer, or committee comments during normal writing/revision.
+6. Apply [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) for central claims, contribution statements, result claims, benchmark comparisons, and code/data/experiment statements.
+7. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
+8. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
+9. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
+10. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
+11. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
+12. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) when the user provides supervisor, reviewer, or committee comments during normal writing/revision.
 
 ## Reference
 
@@ -79,6 +80,8 @@ Read [field-and-terminology-control.md](references/field-and-terminology-control
 Read [writing-input-handoffs.md](references/writing-input-handoffs.md) before drafting from verified evidence, parsed notes, DOCX comments, figure plans, or post-draft review packets.
 
 Read [literature-gap-and-evidence-precheck.md](references/literature-gap-and-evidence-precheck.md) before drafting from an outline or when a claim needs more literature/data than currently available.
+
+Read [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) when central claims, contribution statements, method comparisons, result claims, code/data/experiment claims, or figure-caption claims must remain traceable across writing, review, polish, and formatting.
 
 Read [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md) for language baseline, abbreviation-first-use, paragraph logic, contribution framing, and claim evidence rules.
 

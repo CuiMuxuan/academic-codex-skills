@@ -44,6 +44,7 @@ Source text present:
 Section type:
 Paragraph role:
 Fixed claims and citations:
+Claim anchors, if available:
 Allowed edit intensity:
 Do-not-change terms:
 ```
@@ -70,7 +71,7 @@ Classify each target paragraph:
 4. Use [high-risk-patterns.md](references/high-risk-patterns.md) for pattern diagnosis and [rewrite-tactics.md](references/rewrite-tactics.md) for revision tactics.
 5. Use [section-playbooks.md](references/section-playbooks.md) when the rewrite problem is section-dependent.
 6. Use [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) when main text contains project, operation, prompt, or file-management traces.
-7. After each rewrite, verify meaning, citations, terminology, and technical scope.
+7. After each rewrite, verify meaning, citations, terminology, claim anchors, and technical scope.
 
 ## Material Request
 
