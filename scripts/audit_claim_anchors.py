@@ -22,7 +22,7 @@ def read_text(path: Path) -> str:
 
 
 def normalize_anchor(raw: str) -> str:
-    value = raw.strip()
+    value = raw.strip().rstrip(".,;:)")
     if re.fullmatch(r"\d{1,4}", value):
         return f"C{value}"
     match = re.fullmatch(r"(?:CLAIM|CA|C)[-_ ]?(\d{1,4})", value, flags=re.IGNORECASE)
