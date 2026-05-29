@@ -1,6 +1,6 @@
 ---
 name: academic-paper-orchestrator
-description: "Coordinate an end-to-end academic paper, thesis, dissertation, review paper, or manuscript workflow by routing work across research verification, PDF/DOCX parsing, writing, academic figures, and formatting skills. Use when the user asks to manage a full paper project, plan a thesis from source materials to final DOCX, decide which academic skill should handle a task, or run gated human-AI paper production. Chinese triggers: 论文全流程, 毕业论文, 学位论文, 综述论文, 论文总控, 编排论文工作流."
+description: "Coordinate an end-to-end academic paper, thesis, dissertation, review paper, or manuscript workflow by routing work across research verification, PDF/DOCX parsing, writing, academic figures, de-AI polishing, post-draft review, and formatting skills. Use when the user asks to manage a full paper project, plan a thesis from source materials to final DOCX, decide which academic skill should handle a task, run gated human-AI paper production, coordinate evidence gaps, field confirmation, reviewer-comment revision planning, or final polish handoffs. Chinese triggers: 论文全流程, 毕业论文, 学位论文, 综述论文, 论文总控, 编排论文工作流, 待补证据流程, 评审意见流程, 最终润色流程."
 ---
 
 # Academic Paper Orchestrator
@@ -14,9 +14,12 @@ Use this skill to coordinate a complete academic paper workflow. Do not do every
 | Search literature, verify DOI/title match, check citation authenticity | `$academic-research-verification` |
 | Parse PDFs or DOCX files into structured notes, evidence, headings, comments, or revision data | `$pdf-docx-parsing-workflow` |
 | Plan sections, draft chapters, revise academic prose, integrate evidence into claims | `$paper-writing-workflow` |
+| Confirm research field, handle terminology gates, mark writing evidence gaps, or plan ordinary reviewer/supervisor-comment revisions | `$paper-writing-workflow` |
+| Resolve `LIT_GAP` items, find needed literature, verify new evidence, or update the evidence register | `$academic-research-verification` |
 | Create mechanism figures, SVG diagrams, draw.io engineering diagrams, or approved OpenAI generated images | `$academic-figure-workflow` |
 | Apply school handbook, Word template, journal guide, or general academic formatting | `$academic-formatting-workflow` |
 | Review a complete initial draft against 3-10 benchmark papers and plan the next revision | `$post-manuscript-benchmark-review` |
+| Polish stable manuscript prose, reduce AI-like cadence, or remove internal project/operation traces | `$academic-de-ai-polishing` |
 
 If a focused skill is unavailable, follow the same ownership boundaries and tell the user which part was handled without the dedicated skill.
 
@@ -35,6 +38,7 @@ If a focused skill is unavailable, follow the same ownership boundaries and tell
 Collect only what is missing:
 
 - paper type, language target, and delivery target;
+- research field and target venue/school field when terminology may matter;
 - target standard: school handbook, Word template, journal guide, supervisor requirement, or provisional baseline;
 - target examples: 3-10 accepted papers, approved theses, templates, author guidelines, or supervisor-approved chapters when available;
 - current materials: topic, outline, draft, PDFs, DOCX files, data, codebase, figures, bibliography, and notes;
@@ -55,8 +59,9 @@ Fallback if unavailable:
 2. Decide the current route using the routing map.
 3. Apply [orchestration-contract.md](references/orchestration-contract.md) for substantial projects, state files, and handoff packets.
 4. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
-5. Route execution to the focused skill that owns the current stage.
-6. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+5. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
+6. Route execution to the focused skill that owns the current stage.
+7. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -85,6 +90,8 @@ Read [project-artifact-templates.md](references/project-artifact-templates.md) w
 Read [orchestration-contract.md](references/orchestration-contract.md) for project-state output, route plan, handoff packets, and state-file use.
 
 Read [project-gates-and-phases.md](references/project-gates-and-phases.md) for standard phases, required gates, and stage execution notes.
+
+Read [writing-chain-gates.md](references/writing-chain-gates.md) for field confirmation, `LIT_GAP` handling, reviewer-comment revision planning, post-draft review routing, and final de-AI polishing gates.
 
 ## Bundled Utilities
 

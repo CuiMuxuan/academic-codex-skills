@@ -22,6 +22,8 @@ If none are available, I will proceed with a provisional general academic baseli
 paper_type:
 language:
 target_standard:
+current_field:
+target_venue_field:
 target_examples:
 materials:
 evidence_status:

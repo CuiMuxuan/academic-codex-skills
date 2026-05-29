@@ -13,5 +13,10 @@
     "id": 3,
     "prompt": "Use $post-manuscript-benchmark-review for my topic idea. I do not have a full draft yet, but I want a benchmark review and SCI readiness score.",
     "expected": "Declines the full post-draft review because the activation gate is not met, routes upstream to planning/research/writing, and asks for a complete draft or suitable materials before giving a readiness score."
+  },
+  {
+    "id": 4,
+    "prompt": "用 $post-manuscript-benchmark-review 处理完整初稿收到的审稿意见：请逐条判断哪些采纳、哪些部分采纳、哪些不采纳，并给下一阶段修改方案。",
+    "expected": "Confirms a complete draft exists, analyzes each comment against evidence and benchmark expectations, assigns accept/partly_accept/reject/needs_new_literature or data statuses, reports priorities, risks, dependencies, and asks for confirmation before execution."
   }
 ]

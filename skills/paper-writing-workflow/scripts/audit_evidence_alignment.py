@@ -4,7 +4,7 @@
 The script is intentionally conservative. It checks whether citation keys used
 in Markdown/Pandoc or LaTeX-style citations exist in the evidence register and
 whether their trust state is acceptable for writing. It also reports unresolved
-`needs evidence` markers and verified register items that are not cited.
+`needs evidence` or `LIT_GAP` markers and verified register items that are not cited.
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ from typing import Any
 PANDOC_CITE_RE = re.compile(r"@([A-Za-z0-9_:.#/$%&+?<>~|-]+)")
 LATEX_CITE_RE = re.compile(r"\\cite\w*\s*(?:\[[^\]]*\]\s*){0,2}\{([^}]+)\}")
 NEEDS_EVIDENCE_RE = re.compile(
-    r"(needs\s+evidence|need\s+evidence|evidence\s+needed|TODO\s*:?\s*evidence|待补证据|需要证据|需补充证据)",
+    r"(LIT_GAP|needs\s+evidence|need\s+evidence|evidence\s+needed|TODO\s*:?\s*evidence|待补证据|需要证据|需补充证据)",
     re.IGNORECASE,
 )
 
@@ -34,10 +34,10 @@ def read_text(path: Path) -> str:
 
 
 def extract_citations(text: str) -> set[str]:
-    keys = set(PANDOC_CITE_RE.findall(text))
+    keys = {key.rstrip(".,;") for key in PANDOC_CITE_RE.findall(text)}
     for group in LATEX_CITE_RE.findall(text):
         for key in group.split(","):
-            cleaned = key.strip()
+            cleaned = key.strip().rstrip(".,;")
             if cleaned:
                 keys.add(cleaned)
     return keys
@@ -170,6 +170,7 @@ def audit(draft_text: str, register_rows: list[dict[str, str]]) -> tuple[list[di
         "missing_from_register": sum(1 for item in issues if item["issue"] == "citation_missing_from_register"),
         "not_writing_ready": sum(1 for item in issues if item["issue"] == "citation_not_writing_ready"),
         "needs_evidence_markers": sum(1 for item in issues if item["issue"] == "needs_evidence_marker"),
+        "needs_evidence_or_lit_gap_markers": sum(1 for item in issues if item["issue"] == "needs_evidence_marker"),
     }
     return issues, summary
 
@@ -223,7 +224,7 @@ def main() -> int:
     if args.output_md:
         write_markdown(args.output_md, summary, issues)
     print(f"citations={summary['citations_detected']} register={summary['register_records']} issues={summary['issues']} output={args.output_csv}")
-    return 1 if summary["missing_from_register"] or summary["not_writing_ready"] else 0
+    return 1 if summary["missing_from_register"] or summary["not_writing_ready"] or summary["needs_evidence_or_lit_gap_markers"] else 0
 
 
 if __name__ == "__main__":

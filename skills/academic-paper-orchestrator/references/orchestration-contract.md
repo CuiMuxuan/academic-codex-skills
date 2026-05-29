@@ -24,6 +24,8 @@ Track:
 - `paper_type`
 - `language`
 - `target_standard`
+- `current_field`
+- `target_venue_field`
 - `materials`
 - `evidence_status`
 - `draft_status`
@@ -39,9 +41,11 @@ The route plan must map each stage to one focused skill or to the orchestrator i
 |---|---|
 | Parsing -> research | extracted DOI strings, bibliography entries, source metadata, low-confidence flags |
 | Research -> writing | verified evidence register, unresolved items, rejected or downgraded sources |
+| Writing -> research | `LIT_GAP` ids, target claims, field, evidence type, search/download targets, intended manuscript use |
 | Parsing -> writing | evidence CSV, headings, comments, tracked-change summaries, extracted notes |
 | Writing -> figures | figure purpose, target section, factual content, caption intent |
 | Writing -> formatting | stable manuscript version, target guide, figure/table list, bibliography status |
+| Writing -> de-AI polishing | stable manuscript text, fixed claims/citations, section roles, do-not-change terms, allowed edit intensity |
 | Writing -> post-draft review | complete draft, target standard, benchmark set, evidence register, figures/tables, unresolved claims |
 | Figures -> formatting | source figure files, exports, captions, placement notes, unresolved assumptions |
 | Post-draft review -> writing | P0/P1/P2 revision plan, claim triage, benchmark gap table, missing evidence list |

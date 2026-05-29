@@ -18,5 +18,10 @@
     "id": 4,
     "prompt": "Use $academic-de-ai-polishing on a discussion paragraph that sounds polished but overclaims a causal mechanism. Preserve citations and fix the claim boundary before improving style.",
     "expected": "Applies the argument-first gate, flags overclaiming, softens or requests evidence before cadence polishing, and keeps citation and terminology boundaries visible."
+  },
+  {
+    "id": 5,
+    "prompt": "用 $academic-de-ai-polishing 做最终润色，但文中还有 LIT_GAP 标记和未确认术语，请判断能否直接润色。",
+    "expected": "Responds in Chinese, applies the final-polish boundary, refuses to hide unresolved evidence or terminology gaps, routes evidence/terminology issues back to writing or research verification, and only offers conservative local polishing if safe."
   }
 ]

@@ -1,4 +1,4 @@
 interface:
   display_name: "Paper Writing Workflow"
-  short_description: "Draft and audit evidence-backed papers."
-  default_prompt: "Use $paper-writing-workflow to plan, draft, revise, and audit my paper chapter by chapter with evidence-backed claims."
+  short_description: "Draft evidence-backed papers with logic and terminology gates."
+  default_prompt: "Use $paper-writing-workflow to plan, draft, revise, and audit my paper chapter by chapter with field-aware terminology, clear section logic, abbreviation checks, and evidence-gap handling."

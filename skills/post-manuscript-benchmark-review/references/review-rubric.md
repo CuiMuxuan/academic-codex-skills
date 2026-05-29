@@ -95,6 +95,8 @@ Score guide:
 
 ## Benchmark Paper Selection
 
+For detailed benchmark selection and extraction, use `benchmark-selection-and-extraction.md`. The rules below are the rubric-level scoring context.
+
 Rank candidate benchmark papers by:
 
 1. task similarity;
@@ -168,6 +170,12 @@ Each action should include:
 - where it goes in main paper or Supplement.
 
 P0 actions should be few and concrete. If more than five P0 items appear, group them by root cause such as `evidence`, `benchmarking`, `claim discipline`, `figures`, or `structure`.
+
+## Reviewer Comment Discipline
+
+When user-provided comments are present, do not treat them as automatically correct. Each comment must be classified as accepted, partly accepted, rejected with reason, needing user decision, needing new literature, or needing new data/analysis.
+
+Accepted and partly accepted comments must map to exact manuscript locations and revision actions. Rejected or deferred comments must include evidence-based reasons and the risk of not acting.
 
 ## Claim Triage
 

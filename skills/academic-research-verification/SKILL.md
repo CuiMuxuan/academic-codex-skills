@@ -1,6 +1,6 @@
 ---
 name: academic-research-verification
-description: "Discover, verify, and audit academic literature for papers, theses, dissertations, and review articles. Use when the user needs literature search, DOI verification, title-DOI matching, citation authenticity checks, bibliography cleanup, evidence register maintenance, or prevention of fabricated references. Chinese triggers: 文献检索, DOI核验, 引用真实性检查, 参考文献核对, 证据表, 文献可信度."
+description: "Discover, verify, and audit academic literature for papers, theses, dissertations, and review articles. Use when the user needs literature search, DOI verification, title-DOI matching, citation authenticity checks, bibliography cleanup, evidence register maintenance, LIT_GAP or 待补证据 resolution, writing-ready source handoffs, or prevention of fabricated references. Chinese triggers: 文献检索, DOI核验, 引用真实性检查, 参考文献核对, 证据表, 文献可信度, 待补证据, 文献缺口, LIT_GAP."
 ---
 
 # Academic Research Verification
@@ -14,6 +14,7 @@ Do:
 - Discover, normalize, verify, and audit literature records.
 - Maintain explicit source trails and trust states.
 - Produce evidence registers, mismatch lists, manual queues, and citation audit reports.
+- Convert writing `LIT_GAP` items into verified evidence or manual download/search queues.
 
 Do not:
 
@@ -21,6 +22,7 @@ Do not:
 - Invent DOI strings, article titles, author lists, venues, page ranges, or citation metadata.
 - Present `candidate` or `unresolved` sources as writing-ready without a user decision.
 - Draft manuscript prose as the primary task; route writing to `$paper-writing-workflow`.
+- Backfill unsupported prose before the source is verified or explicitly approved.
 
 ## Core Rules
 
@@ -33,7 +35,7 @@ Do not:
 
 ## Intake
 
-Identify the paper type, subject area, target chapter or claim category, recency range, target examples, preferred source types, citation style, and available bibliography/PDF/export files.
+Identify the paper type, subject area, target chapter or claim category, `LIT_GAP` id or evidence need, recency range, target examples, preferred source types, citation style, and available bibliography/PDF/export files.
 
 Before search, DOI checks, or citation audits, ask for missing materials that would materially improve verification quality:
 
@@ -48,10 +50,11 @@ Fallback if unavailable:
 
 1. Define the evidence need and output a short search-and-verification plan.
 2. Build or normalize the candidate list.
-3. Apply [literature-search-and-identity-workflow.md](references/literature-search-and-identity-workflow.md) for discovery, DOI/title matching, and identity checks.
-4. Apply [trust-state-decision-gates.md](references/trust-state-decision-gates.md) before changing trust state or marking a source writing-ready.
-5. Apply [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when auditing an existing manuscript or bibliography.
-6. Return writing handoff evidence with claim/topic, source, finding, method context, limitation, target chapter, citation key, and verification state.
+3. Apply [literature-gap-verification-workflow.md](references/literature-gap-verification-workflow.md) when resolving `LIT_GAP`, 待补证据, or writing evidence-gap lists.
+4. Apply [literature-search-and-identity-workflow.md](references/literature-search-and-identity-workflow.md) for discovery, DOI/title matching, and identity checks.
+5. Apply [trust-state-decision-gates.md](references/trust-state-decision-gates.md) before changing trust state or marking a source writing-ready.
+6. Apply [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when auditing an existing manuscript or bibliography.
+7. Return writing handoff evidence with claim/topic, source, finding, method context, limitation, target chapter, citation key, and verification state.
 
 ## Network And API Boundaries
 
@@ -68,6 +71,8 @@ Use one or more:
 - `missing_metadata_list`;
 - `unverified_or_unresolved_list`;
 - `evidence_register`;
+- `lit_gap_resolution_report`;
+- `writing_ready_evidence_handoff`;
 - `citation_audit_report`;
 - `search_strategy_note`.
 
@@ -88,6 +93,8 @@ Read [evidence-register-schema.md](references/evidence-register-schema.md) when 
 Read [trust-state-decision-gates.md](references/trust-state-decision-gates.md) when changing trust state or deciding writing readiness.
 
 Read [literature-search-and-identity-workflow.md](references/literature-search-and-identity-workflow.md) for candidate discovery, DOI/title matching, and identity verification.
+
+Read [literature-gap-verification-workflow.md](references/literature-gap-verification-workflow.md) when a writing workflow passes `LIT_GAP` markers, evidence-gap lists, or requests for new support before drafting.
 
 Read [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when checking in-body citations, bibliography entries, or claim support.
 

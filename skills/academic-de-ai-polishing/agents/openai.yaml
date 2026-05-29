@@ -1,7 +1,7 @@
 interface:
   display_name: "Academic De-AI Polishing"
-  short_description: "De-template prose and remove workflow residue."
-  default_prompt: "Use $academic-de-ai-polishing to revise this academic text so it keeps its meaning, evidence, and rigor but loses mechanical, AI-like cadence and any internal project or operation-record traces."
+  short_description: "Final-polish stable prose and remove workflow residue."
+  default_prompt: "Use $academic-de-ai-polishing to final-polish this stable academic text so it keeps meaning, evidence, citations, terminology, and claim strength while reducing mechanical cadence and removing internal project or operation-record traces."
 
 policy:
   allow_implicit_invocation: true

@@ -1,4 +1,4 @@
 interface:
   display_name: "Academic Paper Orchestrator"
-  short_description: "Coordinate and gate full paper workflows."
-  default_prompt: "Use $academic-paper-orchestrator to coordinate my thesis from source materials to a formatted final draft, with project-state gates and handoff packets."
+  short_description: "Coordinate full paper workflows with evidence and writing gates."
+  default_prompt: "Use $academic-paper-orchestrator to coordinate my thesis from source materials to a formatted final draft, with field confirmation, evidence-gap handling, project-state gates, and handoff packets."

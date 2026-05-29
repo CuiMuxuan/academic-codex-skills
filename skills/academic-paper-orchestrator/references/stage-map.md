@@ -11,6 +11,8 @@ Track these fields in a compact project-state note:
 | `paper_type` | review, experimental paper, thesis, dissertation, report, manuscript |
 | `language` | English, Chinese, bilingual |
 | `target_standard` | school guide, Word template, journal guide, supervisor rule, provisional |
+| `current_field` | confirmed or inferred manuscript research field |
+| `target_venue_field` | target journal, school, or supervisor field expectations |
 | `materials` | files, links, datasets, code repositories, notes |
 | `evidence_status` | missing, candidate, verified, parsed, citation-audited |
 | `draft_status` | none, outline, chapter drafts, integrated draft, pre-final |
@@ -21,10 +23,13 @@ Track these fields in a compact project-state note:
 ## Stage Handoffs
 
 - Research to writing: pass verified evidence register and unresolved items.
+- Writing to research: pass `LIT_GAP` ids, target claims, field, evidence type, and suggested search targets.
 - Parsing to research: pass extracted DOI strings, bibliography entries, and source metadata with low-confidence flags.
 - Parsing to writing: pass evidence CSV, headings, comments, and extracted notes.
 - Writing to figures: pass figure purpose, target section, factual content, and caption intent.
 - Writing to formatting: pass stable manuscript version, target guide, figure/table list, and bibliography status.
+- Writing to de-AI polishing: pass stable text, fixed claims/citations, section roles, and do-not-change terms.
+- Post-draft review to writing: pass P0/P1/P2 revision plan, benchmark gap table, and missing evidence list.
 
 ## Gate Report Template
 

@@ -10,6 +10,7 @@ Classify the task:
 - `section_draft`: one chapter or section needs drafting.
 - `revision`: a draft exists and needs stronger logic, evidence, or style.
 - `integration`: approved sections need a coherent full manuscript.
+- `comment_response`: supervisor, reviewer, committee, or editor comments need analysis before editing.
 - `polish`: content is stable and language quality is the main target.
 
 ## Stage Gate Report
@@ -26,3 +27,11 @@ Next confirmation:
 Use `plan_only` when evidence, outline, or user decisions are insufficient for drafting. Use `needs_verification` when source authenticity or DOI/citation truth is unresolved and route that work to `$academic-research-verification`.
 
 Stop for confirmation before drafting substantial body text from a new paper design document or chapter outline.
+
+## Required Writing Gates
+
+- Field/terminology gate: confirm the research field when it is inferred or unclear; if the user still does not set a field, proceed with `computer and electronic information` as a provisional fallback.
+- Evidence precheck gate: before substantive drafting, classify core claims and identify unsupported claims that need `LIT_GAP`.
+- Draft gate: stop after each major section or chapter draft for user confirmation.
+- Comment-response gate: when comments are substantial, present the revision plan before editing.
+- Final-polish gate: enter style polishing only after structure, evidence, and claim strength are stable; route heavy de-AI polishing to `$academic-de-ai-polishing`.

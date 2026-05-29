@@ -10,6 +10,8 @@ Ask for any available target examples before drafting:
 |---|---|
 | `target_examples` | 3-10 final papers, theses, accepted manuscripts, or supervisor-approved chapters |
 | `target_outlet_or_school` | Journal, conference, school, department, or supervisor |
+| `current_field` | Confirmed or inferred research field |
+| `target_venue_field` | Field implied by journal, conference, school, or supervisor standard |
 | `features_to_match` | Section structure, evidence density, tone, bilingual style, figure/table callouts |
 | `features_to_avoid` | Overlong background, excessive citation strings, weak discussion, formulaic language |
 
@@ -111,6 +113,8 @@ Working title:
 Paper type:
 Target outlet/school:
 Language:
+Current field:
+Target venue/school field:
 Research problem:
 Central argument or contribution:
 Scope:
@@ -124,7 +128,7 @@ Next gate:
 
 ## Evidence-To-Section Map
 
-| section | purpose | evidence keys | claim supported | gap | next action |
+| section | purpose | evidence keys | claim supported | gap or LIT_GAP | next action |
 |---|---|---|---|---|---|
 | Introduction | frame problem | source ids | claim | missing/ready | verify/draft/ask user |
 
@@ -135,6 +139,7 @@ Mode:
 Active gate:
 Section:
 Section purpose:
+Current field:
 Target/benchmark alignment:
 Evidence used:
 Evidence gaps:

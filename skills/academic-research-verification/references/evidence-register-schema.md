@@ -17,6 +17,7 @@ Use this schema for literature master lists, citation audits, and evidence regis
 | `trust_state` | yes | candidate, verified, downloaded, parsed, cited, rejected, unresolved |
 | `verification_source` | no | Link or database used to verify identity |
 | `intended_use` | no | Claim, section, or chapter |
+| `lit_gap_id` | no | Links the source to a writing `LIT_GAP` or evidence-gap item |
 | `notes` | no | Gaps, doubts, or user decisions |
 
 ## Evidence Fields
@@ -30,6 +31,7 @@ Use this schema for literature master lists, citation audits, and evidence regis
 | `method_context` | no | Conditions, sample, method, dataset |
 | `limitation` | no | Scope limits or uncertainty |
 | `target_chapter` | no | Where this evidence may be used |
+| `lit_gap_id` | no | Gap marker this evidence resolves, if any |
 | `quote` | no | Keep short and copyright-compliant |
 | `verification_state` | yes | verified, unresolved, rejected |
 

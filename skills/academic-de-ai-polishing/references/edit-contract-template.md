@@ -24,6 +24,7 @@ Target exemplar pattern:
 Fixed claims:
 Fixed citations:
 Do-not-change terms:
+Unresolved evidence gaps:
 Allowed intensity: light | moderate | heavy
 Output wanted: diagnosis only | rewrite | rewrite + change note
 ```

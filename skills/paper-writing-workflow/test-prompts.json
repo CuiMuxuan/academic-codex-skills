@@ -23,5 +23,15 @@
     "id": 5,
     "prompt": "Use $paper-writing-workflow to draft an Introduction subsection after I provide five benchmark papers from the target journal. First infer the target writing pattern, then draft from my verified evidence register.",
     "expected": "Builds a target/benchmark writing-alignment brief, calibrates section job, evidence density, citation pattern, claim strength, and figure/table callouts before drafting, and avoids generic academic prose or copied benchmark wording."
+  },
+  {
+    "id": 6,
+    "prompt": "用 $paper-writing-workflow 写作论文引言，但我没有说明研究领域，也缺少部分支撑文献。请先判断能否开始写正文。",
+    "expected": "Responds in Chinese, asks for or confirms the research field before terminology-sensitive drafting, performs evidence precheck, marks unsupported required claims with LIT_GAP, and does not fabricate citations."
+  },
+  {
+    "id": 7,
+    "prompt": "Use $paper-writing-workflow to handle three reviewer comments on my draft. Decide what to accept, partly accept, or reject, and give me the next revision plan before editing.",
+    "expected": "Uses comment-response mode, analyzes each comment, assigns acceptance status, priority, value, risks, and external dependencies, then asks for confirmation before substantial edits."
   }
 ]

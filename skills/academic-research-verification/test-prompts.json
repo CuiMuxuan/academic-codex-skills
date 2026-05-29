@@ -18,5 +18,10 @@
     "id": 4,
     "prompt": "Use $academic-research-verification to verify a CSV bibliography across multiple sources. Prefer DOI/title agreement across Crossref, OpenAlex, Semantic Scholar, and PubMed when applicable, and do not silently repair mismatches.",
     "expected": "Uses or recommends the multi-source verification script, treats script output as an audit queue, records source URLs/title similarity/DOI agreement, and requires user review before changing trust states."
+  },
+  {
+    "id": 5,
+    "prompt": "用 $academic-research-verification 处理论文写作中的 LIT_GAP 清单：需要为引言里的三个判断找到可核验文献，并告诉我哪些需要下载。",
+    "expected": "Responds in Chinese, turns each LIT_GAP into a specific evidence need, searches/verifies or creates manual download queues, keeps candidate/unresolved items out of writing-ready evidence, and returns a gap resolution report plus writing-ready handoff only for verified or user-approved evidence."
   }
 ]

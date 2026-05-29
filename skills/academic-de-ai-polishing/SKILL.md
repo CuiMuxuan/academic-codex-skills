@@ -1,6 +1,6 @@
 ---
 name: academic-de-ai-polishing
-description: "Use when polishing a paper, review, thesis, rebuttal, or other scholarly prose that reads mechanically, over-smoothed, obviously AI-assisted, or contaminated by internal project notes, operation logs, process records, TODOs, handoff language, or draft-management traces in the manuscript body. Best for section-by-section rewriting that preserves meaning, citations, and technical rigor while reducing templated transitions, repetitive cadence, formulaic academic phrasing, and non-manuscript operational residue. Chinese triggers: 论文降AI痕迹, 去AI味, 去模板化润色, 降低机械感, 学术润色, AIGC痕迹评估, 内部项目记录, 操作记录痕迹, 主文日志化."
+description: "Use when polishing stable paper, review, thesis, rebuttal, or other scholarly prose that reads mechanically, over-smoothed, obviously AI-assisted, or contaminated by internal project notes, operation logs, process records, TODOs, handoff language, or draft-management traces in the manuscript body. Best after content, structure, evidence, citations, and claim strength are stable, for section-by-section rewriting that preserves meaning, citations, and technical rigor while reducing templated transitions, repetitive cadence, formulaic academic phrasing, and non-manuscript operational residue. Chinese triggers: 论文降AI痕迹, 去AI味, 去模板化润色, 降低机械感, 学术润色, 最终润色, AIGC痕迹评估, 内部项目记录, 操作记录痕迹, 主文日志化."
 ---
 
 # Academic De-AI Polishing
@@ -15,6 +15,7 @@ Do:
 - Reduce templated transitions, repetitive cadence, vague academic filler, and over-smooth balance.
 - Remove or recast internal project notes, operation logs, prompt traces, TODO markers, and draft-management residue.
 - Preserve or strengthen evidence-grounded authorial judgment.
+- Enforce final-polish boundaries after writing, evidence, and structure are stable.
 
 Do not:
 
@@ -22,6 +23,7 @@ Do not:
 - Change claim strength beyond what the evidence supports.
 - Claim detector percentages or guarantee AIGC-score outcomes.
 - Regenerate whole sections unless the user explicitly asks.
+- Use polish to bypass missing evidence, unresolved `LIT_GAP` markers, or unstable manuscript structure.
 
 ## Core Rules
 
@@ -31,6 +33,7 @@ Do not:
 4. Do not make prose more confident than the evidence permits.
 5. Keep Chinese, English, and bilingual terminology stable unless the user asks for translation.
 6. Move unresolved author decisions to `User-review items` instead of hiding them in polished prose.
+7. Treat accurate, direct, concise, understandable writing as the baseline; style elevation is optional and must stay evidence-safe.
 
 ## Pre-Edit Gate
 
@@ -63,10 +66,11 @@ Classify each target paragraph:
 
 1. Identify medium- and high-risk paragraphs.
 2. Diagnose the dominant risk: connector overload, repetitive cadence, templated dialectic, vague vocabulary, missing judgment, overclaiming, or workflow residue.
-3. Use [high-risk-patterns.md](references/high-risk-patterns.md) for pattern diagnosis and [rewrite-tactics.md](references/rewrite-tactics.md) for revision tactics.
-4. Use [section-playbooks.md](references/section-playbooks.md) when the rewrite problem is section-dependent.
-5. Use [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) when main text contains project, operation, prompt, or file-management traces.
-6. After each rewrite, verify meaning, citations, terminology, and technical scope.
+3. Use [final-polish-boundary.md](references/final-polish-boundary.md) before broad final polishing or when the request may hide evidence, structure, or claim-strength work.
+4. Use [high-risk-patterns.md](references/high-risk-patterns.md) for pattern diagnosis and [rewrite-tactics.md](references/rewrite-tactics.md) for revision tactics.
+5. Use [section-playbooks.md](references/section-playbooks.md) when the rewrite problem is section-dependent.
+6. Use [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) when main text contains project, operation, prompt, or file-management traces.
+7. After each rewrite, verify meaning, citations, terminology, and technical scope.
 
 ## Material Request
 
@@ -84,6 +88,8 @@ Ask for source text, target examples, section type, paragraph role, fixed claims
 ## Reference
 
 Read [edit-contract-template.md](references/edit-contract-template.md) when the edit boundary is unclear.
+
+Read [final-polish-boundary.md](references/final-polish-boundary.md) when deciding whether the manuscript is ready for final polish or whether the task should route back to writing, research verification, or post-draft review.
 
 Read [high-risk-patterns.md](references/high-risk-patterns.md) when diagnosing mechanical or AI-shaped sentence patterns.
 

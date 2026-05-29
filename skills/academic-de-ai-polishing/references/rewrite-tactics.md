@@ -36,6 +36,7 @@ Judgment must remain evidence-grounded and formal.
 ## Preserve Academic Rigor
 
 - Do not paraphrase beyond the evidence.
+- Do not hide unresolved `LIT_GAP` or `needs evidence` markers by smoothing the surrounding prose.
 - Keep abbreviations, units, and process names exact.
 - Maintain citation density unless compression is clearly safe.
 - When compressing long citation strings, do not hide disagreement or distinct evidence roles.

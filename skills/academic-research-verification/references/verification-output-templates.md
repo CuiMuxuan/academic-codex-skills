@@ -23,3 +23,24 @@ Ask whether the user can provide 3-10 target papers, approved theses, or accepte
 | issue | in-body key | bibliography key | location | action |
 |---|---|---|---|---|
 | missing bibliography | author-year | none | paragraph/section | add source or remove citation |
+
+## Literature Gap Resolution Report
+
+| gap id | target claim | status | source/material | evidence use | limitation | next action |
+|---|---|---|---|---|---|---|
+| LIT_GAP-001 | claim needing support | resolved_verified/candidate_needs_download/requires_user_data_or_analysis/unresolved_search_more/delete_or_soften_claim | DOI/link/file needed | how it supports writing | scope limit | backfill/search/ask user |
+
+## Writing-Ready Evidence Handoff
+
+```text
+LIT_GAP id:
+Claim supported:
+Recommended citation key:
+Source identity:
+Evidence location:
+Finding to use:
+Method/context:
+Limitation:
+Target manuscript location:
+Allowed claim strength:
+```
