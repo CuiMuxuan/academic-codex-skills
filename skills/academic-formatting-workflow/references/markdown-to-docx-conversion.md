@@ -15,6 +15,8 @@ Before converting, identify:
 
 Do not install or upgrade converters silently. If Pandoc, a citation processor, a DOCX reference file, or Word automation is missing, report the limitation and ask before using a fallback that loses editability or links.
 
+For shared conversion-sensitive notation rules, apply [notation-and-conversion-integrity-gate.md](../../../shared/notation-and-conversion-integrity-gate.md).
+
 ## Formula Standard
 
 - Treat LaTeX as the canonical source for formulas. Preserve the original LaTeX expression in the Markdown source or a conversion log.
@@ -34,6 +36,8 @@ Check both formulas and non-formula text:
 
 Preserve semantic grouping. Do not let grouped indices, exponents, chemical formulas, or units degrade into baseline plain text. Inspect nested indices, primes, Greek letters, vectors, matrices, fractions, summations, integrals, and equation labels after conversion.
 
+Also check figure labels, table cells, captions, footnotes, and bibliography text when they contain notation. Figure/table conversion is not acceptable if `x_i`, `R^2`, `CO_2`, `10^{-3}`, or similar notation becomes plain baseline text.
+
 ## Citations And Cross-References
 
 - Prefer a structured citation processor such as Pandoc with CSL and BibTeX/BibLaTeX metadata when available.
@@ -41,6 +45,7 @@ Preserve semantic grouping. Do not let grouped indices, exponents, chemical form
 - Validate that every in-text citation has a bibliography entry and every required bibliography item is intentionally used or retained.
 - Check figure, table, and equation references separately from bibliographic citations.
 - Confirm that captions, labels, numbering, and reference text survive conversion or are listed as requiring Word refresh/manual repair.
+- Ensure figure/table labels embedded in images do not contain stale manual numbering or broken superscript/subscript notation.
 - When Word fields, TOC, tables of figures, or automatic cross-references are required, mark the DOCX as `needs Word refresh` unless Word automation has been explicitly run and verified.
 
 ## Run Plan

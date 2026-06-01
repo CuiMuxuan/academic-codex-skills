@@ -59,6 +59,7 @@ Stop and ask before:
 - treating a provisional baseline as final;
 - making broad formatting changes while content is still actively changing;
 - converting Markdown formulas, citations, or cross-references into lossy DOCX output;
+- converting figure/table labels, captions, formulas, superscripts/subscripts, citations, or cross-references when notation may be lost;
 - claiming final readiness when TOC, fields, cross-references, captions, or page numbering still require Word refresh.
 
 ## Workflow
@@ -66,15 +67,18 @@ Stop and ask before:
 1. Inventory inputs and missing rule sources.
 2. Extract the formatting baseline from the official guide, template, target examples, or provisional baseline.
 3. Use [formatting-run-plan.md](references/formatting-run-plan.md) to create the rule table, pass plan, output naming, and report structure.
-4. Use [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when source Markdown formulas, superscripts/subscripts, citations, bibliography entries, or cross-references must survive DOCX conversion.
-5. Apply formatting in separate passes and save a new output copy.
-6. Use [formatting-validation.md](references/formatting-validation.md) before calling the output ready.
+4. Use [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions may be converted.
+5. Use [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when source Markdown formulas, superscripts/subscripts, citations, bibliography entries, or cross-references must survive DOCX conversion.
+6. Apply formatting in separate passes and save a new output copy.
+7. Use [formatting-validation.md](references/formatting-validation.md) before calling the output ready.
 
 ## Reference
 
 Read [formatting-rule-checklist.md](references/formatting-rule-checklist.md) when applying a school handbook, Word template, or journal formatting guide.
 
 Read [target-template-intake.md](references/target-template-intake.md) when the user lacks a strict handbook/template or wants formatting inferred from approved examples.
+
+Read [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before converting or validating formulas, superscripts/subscripts, citations, cross-references, figures, tables, captions, or notation-heavy text.
 
 Read [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when converting Markdown manuscripts to DOCX or validating converted formulas, superscripts/subscripts, citations, bibliography entries, and cross-references.
 

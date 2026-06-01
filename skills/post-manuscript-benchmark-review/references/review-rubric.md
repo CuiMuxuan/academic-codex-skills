@@ -4,6 +4,8 @@
 
 Use this rubric to produce defensible, evidence-backed review judgments. Do not treat the four criteria as independent checkboxes: a weak evidence design can lower innovation value, and weak benchmark positioning can weaken the literature-review score.
 
+Core manuscript quality should always reduce to four questions: whether the problem is clear, whether the method is reasonable, whether the experiments support the conclusion, and whether the contribution is explicit.
+
 ### 1. Topic And Literature Review
 
 Evaluate:
@@ -46,6 +48,8 @@ Look for:
 - external or rolling validation when required;
 - reproducible scripts, feature dictionaries, and command manifests.
 
+When ablation experiments exist, check whether they progress through replacement ablation, key-hyperparameter robustness, and cross ablation for multiple core components. A simple "with/without module" comparison is usually not enough to prove that a proposed design is irreplaceable rather than merely adding capacity.
+
 Score guide:
 
 - `5`: design, data provenance, baselines, validation, limitations, and reproducibility are aligned with target-level papers.
@@ -58,6 +62,7 @@ Evaluate:
 
 - new insight, method, framework, dataset, protocol, or application contribution;
 - whether the contribution solves an important scientific or technical problem;
+- what problem the work actually solves and what the core idea is;
 - whether value is demonstrated by evidence, not only asserted;
 - whether the contribution is differentiated from benchmark papers.
 
@@ -86,6 +91,8 @@ Evaluate:
 - whether limitations are honest and proportional.
 
 For high-quality SCI manuscripts, prefer a compact main story with supporting details in Supplement.
+
+Move details that do not support the central problem-method-experiment-contribution chain into Supplement, appendix, methods detail, or future work instead of letting them blur the main story.
 
 Score guide:
 
@@ -178,6 +185,8 @@ P0 actions should be few and concrete. If more than five P0 items appear, group 
 When user-provided comments are present, do not treat them as automatically correct. Each comment must be classified as accepted, partly accepted, rejected with reason, needing user decision, needing new literature, or needing new data/analysis.
 
 Accepted and partly accepted comments must map to exact manuscript locations and revision actions. Rejected or deferred comments must include evidence-based reasons and the risk of not acting.
+
+When two or more comments are present, apply [reviewer-comment-action-plan-gate.md](../../../shared/reviewer-comment-action-plan-gate.md). Default to at least 20 concrete actions, unless the total comment count is below 25 and the actual issue count justifies fewer actions.
 
 ## Claim Triage
 

@@ -28,6 +28,7 @@ Validation:
 
 Use Draw.io for:
 
+- workflow and process diagrams;
 - system architecture;
 - runtime workflow;
 - use-case diagrams;
@@ -42,6 +43,8 @@ Rules:
 - Prefer uncompressed Draw.io XML when generating files for easier review.
 - Keep page names close to manuscript subsection names.
 - Avoid services, databases, or modules that do not exist.
+- Keep in-diagram text limited to labels and essential annotations; move captions, titles, long explanations, operation notes, and draft comments outside the canvas.
+- Preserve user-edited Draw.io styling unless the user or plan explicitly requests a redraw.
 - For code-backed diagrams, cite files, modules, routes, tables, functions, configs, or scripts that justify major nodes and edges in the final note.
 
 ## Caption And Integration

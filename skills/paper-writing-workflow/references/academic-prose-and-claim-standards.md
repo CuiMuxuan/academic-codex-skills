@@ -26,6 +26,17 @@ Use this reference for drafting, revising, and integrating academic prose. It is
 - Sentences must connect by explicit logic: cause, contrast, sequence, scope narrowing, evidence, implication, or transition.
 - Avoid citation dumping. Explain why the cited evidence matters for the paper's argument.
 
+## Paper Mainline Standard
+
+Use these four questions as the core writing-quality gate:
+
+1. Is the problem clear?
+2. Is the method reasonable for that problem?
+3. Do the experiments or analysis support the conclusion?
+4. Is the contribution explicit and tied to the manuscript's central idea?
+
+Keep the main manuscript focused on the central problem, method, experiment, and contribution. Remove material that does not support the main line, or move it to methods detail, appendix, supplement, limitation, or future work when it is still useful.
+
 ## Contribution And Limitation Framing
 
 - When describing the manuscript's own contribution, emphasize completed work, evidence, analysis, and defensible conclusions.
@@ -45,7 +56,9 @@ Do not make these claims without verified literature, data, analysis output, cod
 - evidence-quality or reporting-standard judgments;
 - conclusion-like statements that summarize what is known or proven.
 
-If the required support is missing, mark the location with `LIT_GAP` and continue with other draftable sections.
+For final main text and rebuttal text, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). If the required support is missing, stop and output a reference download or material request list instead of drafting final prose.
+
+For outlines, planning notes, or non-final draft areas that are not main-text or rebuttal final prose, mark the location with `LIT_GAP` and continue with other draftable sections.
 
 For central claims, maintain a claim anchor with support locator and allowed claim strength. Do not phrase the claim more strongly than the anchor permits.
 

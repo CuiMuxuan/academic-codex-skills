@@ -8,6 +8,8 @@ Before editing the manuscript, turn comments into a revision plan and ask the us
 
 Do not mechanically accept every comment. Judge each one against manuscript goals, evidence, target venue, and available materials.
 
+When two or more comments are provided, apply [reviewer-comment-action-plan-gate.md](../../../shared/reviewer-comment-action-plan-gate.md) before editing. The gate controls comment triage, action count, and exception handling for small comment sets.
+
 ## Per-Comment Analysis
 
 For each comment:
@@ -18,6 +20,7 @@ For each comment:
    - `accept`
    - `partly_accept`
    - `reject_with_reason`
+   - `defer`
    - `needs_user_decision`
    - `needs_new_evidence_or_analysis`
 4. Identify the target section, paragraph, figure, table, or citation.
@@ -46,6 +49,8 @@ Use this table:
 
 | id | comment summary | status | target location | planned action | priority | value | new risk | external dependency |
 |---|---|---|---|---|---|---|---|---|
+
+For action plans that must be executed later, also keep the shared action fields from [reviewer-comment-action-plan-gate.md](../../../shared/reviewer-comment-action-plan-gate.md), especially `source_comment_id`, `specific_change`, `required_material`, `verification_method`, and `owner_skill`.
 
 End with:
 

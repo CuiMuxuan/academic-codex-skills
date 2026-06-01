@@ -26,6 +26,7 @@ Before finishing, verify:
 - captions and cross-references are not obviously broken;
 - Markdown-origin formulas are readable, preferably editable, and traceable to their LaTeX source;
 - superscripts and subscripts in formulas, units, chemical notation, and variables survived conversion;
+- superscripts and subscripts in figure labels, table cells, captions, footnotes, and bibliography text survived conversion when present;
 - in-text citations, bibliography entries, and figure/table/equation cross-references remain linked or are explicitly listed for manual refresh;
 - bibliography style is consistent;
 - table of contents is refreshed or listed as requiring Word refresh;

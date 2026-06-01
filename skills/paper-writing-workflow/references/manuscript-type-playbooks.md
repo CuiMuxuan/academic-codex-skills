@@ -25,6 +25,14 @@ Emphasize:
 
 Do not invent data, statistical results, model performance, ablation outcomes, or causal mechanisms. If the data are missing, produce a results-writing plan and evidence gap list.
 
+When ablation experiments exist, the experiment narrative should check three levels before claiming the design is validated:
+
+1. replacement variants for core modules, not only removed-module variants;
+2. robustness trends for important new hyperparameters;
+3. cross ablations for two or more claimed core components.
+
+If any level is missing, write the gap as a required experiment, figure, or limitation instead of presenting the ablation as complete.
+
 ## Theses And Dissertations
 
 Emphasize:

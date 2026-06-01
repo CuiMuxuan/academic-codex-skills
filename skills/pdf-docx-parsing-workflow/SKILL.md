@@ -32,6 +32,7 @@ Do not:
 5. Use the least fragile parser that works in the environment.
 6. Do not install dependencies, run OCR, or use Word automation without user approval.
 7. Do not overwrite source documents.
+8. When extracting review comments, preserve comment count, source location, author/time metadata when available, and downstream action-planning fields.
 
 ## Intake
 
@@ -61,7 +62,8 @@ Use [parser-selection.md](references/parser-selection.md) for parser choice and 
 3. For PDFs, apply [pdf-extraction-playbook.md](references/pdf-extraction-playbook.md).
 4. For DOCX files, apply [docx-extraction-playbook.md](references/docx-extraction-playbook.md).
 5. Normalize outputs with [structured-output-schema.md](references/structured-output-schema.md).
-6. Apply [handoff-quality-gates.md](references/handoff-quality-gates.md) before routing outputs downstream.
+6. Apply [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when extracted comments will be routed into writing or post-draft review.
+7. Apply [handoff-quality-gates.md](references/handoff-quality-gates.md) before routing outputs downstream.
 
 ## Outputs
 
@@ -71,6 +73,7 @@ Use one or more:
 - `pdf_evidence.csv`;
 - `docx_structure.csv`;
 - `docx_comments.csv`;
+- `review_comment_inventory.md`;
 - `tracked_changes_report.md`;
 - `format_template_inventory.md`;
 - `manual_recovery_list.md`.
@@ -84,6 +87,8 @@ Read [parser-selection.md](references/parser-selection.md) when choosing PDF/DOC
 Read [pdf-extraction-playbook.md](references/pdf-extraction-playbook.md) for PDF text, table, bibliography, and scanned-page recovery extraction.
 
 Read [docx-extraction-playbook.md](references/docx-extraction-playbook.md) for DOCX headings, comments, tracked changes, styles, captions, and template inspection.
+
+Read [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when parsed comments should preserve enough detail for downstream triage and concrete revision actions.
 
 Read [handoff-quality-gates.md](references/handoff-quality-gates.md) before passing parsed outputs to research, writing, formatting, or figure workflows.
 

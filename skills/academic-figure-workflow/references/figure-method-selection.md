@@ -20,6 +20,7 @@ Validation:
 ## Draw.io Is Preferred For
 
 - Flowcharts.
+- Workflow and process diagrams.
 - Use-case diagrams.
 - System architecture.
 - Module diagrams.
@@ -32,6 +33,8 @@ Validation:
 - Edges represent real flow or dependency.
 - Page names match target sections.
 - No unsupported system layer appears.
+- The `.drawio` source path is reported with any exported SVG/PDF/PNG preview.
+- If the user manually edited the `.drawio` source, that edited style remains the baseline unless a redraw is explicitly requested.
 
 ## OpenAI Image Generation Is Reserved For
 

@@ -45,6 +45,8 @@ When the venue specifies a maximum resolution or file size, obey it and report t
 - Keep one editable source file per figure and one export packet per intended use.
 - Name files so the figure number, short topic, and source/export role are unambiguous.
 - Do not place caption text, figure number/title, article title, or author names inside the image file unless a target template specifically requires it.
+- For Draw.io figures, keep and report the `.drawio` source path even when the manuscript receives SVG, PDF, PNG, or DOCX output.
+- When a user has manually edited a Draw.io source, preserve that source as the style baseline and avoid regenerating it unless redraw is explicitly requested.
 
 ## Export Packet
 
@@ -52,13 +54,16 @@ For each generated figure, report:
 
 ```text
 Editable source:
+Draw.io source, if applicable:
 Vector exports:
 Raster preview/submission exports:
 Final size:
+DOCX/PDF insertion preview checked: yes/no
 Font/editability status:
 DPI or vector status:
 Colour space:
 Caption/legend location:
+Figure-internal text removed or retained:
 Unresolved export risks:
 ```
 

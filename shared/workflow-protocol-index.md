@@ -11,6 +11,9 @@ Use this shared index when coordinating multiple academic skills. Keep cross-ski
 | Claim evidence anchor | drafting, verifying, reviewing, polishing, or captioning central claims | writing + research verification |
 | Literature gap handoff | moving `LIT_GAP` items between writing and research verification | writing + research verification |
 | Benchmark report | reviewing a complete draft against target papers | post-manuscript benchmark review |
+| Main text and rebuttal claim support | drafting, revising, polishing, or approving final main-text or rebuttal claims | writing + research verification |
+| Reviewer comment action plan | turning two or more review comments into accepted, partial, rejected, deferred, or material-blocked actions | writing + post-manuscript benchmark review |
+| Notation and conversion integrity | converting formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions across output formats | formatting + figures |
 | Trigger conflict matrix | deciding which skill owns an ambiguous user request | orchestrator |
 | Validation policy | checking local or installed skills before use or release | repository validation script |
 
@@ -26,8 +29,11 @@ Ask for user confirmation before moving past:
 - project design document and chapter outline;
 - initial verified evidence register or gap-resolution handoff;
 - benchmark set before target-readiness judgment;
+- unsupported main-text or rebuttal claims that require citations, data, standards, code, or user-supplied materials;
+- reviewer-comment batches with two or more comments before drafting the revision or rebuttal;
 - integrated draft before final polish or formatting;
 - external image-generation use;
+- lossy formula, superscript/subscript, citation, cross-reference, or figure/table conversion;
 - formatting baseline before final DOCX normalization.
 
 When a field is unclear and the user also declines to set it, default to computer science and electronic information, then mark the assumption.

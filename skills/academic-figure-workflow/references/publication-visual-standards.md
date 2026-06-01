@@ -33,11 +33,22 @@ If the target venue gives a different rule, follow the venue and report the diff
 Before calling a figure ready:
 
 - inspect it at the intended print width, not only at full-screen zoom;
+- inspect a DOCX/PDF insertion preview when the figure is meant for a manuscript or thesis;
+- ensure figure text does not look smaller than the surrounding body text after insertion, unless the target venue explicitly requires a smaller final-size font;
 - ensure every label, tick, arrow label, legend entry, and panel letter remains legible;
 - remove or rewrite labels that require shrinking below the selected standard;
 - use shorter manuscript terminology rather than wrapping long prose inside the figure;
 - avoid placing important text on saturated colours or busy image regions;
 - keep text horizontal unless the axis or layout genuinely requires rotation.
+
+## Figure-Internal Text Filter
+
+Text inside the figure should be limited to what helps interpret the visual object:
+
+- keep panel letters, axis labels, ticks, legends, node labels, short arrow labels, scale bars, and essential in-panel annotations;
+- remove manuscript captions, figure titles, author notes, implementation TODOs, prompt traces, operation logs, file paths, draft comments, and explanatory paragraphs;
+- move long explanations, limitations, source notes, and interpretation into the caption, main text, methods, appendix, or supplement;
+- when a text label is needed but too long, shorten the label and define it in the caption or legend.
 
 ## Spacing And Alignment
 
@@ -58,6 +69,7 @@ Reject or revise figures that contain:
 - boxed panel letters;
 - chart titles inside the figure when the caption/manuscript should provide the title;
 - captions, figure numbers, author names, or article titles embedded inside the figure file;
+- project notes, operation logs, TODOs, source-file comments, or revision instructions inside the figure;
 - rasterized text in vector-style diagrams or plots;
 - dense labels that make the figure unreadable after insertion into DOCX/PDF.
 

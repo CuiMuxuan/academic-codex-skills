@@ -32,6 +32,14 @@ Ask whether the user can provide 3-10 target papers, approved theses, or accepte
 |---|---|---|---|---|---|---|---|---|
 | LIT_GAP-001 | C1 | claim needing support | resolved_verified/candidate_needs_download/requires_user_data_or_analysis/unresolved_search_more/delete_or_soften_claim | DOI/link/file needed | how it supports writing | scope limit | cautious/moderate/strong | backfill/search/ask user |
 
+## Reference Download Or Material Request List
+
+Use this when main text or rebuttal writing must pause because a factual, boundary, subjective, contribution, limitation, or rebuttal claim lacks concrete support.
+
+| id | blocked claim | target location | needed support type | suggested reference/material | DOI/link/search string | why needed | next step after user provides it |
+|---|---|---|---|---|---|---|---|
+| RQ-001 | claim needing support | section/paragraph/rebuttal item | literature/data/code/result/standard/user material | paper/table/script/file | exact DOI/link/search | exact sentence cannot be supported yet | verify then hand off to writing |
+
 ## Writing-Ready Evidence Handoff
 
 ```text

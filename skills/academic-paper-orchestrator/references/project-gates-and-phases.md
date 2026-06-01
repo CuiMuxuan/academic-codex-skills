@@ -33,14 +33,17 @@ Stop and wait for confirmation after:
 - project design document and chapter outline;
 - inferred or unclear research field/terminology baseline;
 - outline-level evidence precheck and `LIT_GAP` list;
+- main-text or rebuttal support gaps that require literature, data, code, standards, or user-supplied materials;
 - initial verified literature/evidence register;
 - gap-driven literature supplementation before writing-ready use;
 - each chapter draft;
 - integrated full draft;
 - reviewer/supervisor-comment revision plan before substantial edits;
+- two-or-more-comment action plan before revision or rebuttal writing;
 - benchmark-review plan and benchmark set before judging target readiness when the user asks for post-draft review;
 - final de-AI/style polish entry after content, evidence, and structure are stable;
 - figure plan when figures are substantial or use an external image-generation API;
+- lossy notation-sensitive conversion involving formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions;
 - formatting baseline before applying final DOCX normalization;
 - pre-final draft after quality review.
 
@@ -66,7 +69,7 @@ Recommended next step:
 - Evidence gaps: route search, DOI checks, and trust-state changes to `$academic-research-verification`.
 - Comment response: use `$paper-writing-workflow` for ordinary revision planning; use `$post-manuscript-benchmark-review` for full-draft benchmark review.
 - Final polish: use `$academic-de-ai-polishing` only after content, evidence, and structure are stable.
-- Figures: use `$academic-figure-workflow` for nontrivial figures; AI image generation requires explicit confirmation.
+- Figures: use `$academic-figure-workflow` for nontrivial figures; workflow diagrams should generally use Draw.io; AI image generation requires explicit confirmation.
 - Formatting: use `$academic-formatting-workflow` only after content is reasonably stable.
 - Post-draft review: use `$post-manuscript-benchmark-review` only after a complete first draft or integrated chapter exists.
 

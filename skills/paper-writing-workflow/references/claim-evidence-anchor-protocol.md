@@ -33,6 +33,19 @@ open_risk:
 
 `support_locator` should be concrete: DOI and page/table/figure, local file path, table ID, script path plus command, result file, figure panel, or explicit user decision.
 
+## Support Wording
+
+When writing Chinese or bilingual manuscripts, avoid overusing the generic word "证据" if a more exact expression is available. Prefer the support type that matches the locator:
+
+- "文献支持" for verified papers;
+- "实验结果" or "结果表明" for measured outcomes;
+- "数据支撑" for datasets or quantitative observations;
+- "实现依据" for inspected code, configurations, or repositories;
+- "理论依据" for definitions, derivations, or formal arguments;
+- "消融结果" for ablation-backed claims.
+
+Use "证据" only when it is the most accurate umbrella term.
+
 ## Claim Strength Rules
 
 | strength | allowed wording |
@@ -53,6 +66,8 @@ Before drafting a claim-heavy section:
 2. Attach existing anchors or create provisional anchors.
 3. Draft only claims with `verified`, `parsed`, `writing_ready`, or `user_approved` support.
 4. Mark unsupported claims with `LIT_GAP` and route them to research verification.
+
+For final main-text or rebuttal wording, also apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md); unsupported final claims should stop at a material request rather than be drafted as final prose.
 
 ## Handoff To Research Verification
 

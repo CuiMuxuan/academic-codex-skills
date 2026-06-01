@@ -15,6 +15,8 @@ Do not mechanically accept every comment. Judge each comment against:
 
 Produce a next-stage revision plan and ask for user confirmation before executing substantial edits.
 
+When two or more comments are provided, apply [reviewer-comment-action-plan-gate.md](../../../shared/reviewer-comment-action-plan-gate.md) before editing. The gate controls action-plan size, small-comment-set exceptions, triage states, and concrete action fields.
+
 ## Per-Comment Handling
 
 For each comment:
@@ -26,6 +28,7 @@ For each comment:
    - `accept`
    - `partly_accept`
    - `reject_with_reason`
+   - `defer`
    - `needs_user_decision`
    - `needs_new_literature`
    - `needs_new_data_or_analysis`
@@ -52,6 +55,8 @@ Check whether the fix could cause:
 
 | id | comment | status | target location | action | priority | value | new risk | external dependency |
 |---|---|---|---|---|---|---|---|---|
+
+For executable next-version plans, preserve the shared action fields from [reviewer-comment-action-plan-gate.md](../../../shared/reviewer-comment-action-plan-gate.md): `source_comment_id`, `specific_change`, `required_material`, `expected_effect`, `verification_method`, `owner_skill`, and `priority`.
 
 End with:
 

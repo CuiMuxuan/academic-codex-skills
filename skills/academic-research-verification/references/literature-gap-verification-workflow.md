@@ -25,6 +25,8 @@ Allowed claim strength if resolved:
 
 If the target claim is too broad, split it into smaller verifiable claims before searching.
 
+For final main-text or rebuttal gaps, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). Do not backfill final prose until the needed support is verified or explicitly supplied.
+
 ## Search And Verification
 
 1. Translate the target claim into 2-4 search strings.
@@ -43,6 +45,11 @@ If a source is useful but inaccessible:
 - provide title, DOI or stable link, venue, year, and why it is needed;
 - ask the user to download, attach, or provide the relevant pages;
 - mark the source `candidate` or `unresolved`, not writing-ready.
+
+Use this download-list format when writing or rebuttal must pause:
+
+| needed item | target claim | suggested source | DOI/link/search string | why needed | blocks next step |
+|---|---|---|---|---|---|
 
 If the evidence requires user data or a new analysis, state the needed table, figure, script output, or experiment instead of searching literature.
 

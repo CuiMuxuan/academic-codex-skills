@@ -32,6 +32,22 @@ Use the canonical `material_passport`, `claim_anchor`, and writing-ready evidenc
 | `quality` | high, medium, low, failed |
 | `notes` | Recovery notes or uncertainty |
 
+## Review Comment Extension
+
+Add these fields when extracted DOCX/PDF comments will feed reviewer-comment planning:
+
+| Field | Notes |
+|---|---|
+| `comment_id` | Stable local id or source comment id |
+| `comment_source` | reviewer, editor, committee, supervisor, author reply, unknown |
+| `comment_author` | Author metadata when available |
+| `comment_time` | Timestamp when available |
+| `comment_location` | Page, paragraph, heading, anchor text, or range |
+| `comment_text` | Extracted comment text or concise summary |
+| `related_revision` | Nearby tracked change or reply when available |
+| `downstream_owner` | writing, post-review, research, figure, formatting |
+| `triage_status` | untriaged by default |
+
 ## Evidence Extension
 
 Add these fields when the output feeds academic writing:

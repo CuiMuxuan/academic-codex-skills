@@ -32,6 +32,7 @@ Do not:
 4. Use reliable external sources for current or uncertain bibliographic data when network access is available.
 5. Record source links and verification trails when browsing or API access is used.
 6. If verification cannot be completed, mark the item `unresolved`.
+7. For main-text or rebuttal support gaps, return a concrete reference download or material request list instead of backfilling prose.
 
 ## Intake
 
@@ -54,7 +55,8 @@ Fallback if unavailable:
 4. Apply [literature-search-and-identity-workflow.md](references/literature-search-and-identity-workflow.md) for discovery, DOI/title matching, and identity checks.
 5. Apply [trust-state-decision-gates.md](references/trust-state-decision-gates.md) before changing trust state or marking a source writing-ready.
 6. Apply [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when auditing an existing manuscript or bibliography.
-7. Return writing handoff evidence with claim/topic, claim-anchor id when provided, source, finding, method context, limitation, target chapter, citation key, verification state, support locator, and allowed claim strength.
+7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) when a writing or rebuttal handoff is blocked by missing support.
+8. Return writing handoff evidence with claim/topic, claim-anchor id when provided, source, finding, method context, limitation, target chapter, citation key, verification state, support locator, and allowed claim strength.
 
 ## Network And API Boundaries
 
@@ -98,6 +100,8 @@ Read [literature-search-and-identity-workflow.md](references/literature-search-a
 Read [literature-gap-verification-workflow.md](references/literature-gap-verification-workflow.md) when a writing workflow passes `LIT_GAP` markers, evidence-gap lists, or requests for new support before drafting.
 
 Read [citation-authenticity-audit.md](references/citation-authenticity-audit.md) when checking in-body citations, bibliography entries, or claim support.
+
+Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) when missing support blocks main-text drafting or rebuttal response writing.
 
 ## Bundled Utilities
 

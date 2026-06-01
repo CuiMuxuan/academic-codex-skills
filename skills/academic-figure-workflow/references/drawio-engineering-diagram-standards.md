@@ -14,6 +14,8 @@ Use Draw.io when the figure's value is an editable engineering diagram rather th
 - experiment or thesis implementation pipeline;
 - code-backed process extracted from a repository.
 
+Prefer Draw.io for all workflow and process diagrams unless the user or target venue requires another editable source format.
+
 Use SVG instead when the figure is a mechanism illustration or concept diagram that needs precise custom shapes. Use Matplotlib when the figure is data-driven.
 
 ## Source Contract
@@ -74,6 +76,17 @@ If a shape meaning changes between diagrams, state the legend or change the desi
 - Avoid shadows, gradients, clipart, and decorative icons.
 - Prefer uncompressed Draw.io XML for review and version control.
 - Use one Draw.io page per figure or subfigure topic; name pages after manuscript sections or figure panels.
+- Remove figure titles, captions, author notes, draft comments, operation notes, and long explanations from the canvas unless the target template explicitly requires them.
+- Keep in-canvas text readable at the final manuscript insertion size; if it cannot be read beside body text in DOCX/PDF, simplify labels or enlarge the diagram.
+
+## User-Edited Source Rule
+
+If the user says a `.drawio` file was manually edited:
+
+- treat the user's edited file as the style and layout baseline;
+- preserve colours, typography, spacing, lane structure, icon choices, page names, and grouping unless the user asks to change them;
+- edit text labels and factual content when requested;
+- do not redraw the whole source unless the plan or the user explicitly says to redraw.
 
 ## Output Packet
 
@@ -84,6 +97,7 @@ Page names:
 Diagram legend:
 Evidence/code trace:
 Unsupported assumptions:
+User-edited source respected: yes/no/not applicable
 Manual checks:
 ```
 

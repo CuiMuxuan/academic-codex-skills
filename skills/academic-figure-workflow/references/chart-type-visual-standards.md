@@ -58,6 +58,14 @@ Use for dense matrix-like relationships.
 - Do not use colour to make a method look better than the data justify.
 - Include run count, split, dataset, and metric definition in the caption or support note.
 
+For manuscripts that already include ablation experiments, use three progressive checks:
+
+1. Replacement ablation: do not only compare "with module A" against "without module A"; when feasible, replace A with a traditional module of comparable parameter scale or computational role to show the proposed design is not only benefiting from added capacity.
+2. Hyperparameter robustness: for new mechanism hyperparameters such as loss weights, mask ratios, thresholds, or module depths, show a trend plot or heatmap across a meaningful range rather than only the best value. A stable plateau supports robustness; a narrow isolated peak requires training-stability discussion.
+3. Cross ablation: when two or more new core components are claimed, provide a full-combination table or matrix, such as 2x2 or 3x3, to show each component alone and the joint effect.
+
+If the data needed for these checks is missing, route the gap to writing or research verification as an experiment/material request instead of implying the ablation is complete.
+
 ## Tables As Figures
 
 Use only when visual comparison is stronger than a native table.

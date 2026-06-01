@@ -22,6 +22,7 @@ Capture:
 - table count and rough location;
 - figure/table captions;
 - comments and authors when available;
+- comment ids, source locations, timestamps, replies, and nearby anchor text when available;
 - tracked insertions/deletions when available;
 - section/page setup signals when inspecting templates;
 - extraction quality and notes.
@@ -31,6 +32,7 @@ Capture:
 Check:
 
 - comments not captured;
+- extracted review comments lack enough location detail for downstream action planning;
 - tracked changes hidden in XML but not summarized;
 - style names missing or inconsistent;
 - captions not detected;

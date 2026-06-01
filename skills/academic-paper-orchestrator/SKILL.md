@@ -32,6 +32,8 @@ If a focused skill is unavailable, follow the same ownership boundaries and tell
 5. Keep research, parsing, writing, figures, formatting, and post-draft review as separate passes.
 6. Stop for user confirmation at required gates before moving to the next major stage.
 7. Never fabricate citations, DOI records, experiment results, repository behavior, figure contents, or formatting rules.
+8. Stop main-text or rebuttal writing when required support is missing; request the missing material before continuing.
+9. Treat formulas, superscripts/subscripts, citations, cross-references, figures, and tables as conversion-sensitive artifacts.
 
 ## Intake
 
@@ -62,9 +64,12 @@ Fallback if unavailable:
 5. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
 6. Apply [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before drafting, benchmark review, final polish, formatting, or any claim about code/data/results.
 7. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
-8. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
-9. Route execution to the focused skill that owns the current stage.
-10. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+8. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claims.
+9. Apply [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when two or more reviewer, editor, committee, or supervisor comments are provided.
+10. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before lossy manuscript, figure, table, formula, citation, or cross-reference conversion.
+11. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
+12. Route execution to the focused skill that owns the current stage.
+13. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -94,6 +99,12 @@ Read [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) befor
 Read [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request could trigger multiple academic skills or when deciding whether the orchestrator should own the task.
 
 Read [handoff-field-schema.md](../../shared/handoff-field-schema.md) when checking field names for workflow modes, material passports, claim anchors, literature gaps, writing-ready handoffs, or benchmark reports.
+
+Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before drafting, revising, polishing, or approving supported main-text or rebuttal claims.
+
+Read [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when a comment batch needs triage and concrete revision actions before editing.
+
+Read [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions are converted across formats.
 
 Read [project-artifact-templates.md](references/project-artifact-templates.md) when creating a project state file, handoff packet, or target-baseline note.
 

@@ -12,6 +12,8 @@ Watch for these patterns:
 - a weak implementation or failed experiment is reframed as a novel contribution;
 - benchmark facts are inferred from abstract or metadata as if full text had been read;
 - generated prose keeps project-log residue, TODOs, operation records, or hidden assumptions in the manuscript body;
+- main-text or rebuttal sentences make factual, boundary, subjective, contribution, or limitation claims without concrete support;
+- formulas, superscripts/subscripts, citations, cross-references, or figure/table labels are flattened during conversion;
 - the workflow stays locked to an early frame after new evidence contradicts it.
 
 ## Gate 1: Source And Claim Reality
@@ -24,6 +26,8 @@ Before writing or backfilling claims, require one of:
 - explicit user approval to keep a provisional claim.
 
 If none exists, write `LIT_GAP` or remove/soften the claim.
+
+For final main text or rebuttal prose, use [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). Missing support blocks final wording and should produce a reference download or material request list.
 
 ## Gate 2: Code, Data, And Experiment Reality
 
@@ -55,6 +59,7 @@ Before final polish, formatting, or delivery, check:
 - all central claims have verified evidence, inspected artifacts, or accepted `LIT_GAP` status;
 - citations and bibliography have been audited or queued for manual verification;
 - figures and tables match the manuscript claims and captions;
+- figure text remains readable at final DOCX/PDF insertion size and does not contain draft notes, captions, operation logs, or other non-figure text;
 - final polish did not change technical meaning, claim strength, citations, formulas, or terminology;
 - DOCX/Markdown versions are semantically aligned if both exist.
 

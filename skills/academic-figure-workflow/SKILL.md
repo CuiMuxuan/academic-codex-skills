@@ -65,6 +65,9 @@ Read [figure-method-selection.md](references/figure-method-selection.md) when a 
 4. Export publication formats only after the editable source is accepted.
 5. Keep labels concise and consistent with manuscript terminology.
 6. Record assumptions and unresolved evidence instead of filling gaps visually.
+7. Ensure figure text remains readable at final DOCX/PDF insertion size and remove text that should not appear inside the figure.
+8. Prefer Draw.io for workflow and process diagrams; preserve user-edited `.drawio` styling unless a redraw is explicitly requested.
+9. Preserve formulas, superscripts/subscripts, and notation in labels, captions, tables-as-figures, and exports.
 
 ## Workflow
 
@@ -76,7 +79,8 @@ Read [figure-method-selection.md](references/figure-method-selection.md) when a 
 6. For image plates, photographs, microscopy, heatmaps over images, or mixed raster/vector panels, apply [image-panel-integrity.md](references/image-panel-integrity.md).
 7. For AI-generated bitmap assets, apply [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before generation.
 8. When a venue-specific requirement, external visual example, or numeric artwork standard matters, apply [publisher-visual-source-map.md](references/publisher-visual-source-map.md) and verify the current official guide when possible.
-9. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, and unresolved issues.
+9. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure labels, formulas, superscripts/subscripts, citations, or cross-references may be converted.
+10. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, and unresolved issues.
 
 ## Validation
 
@@ -86,6 +90,7 @@ Before finishing:
 - inspect generated source files when possible;
 - check label overlap, readability, export integrity, and editability;
 - verify final-size readability, font consistency, line weight, colour meaning, grayscale or colour-blind-safe interpretation, and caption/description handoff when relevant;
+- report the editable source path, especially `.drawio` paths for workflow diagrams;
 - trace each panel, node, edge, label, plotted value, or annotation back to approved source facts;
 - confirm code-backed diagrams match actual implementation;
 - defer figure numbering or final caption style to formatting when the target format is not known;
@@ -112,6 +117,8 @@ Read [chart-type-visual-standards.md](references/chart-type-visual-standards.md)
 Read [svg-and-drawio-diagrams.md](references/svg-and-drawio-diagrams.md) for mechanism diagrams, conceptual SVGs, architecture diagrams, and code-backed Draw.io diagrams.
 
 Read [drawio-engineering-diagram-standards.md](references/drawio-engineering-diagram-standards.md) for Draw.io architecture, workflow, module, use-case, data-flow, and code-backed diagram conventions.
+
+Read [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure text, notation, formulas, superscripts/subscripts, citations, or cross-references are converted across figure, manuscript, DOCX, PDF, SVG, or Draw.io outputs.
 
 Read [image-panel-integrity.md](references/image-panel-integrity.md) for photographs, microscopy, image plates, raster panels, scale bars, crop/manipulation notes, and mixed raster/vector figures.
 

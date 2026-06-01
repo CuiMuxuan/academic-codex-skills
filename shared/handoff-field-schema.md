@@ -100,3 +100,19 @@ benchmark_pressure:
 gap_severity: blocking | major | moderate | minor
 next_version_action:
 ```
+
+## Reviewer Comment Action
+
+```text
+action_id:
+source_comment_id:
+acceptance_state: accept | partly_accept | reject_with_reason | defer | needs_material
+target_location:
+modification_type:
+specific_change:
+required_material:
+expected_effect:
+verification_method:
+owner_skill:
+priority: P0 | P1 | P2
+```
