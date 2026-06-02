@@ -39,9 +39,9 @@ Do not:
 7. Do not overwrite the only working draft.
 8. Stop for confirmation after each major chapter or integrated manuscript.
 9. During drafting and revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass.
-10. On first use of an abbreviation, write the full term followed by the abbreviation in parentheses unless the target style guide says otherwise.
+10. From the first body-text section onward, write the full term followed by the abbreviation in parentheses on first use unless the target style guide says otherwise; title, abstract, and highlights are exempt by default.
 11. Judge manuscript quality by whether the problem is clear, the method is reasonable, the experiments support the conclusion, and the contribution is explicit.
-12. For main text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support.
+12. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, and highlights are exempt unless the target rules require otherwise.
 
 ## Intake
 

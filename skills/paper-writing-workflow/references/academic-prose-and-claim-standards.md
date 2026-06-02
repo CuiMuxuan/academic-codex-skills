@@ -12,7 +12,8 @@ Use this reference for drafting, revising, and integrating academic prose. It is
 
 ## Abbreviations
 
-- On first use, write `full term (abbreviation)`.
+- From the first body-text section onward, write `full term (abbreviation)` on first use.
+- Titles, abstracts, and highlights are exempt from the first-use abbreviation expansion rule unless the target journal, school template, supervisor, or user explicitly requires expansion there.
 - Use the abbreviation alone only after the first-use definition.
 - If a journal, school, or discipline has a fixed convention, follow that convention and record the exception.
 - In bilingual work, keep Chinese and English term pairs stable.
@@ -56,7 +57,7 @@ Do not make these claims without verified literature, data, analysis output, cod
 - evidence-quality or reporting-standard judgments;
 - conclusion-like statements that summarize what is known or proven.
 
-For final main text and rebuttal text, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). If the required support is missing, stop and output a reference download or material request list instead of drafting final prose.
+For final body text and rebuttal text, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). Title, abstract, and highlights do not need citation/support locators by default. If required support is missing in body text or rebuttal text, stop and output a reference download or material request list instead of drafting final prose.
 
 For outlines, planning notes, or non-final draft areas that are not main-text or rebuttal final prose, mark the location with `LIT_GAP` and continue with other draftable sections.
 
