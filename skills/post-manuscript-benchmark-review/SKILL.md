@@ -51,8 +51,9 @@ If key inputs are unavailable, produce a provisional review plan and materials r
 4. Use [benchmark-report-schema.md](references/benchmark-report-schema.md) to keep benchmark facts, access limits, manuscript claim records, gap severity, and next-version actions auditable.
 5. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
 6. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before approving factual, boundary, subjective, contribution, limitation, or rebuttal judgments.
-7. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
-8. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
+7. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when formal review output must judge abstract wording, undefined local labels, operation-record prose, sentence purpose, citation proximity, proxy validity, or bilingual claim-strength consistency.
+8. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
+9. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
 
 ## Quality Gate
 
@@ -64,6 +65,7 @@ The review is high quality only if it:
 - gives actions executable in the next manuscript iteration;
 - marks missing evidence, benchmark access limits, and material dependencies explicitly.
 - turns two or more review comments into a triaged action plan before manuscript rewriting.
+- applies the cross-disciplinary language review gate when wording quality, terminology clarity, sentence purpose, or support distance is part of the review.
 
 ## Reference
 
@@ -78,5 +80,7 @@ Read [reviewer-comment-response-workflow.md](references/reviewer-comment-respons
 Read [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when two or more review comments must become concrete modification actions.
 
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before treating benchmark, readiness, contribution, limitation, or rebuttal judgments as final prose.
+
+Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when reviewing formal body text or rebuttal prose for abstract, mechanical, internally defensive, undefined-term, citation-unclear, proxy-unsupported, or cross-language-inconsistent wording.
 
 Read [review-output-template.md](references/review-output-template.md) when producing a formal report, Chinese evaluation, SCI/Q1 readiness judgment, or benchmark gap table.

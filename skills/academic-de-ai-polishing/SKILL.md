@@ -35,6 +35,7 @@ Do not:
 6. Move unresolved author decisions to `User-review items` instead of hiding them in polished prose.
 7. Treat accurate, direct, concise, understandable writing as the baseline; style elevation is optional and must stay evidence-safe.
 8. In main text and rebuttal prose, do not polish unsupported claims into final language; request support or soften the claim.
+9. Use the shared cross-disciplinary language review gate before finalizing formal body-text or rebuttal rewrites with abstract terms, local labels, operation-record residue, unclear sentence purpose, proxy wording, or bilingual inconsistency.
 
 ## Pre-Edit Gate
 
@@ -73,7 +74,8 @@ Classify each target paragraph:
 5. Use [section-playbooks.md](references/section-playbooks.md) when the rewrite problem is section-dependent.
 6. Use [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) when main text contains project, operation, prompt, or file-management traces.
 7. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) when final main-text or rebuttal wording contains factual, boundary, subjective, contribution, or limitation claims.
-8. After each rewrite, verify meaning, citations, terminology, claim anchors, support wording, and technical scope.
+8. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when the user asks for language review, terminology review, strict sentence-by-sentence checking, abstract wording cleanup, or operation-record cleanup.
+9. After each rewrite, verify meaning, citations, terminology, claim anchors, support wording, and technical scope.
 
 ## Material Request
 
@@ -107,5 +109,7 @@ Read [project-notes-from-this-paper.md](references/project-notes-from-this-paper
 Read [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) for internal project notes, operation logs, prompt traces, file-management language, handoff language, TODO markers, or draft residue.
 
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before polishing unsupported main-text or rebuttal claims into final prose, and when replacing generic "evidence" wording with a more precise support term.
+
+Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) before strict language review or final polishing of formal body text or rebuttal prose that may contain abstract wording, undefined local terms, operation-record traces, unclear sentence function, unsupported proxies, citation-distance problems, or bilingual claim-strength drift.
 
 Read [ai-trace-assessment.md](references/ai-trace-assessment.md) when the user asks for AI-trace or AIGC-risk assessment.

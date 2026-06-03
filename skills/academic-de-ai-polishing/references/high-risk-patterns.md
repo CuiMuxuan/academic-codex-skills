@@ -2,6 +2,8 @@
 
 Use this reference when diagnosing why a paragraph sounds obviously AI-assisted, over-smoothed, or mechanically academic. These are pattern examples, not text to copy directly. Match the user's paragraph to a pattern, then apply the corresponding rewrite strategy.
 
+For strict cross-disciplinary language review, also use [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md). This local file lists style-risk patterns; the shared gate controls field-aware terminology, object-condition-consequence judgment, proxy validity, citation proximity, and bilingual claim-strength checks.
+
 ## How To Use
 
 1. Identify the dominant problem in the paragraph, not every minor issue at once.

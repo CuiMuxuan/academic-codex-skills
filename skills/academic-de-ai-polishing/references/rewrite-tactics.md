@@ -24,6 +24,7 @@ Use this reference when the paragraph argument is sound but the prose reads mech
 - Cut stock phrases such as "it is worth noting that", "plays an important role", and "in conclusion" unless they add real value.
 - Replace vague abstractions with the exact referent when the prior text has not established the concept.
 - Avoid using "framework", "mechanism", "strategy", "feature", "factor", or "performance" without naming what it refers to.
+- For strict academic language review, apply [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md): first confirm the field and paragraph task, then check object-condition-consequence, term status, noun-list level, proxy validity, citation distance, and bilingual strength consistency.
 
 ## Repair Ambiguity And Premature References
 
@@ -74,6 +75,8 @@ When revising text, provide:
 - revised paragraph or paragraph block;
 - preservation check for meaning, citations, terminology, and technical scope;
 - brief note on cadence, vocabulary, or judgment changes when helpful.
+
+When the user asks for sentence-by-sentence review, follow the output shape in [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md) instead of only returning a polished paragraph.
 
 For long passages, use:
 

@@ -10,7 +10,7 @@ Use this reference for revision modes, output packets, and final quality checks 
 | `evidence` | Add, remove, or flag claims based on verified evidence |
 | `style` | Improve academic tone, precision, concision, and bilingual consistency |
 | `structure` | Reorganize headings, paragraph order, and chapter balance |
-| `ambiguity` | Review each sentence for unclear referents, vague abstractions, and unsupported concepts |
+| `ambiguity` | Review each sentence for unclear referents, vague abstractions, unsupported concepts, and cross-disciplinary language-gate issues |
 | `supervisor_response` | Address review comments one by one and preserve a change log |
 | `reviewer_response_plan` | Analyze comments, decide accept/partly accept/reject, assess risks, and wait for user confirmation before editing |
 
@@ -59,8 +59,10 @@ Before claiming a writing task is complete, check:
 - first-use abbreviations follow `full term (abbreviation)` unless the target style says otherwise;
 - field-specific terminology matches the confirmed field and target venue;
 - repeated expressions across subsections have been removed, merged, or justified;
-- each sentence has been checked for ambiguity, vague abstraction, undefined referents, and concepts introduced without setup;
+- each sentence has been checked for ambiguity, vague abstraction, undefined referents, concepts introduced without setup, and the object-condition-consequence rule in [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md);
 - no bibliography-only source is implied as cited;
 - terminology is consistent;
 - Chinese and English terms are paired consistently in bilingual work;
 - figure and table references match planned or existing artifacts.
+
+For user-requested strict language review, apply [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md) to the specified chapter, subsection, paragraph, or sentence only, and include every sentence in the review table.

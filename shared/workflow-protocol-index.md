@@ -13,6 +13,7 @@ Use this shared index when coordinating multiple academic skills. Keep cross-ski
 | Benchmark report | reviewing a complete draft against target papers | post-manuscript benchmark review |
 | Main text and rebuttal claim support | drafting, revising, polishing, or approving final main-text or rebuttal claims | writing + research verification |
 | Citation proximity and style | drafting, reviewing, auditing, polishing, or converting cited manuscript text | writing + research verification + formatting |
+| Cross-disciplinary language review | drafting, reviewing, or polishing formal body text or rebuttal prose for abstract wording, undefined terms, operation-record residue, unclear support, or sentence-level ambiguity | writing + post-manuscript benchmark review + polishing |
 | Reviewer comment action plan | turning two or more review comments into accepted, partial, rejected, deferred, or material-blocked actions | writing + post-manuscript benchmark review |
 | Notation and conversion integrity | converting formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions across output formats | formatting + figures |
 | Trigger conflict matrix | deciding which skill owns an ambiguous user request | orchestrator |
@@ -27,6 +28,7 @@ Use `academic-paper-orchestrator` as the only skill entrypoint that directly rea
 Ask for user confirmation before moving past:
 
 - inferred or unclear research field or terminology baseline;
+- user-requested strict sentence-by-sentence language review before expanding beyond the specified chapter, subsection, paragraph, or sentence;
 - project design document and chapter outline;
 - initial verified evidence register or gap-resolution handoff;
 - benchmark set before target-readiness judgment;

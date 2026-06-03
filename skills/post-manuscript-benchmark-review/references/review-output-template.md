@@ -99,6 +99,7 @@ Use this template when producing a full Chinese post-draft benchmark review. Kee
 | 章节/小节定位 | 章节/小节 | 是否缺少独立定位或强行连接 | 明确局部任务，删除虚假过渡 |
 | 重复表述 | 小节/段落 | 是否重复同一解释、判断或背景 | 合并、删除或改成对比 |
 | 句义歧义 | 句子 | 是否有模糊主语、抽象词或未铺垫概念 | 明确指代、补充定义或拆句 |
+| 跨学科语言门控 | 句子/术语/并列结构 | 是否符合 `cross-disciplinary-language-review-gate`，包括对象-条件-后果、术语来源、代理有效性和跨语言强度一致性 | 按 shared gate 判断成立与否，必要时逐句改写 |
 | 突兀前瞻 | 段落/句子 | 是否提前引入后文才成立的内容 | 删除、后移或改成简短结构导航 |
 | 引用位置 | 句子/分句 | 是否符合 `citation-proximity-and-style-gate` | 按 shared gate 检查引用贴近性、段末堆引用和目标样式标点 |
 

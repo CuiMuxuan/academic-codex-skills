@@ -44,6 +44,7 @@ Do not:
 12. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, highlights, and graphical abstract are exempt unless the target rules require otherwise.
 13. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
 14. Apply the shared citation-proximity gate when placing or revising citations.
+15. Apply the shared cross-disciplinary language review gate before approving formal body-text or rebuttal prose when wording, terminology, sentence purpose, or support clarity is in question.
 
 ## Intake
 
@@ -70,12 +71,13 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 6. Apply [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) for central claims, contribution statements, result claims, benchmark comparisons, and code/data/experiment statements.
 7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claim wording.
 8. Apply [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, or auditing citations.
-9. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
-10. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
-11. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
-12. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
-13. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
-14. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
+9. Apply [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) only when the user asks for language or terminology review, strict sentence-by-sentence checking, or when formal body text or rebuttal prose clearly shows abstract terms, undefined local labels, operation-record residue, unclear sentence purpose, unsupported proxy wording, citation-distance problems, or bilingual strength drift.
+10. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
+11. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
+12. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
+13. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
+14. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
+15. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
 
 ## Reference
 
@@ -92,6 +94,8 @@ Read [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protoc
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before writing final main-text or rebuttal sentences that make factual judgments, boundary statements, subjective evaluations, novelty claims, contribution claims, or limitation claims.
 
 Read [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, reviewing, or auditing citations in manuscript text.
+
+Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when the user asks for language review, terminology review, abstract-expression cleanup, operation-record cleanup, or strict sentence-by-sentence review of formal body text or rebuttal prose.
 
 Read [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md) for language baseline, abbreviation-first-use, paragraph logic, contribution framing, and claim evidence rules.
 
