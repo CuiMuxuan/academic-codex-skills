@@ -42,6 +42,7 @@ Also check figure labels, table cells, captions, footnotes, and bibliography tex
 
 - Prefer a structured citation processor such as Pandoc with CSL and BibTeX/BibLaTeX metadata when available.
 - Preserve citation keys until the final render; do not flatten references into untraceable plain text before citation audit unless the user confirms this is acceptable.
+- Preserve citation key locations and target punctuation conventions according to [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md).
 - Validate that every in-text citation has a bibliography entry and every required bibliography item is intentionally used or retained.
 - Check figure, table, and equation references separately from bibliographic citations.
 - Confirm that captions, labels, numbering, and reference text survive conversion or are listed as requiring Word refresh/manual repair.

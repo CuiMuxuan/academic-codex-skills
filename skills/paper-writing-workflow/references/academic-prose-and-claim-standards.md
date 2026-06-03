@@ -25,7 +25,35 @@ Use this reference for drafting, revising, and integrating academic prose. It is
 - Each paragraph should have a paragraph job: problem framing, concept definition, evidence synthesis, route comparison, method justification, result interpretation, limitation, or transition.
 - A paragraph that cannot be assigned a job is likely filler and should be removed, merged, or rewritten.
 - Sentences must connect by explicit logic: cause, contrast, sequence, scope narrowing, evidence, implication, or transition.
-- Avoid citation dumping. Explain why the cited evidence matters for the paper's argument.
+- Avoid citation dumping. Apply [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md) when placing, moving, or reviewing citations.
+
+## Chapter And Subsection Independence
+
+- A chapter or major section may have its own local purpose and does not need to mechanically echo the full-paper theme in every paragraph.
+- Local independence is bounded: the chapter or section must still stay within the paper's research object, evidence scope, target problem, and accepted terminology.
+- Each subsection should explain its own content clearly before being used by later subsections.
+- Do not force bridges, transition paragraphs, or connective phrases between subsections when no real relationship exists.
+- If subsections do have a real relationship, state the relationship specifically: dependency, contrast, sequence, shared evidence, different scope, or different method role.
+
+## Information Order And Forward Reference Discipline
+
+- Earlier text should not abruptly mention concepts, experiments, conclusions, methods, or terms that only become meaningful later.
+- Necessary structure navigation is allowed, especially in introductions, long review sections, theses, or result roadmaps.
+- Do not use "the next section will..." or similar previews as a substitute for argument, evidence, or concept setup.
+- Later text may refer back to established concepts, definitions, claims, figures, tables, and results.
+- When forward navigation is needed, keep it brief and tied to the current section's purpose.
+
+## Sentence Ambiguity And Abstract Wording
+
+For formal review or revision, check each sentence for ambiguity:
+
+- unclear subject or object;
+- undefined "this", "it", "they", "the method", "the model", or "the system";
+- vague scope words such as "certain", "some", "many", "various", "related", "effective", or "significant" without measurable or contextual meaning;
+- abstract nouns such as "mechanism", "framework", "strategy", "process", "feature", or "performance" when the exact referent has not been introduced;
+- compressed sentences that combine multiple claims and make citation support unclear.
+
+Fix ambiguity by naming the referent, narrowing the scope, adding the missing setup, splitting the sentence, or removing the unsupported abstraction.
 
 ## Paper Mainline Standard
 
@@ -57,11 +85,15 @@ Do not make these claims without verified literature, data, analysis output, cod
 - evidence-quality or reporting-standard judgments;
 - conclusion-like statements that summarize what is known or proven.
 
-For final body text and rebuttal text, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). Title, abstract, and highlights do not need citation/support locators by default. If required support is missing in body text or rebuttal text, stop and output a reference download or material request list instead of drafting final prose.
+For final body text and rebuttal text, apply [main-text-and-rebuttal-claim-support-gate.md](../../../shared/main-text-and-rebuttal-claim-support-gate.md). Title, abstract, highlights, and graphical abstract do not need citation/support locators by default. If required support is missing in body text or rebuttal text, stop and output a reference download or material request list instead of drafting final prose.
 
 For outlines, planning notes, or non-final draft areas that are not main-text or rebuttal final prose, mark the location with `LIT_GAP` and continue with other draftable sections.
 
 For central claims, maintain a claim anchor with support locator and allowed claim strength. Do not phrase the claim more strongly than the anchor permits.
+
+## Citation Placement
+
+Use [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md) for citation proximity, paragraph-end citation piles, multi-claim sentences, and punctuation placement under different citation styles.
 
 ## Code, Data, And Result Claims
 

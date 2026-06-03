@@ -44,12 +44,15 @@ Check whether the fix could cause:
 
 - logic breaks before or after the edited section;
 - content duplication;
+- repeated expressions across neighboring or independent subsections;
+- ambiguous sentences, undefined referents, or over-abstract concepts;
+- abrupt forward references to later-only content;
 - new evidence gaps;
 - claim-strength inflation;
 - terminology conflicts;
 - benchmark-positioning conflicts;
 - figure/table mismatch;
-- formatting or citation side effects.
+- formatting or citation side effects, including violations of [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md).
 
 ## Output Table
 
@@ -67,3 +70,5 @@ Blocked until user provides:
 Recommended revision order:
 Handoff to writing/research/figures/formatting:
 ```
+
+For formal revision plans, include sentence-level ambiguity and subsection-level repetition checks in the verification method when the action modifies prose.

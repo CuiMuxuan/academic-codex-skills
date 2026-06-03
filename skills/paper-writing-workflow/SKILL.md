@@ -41,7 +41,9 @@ Do not:
 9. During drafting and revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass.
 10. From the first body-text section onward, write the full term followed by the abbreviation in parentheses on first use unless the target style guide says otherwise; title, abstract, and highlights are exempt by default.
 11. Judge manuscript quality by whether the problem is clear, the method is reasonable, the experiments support the conclusion, and the contribution is explicit.
-12. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, and highlights are exempt unless the target rules require otherwise.
+12. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, highlights, and graphical abstract are exempt unless the target rules require otherwise.
+13. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
+14. Apply the shared citation-proximity gate when placing or revising citations.
 
 ## Intake
 
@@ -67,12 +69,13 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 5. Run outline-level evidence precheck with [literature-gap-and-evidence-precheck.md](references/literature-gap-and-evidence-precheck.md) before drafting substantive claims.
 6. Apply [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) for central claims, contribution statements, result claims, benchmark comparisons, and code/data/experiment statements.
 7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claim wording.
-8. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
-9. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
-10. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
-11. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
-12. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
-13. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
+8. Apply [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, or auditing citations.
+9. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
+10. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
+11. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
+12. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
+13. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
+14. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
 
 ## Reference
 
@@ -87,6 +90,8 @@ Read [literature-gap-and-evidence-precheck.md](references/literature-gap-and-evi
 Read [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) when central claims, contribution statements, method comparisons, result claims, code/data/experiment claims, or figure-caption claims must remain traceable across writing, review, polish, and formatting.
 
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before writing final main-text or rebuttal sentences that make factual judgments, boundary statements, subjective evaluations, novelty claims, contribution claims, or limitation claims.
+
+Read [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, reviewing, or auditing citations in manuscript text.
 
 Read [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md) for language baseline, abbreviation-first-use, paragraph logic, contribution framing, and claim evidence rules.
 

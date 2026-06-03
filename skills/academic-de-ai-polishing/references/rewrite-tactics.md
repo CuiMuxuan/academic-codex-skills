@@ -7,6 +7,8 @@ Use this reference when the paragraph argument is sound but the prose reads mech
 - Remove stacked transition adverbs unless one is genuinely needed.
 - Link sentences through topic continuation, pronouns, repeated key nouns, and cause-effect ordering.
 - Let one sentence prepare the next through content, not signaling language.
+- Remove subsection bridges that exist only to announce the next subsection.
+- If two subsections have no real relation, do not invent one; keep each subsection locally clear.
 
 ## Break Symmetrical Sentence Habits
 
@@ -20,6 +22,15 @@ Use this reference when the paragraph argument is sound but the prose reads mech
 - Replace generic academic filler with domain-specific distinctions.
 - Prefer verbs that show mechanism or judgment: `narrows`, `redistributes`, `destabilizes`, `masks`, `overstates`, `depends on`, `shifts the burden`.
 - Cut stock phrases such as "it is worth noting that", "plays an important role", and "in conclusion" unless they add real value.
+- Replace vague abstractions with the exact referent when the prior text has not established the concept.
+- Avoid using "framework", "mechanism", "strategy", "feature", "factor", or "performance" without naming what it refers to.
+
+## Repair Ambiguity And Premature References
+
+- When a sentence points to later-only content, either move it later, add the needed setup, or reduce it to concise structure navigation.
+- Split sentences that combine multiple claims with different support sources.
+- Replace unclear pronouns and generic nouns with the actual method, dataset, variable, result, section, or claim.
+- Remove repeated explanations across subsections unless they serve a deliberate contrast, summary, or methodological distinction.
 
 ## Restore Authorial Judgment
 

@@ -8,6 +8,7 @@ Use this reference when auditing an existing manuscript, bibliography, reference
 - Match every bibliography entry to at least one in-body citation unless the user intentionally keeps a reading list.
 - Identify references with missing DOI, impossible year/venue combinations, broken links, or title-author mismatches.
 - Flag claims that cite a source but are not supported by the source summary or extracted evidence.
+- Flag citation-placement problems using [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md).
 - Do not use a citation as support for a claim until the source has been verified and the relevant evidence has been located.
 
 ## Manual Queue

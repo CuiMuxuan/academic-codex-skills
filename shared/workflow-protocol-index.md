@@ -12,6 +12,7 @@ Use this shared index when coordinating multiple academic skills. Keep cross-ski
 | Literature gap handoff | moving `LIT_GAP` items between writing and research verification | writing + research verification |
 | Benchmark report | reviewing a complete draft against target papers | post-manuscript benchmark review |
 | Main text and rebuttal claim support | drafting, revising, polishing, or approving final main-text or rebuttal claims | writing + research verification |
+| Citation proximity and style | drafting, reviewing, auditing, polishing, or converting cited manuscript text | writing + research verification + formatting |
 | Reviewer comment action plan | turning two or more review comments into accepted, partial, rejected, deferred, or material-blocked actions | writing + post-manuscript benchmark review |
 | Notation and conversion integrity | converting formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions across output formats | formatting + figures |
 | Trigger conflict matrix | deciding which skill owns an ambiguous user request | orchestrator |

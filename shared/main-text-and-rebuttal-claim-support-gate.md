@@ -1,6 +1,6 @@
 # Main Text And Rebuttal Claim Support Gate
 
-Use this shared gate only for manuscript main text and reviewer, editor, committee, or supervisor rebuttal text. Do not apply it as a hard stop to titles, abstracts, highlights, notes, brainstorming, outlines, or internal planning unless the output will be used as final manuscript main-text or rebuttal prose.
+Use this shared gate only for manuscript main text and reviewer, editor, committee, or supervisor rebuttal text. Do not apply it as a hard stop to titles, abstracts, highlights, graphical abstracts, notes, brainstorming, outlines, or internal planning unless the output will be used as final manuscript main-text or rebuttal prose.
 
 ## Trigger
 
@@ -13,7 +13,7 @@ Apply this gate before drafting, revising, polishing, or approving:
 - novelty, contribution, limitation, or generalization claims;
 - rebuttal statements that accept, reject, or qualify a reviewer comment.
 
-Do not require citations or claim-support locators inside the title, abstract, or highlights unless the user, target journal, school template, or supervisor explicitly requires them. Start this gate from the first body-text section, such as Introduction or Chapter 1.
+Do not require citations or claim-support locators inside the title, abstract, highlights, or graphical abstract unless the user, target journal, school template, or supervisor explicitly requires them. Start this gate from the first body-text section, such as Introduction or Chapter 1.
 
 ## Required Support
 

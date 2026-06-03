@@ -30,7 +30,7 @@ Each paragraph should advance the reader from background toward the paper's purp
 
 ## Transition Requirements
 
-- Use transition sentences when moving from broad field to specific problem.
+- Use transition sentences only when they express a real narrowing step from broad field to specific problem.
 - Make cause, contrast, and narrowing logic explicit.
 - Avoid abrupt jumps from literature summary to "therefore this paper" without showing the gap.
 - Avoid generic purpose statements that could fit any topic.

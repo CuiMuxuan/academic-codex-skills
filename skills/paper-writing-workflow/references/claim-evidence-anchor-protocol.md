@@ -33,6 +33,8 @@ open_risk:
 
 `support_locator` should be concrete: DOI and page/table/figure, local file path, table ID, script path plus command, result file, figure panel, or explicit user decision.
 
+Use [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md) to keep claim-support citations close to the supported claim and consistent with the target citation style.
+
 ## Support Wording
 
 When writing Chinese or bilingual manuscripts, avoid overusing the generic word "证据" if a more exact expression is available. Prefer the support type that matches the locator:

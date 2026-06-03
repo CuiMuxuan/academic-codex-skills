@@ -48,7 +48,8 @@ Text inside the figure should be limited to what helps interpret the visual obje
 - keep panel letters, axis labels, ticks, legends, node labels, short arrow labels, scale bars, and essential in-panel annotations;
 - remove manuscript captions, figure titles, author notes, implementation TODOs, prompt traces, operation logs, file paths, draft comments, and explanatory paragraphs;
 - move long explanations, limitations, source notes, and interpretation into the caption, main text, methods, appendix, or supplement;
-- when a text label is needed but too long, shorten the label and define it in the caption or legend.
+- when a text label is needed but too long, shorten the label and define it in the caption or legend;
+- for graphical abstracts, default to no formal reference citations inside the visual; if the target journal explicitly allows or requires a citation, or the abstract must directly identify specific prior work, follow the target style and keep the visual independently readable.
 
 ## Spacing And Alignment
 

@@ -85,6 +85,10 @@ Evaluate:
 
 - academic rigor and citation discipline;
 - logical structure and section-to-section continuity;
+- whether chapters, major sections, and subsections have clear local purposes without artificial transitions;
+- whether earlier text abruptly introduces later-only concepts, conclusions, experiments, or terms;
+- whether subsections repeat the same expression or explanation without a deliberate function;
+- whether individual sentences contain ambiguous referents, vague abstractions, or concepts introduced without setup;
 - precision and fluency of language;
 - figure/table economy;
 - whether the manuscript reads like a paper rather than a project log;
@@ -160,6 +164,17 @@ Use this gap severity scale:
 | `minor` | Polish, packaging, or clarity issue. |
 
 Do not mark a benchmark gap as minor when it affects the main claim, baseline fairness, validation independence, or evidence reproducibility.
+
+## Writing And Citation Audit
+
+For formal manuscript review, check:
+
+- each chapter or major section has a local purpose within the paper's research object and evidence scope;
+- subsections are not forced into artificial relationships when no real relationship exists;
+- necessary structure navigation is concise and does not replace argument or setup;
+- repeated wording across subsections is removed, merged, or justified;
+- every sentence is reviewed for ambiguous referents, vague abstractions, and undefined concepts;
+- citations follow [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md).
 
 ## Next-Version Plan Template
 
