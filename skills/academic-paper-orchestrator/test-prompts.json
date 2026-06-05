@@ -33,5 +33,10 @@
     "id": 7,
     "prompt": "Use $academic-paper-orchestrator for a manuscript project with Markdown sources, DOCX submission files, draw.io figures, PNG exports, evidence CSVs, and code-generated results. Identify dependencies, handoff fields, confirmation gates, and which QA scripts or focused skills should be used.",
     "expected": "Routes the mixed project through parsing, verification, writing, figure QA, benchmark review, polishing, and formatting; names likely dependencies such as Pandoc, Word, draw.io, Matplotlib, and Python packages; uses material passports and claim anchors; asks before installation or lossy conversion."
+  },
+  {
+    "id": 8,
+    "prompt": "Use $academic-paper-orchestrator to plan the default multi-agent workflow for a complete paper project. I want parallel checks for evidence, language, figures, formatting, and reviewer-comment actions before revision.",
+    "expected": "Reads the multi-agent academic workflow gate, proposes parallel sub-agent check scopes, states confirmation requirements before launching sub-agents, keeps final decisions with the main agent, and routes each check to the owning academic skill."
   }
 ]

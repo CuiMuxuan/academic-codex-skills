@@ -1,6 +1,6 @@
 ---
 name: academic-paper-orchestrator
-description: "Coordinate an end-to-end academic paper, thesis, dissertation, review paper, or manuscript workflow by routing work across research verification, PDF/DOCX parsing, writing, academic figures, de-AI polishing, post-draft review, and formatting skills. Use when the user asks to manage a full paper project, plan a thesis from source materials to final DOCX, decide which academic skill should handle a task, run gated human-AI paper production, coordinate evidence gaps, field confirmation, reviewer-comment revision planning, or final polish handoffs. Chinese triggers: 论文全流程, 毕业论文, 学位论文, 综述论文, 论文总控, 编排论文工作流, 待补证据流程, 评审意见流程, 最终润色流程."
+description: "Coordinate an end-to-end academic paper, thesis, dissertation, review paper, or manuscript workflow by routing work across research verification, PDF/DOCX parsing, writing, academic figures, de-AI polishing, post-draft review, and formatting skills. Use when the user asks to manage a full paper project, plan a thesis from source materials to final DOCX, decide which academic skill should handle a task, run gated human-AI paper production, coordinate evidence gaps, field confirmation, reviewer-comment revision planning, final polish handoffs, or default multi-agent/sub-agent parallel review, verification, QA, and action-plan decomposition for substantial paper workflows. Chinese triggers: 论文全流程, 毕业论文, 学位论文, 综述论文, 论文总控, 编排论文工作流, 多agent论文流程, 子agent并行审查, 多智能体论文审查, 并行论文核验, 待补证据流程, 评审意见流程, 最终润色流程."
 ---
 
 # Academic Paper Orchestrator
@@ -34,6 +34,7 @@ If a focused skill is unavailable, follow the same ownership boundaries and tell
 7. Never fabricate citations, DOI records, experiment results, repository behavior, figure contents, or formatting rules.
 8. Stop main-text or rebuttal writing when required support is missing; request the missing material before continuing.
 9. Treat formulas, superscripts/subscripts, citations, cross-references, figures, and tables as conversion-sensitive artifacts.
+10. For substantial paper workflows, plan multi-agent parallel review, verification, QA, or action-plan decomposition by default, but start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
 
 ## Intake
 
@@ -60,16 +61,17 @@ Fallback if unavailable:
 1. Rebuild or create the project state.
 2. Decide the current mode and route using the routing map.
 3. Apply [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) and [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request spans stages or the owner skill is ambiguous.
-4. Apply [orchestration-contract.md](references/orchestration-contract.md) for substantial projects, state files, material passports, and handoff packets.
-5. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
-6. Apply [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before drafting, benchmark review, final polish, formatting, or any claim about code/data/results.
-7. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
-8. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claims.
-9. Apply [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when two or more reviewer, editor, committee, or supervisor comments are provided.
-10. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before lossy manuscript, figure, table, formula, citation, or cross-reference conversion.
-11. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
-12. Route execution to the focused skill that owns the current stage.
-13. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+4. Apply [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before substantial review, verification, QA, or reviewer-comment decomposition work that can be split into independent checks.
+5. Apply [orchestration-contract.md](references/orchestration-contract.md) for substantial projects, state files, material passports, and handoff packets.
+6. Apply [project-gates-and-phases.md](references/project-gates-and-phases.md) for full-project phase sequencing and required gates.
+7. Apply [integrity-gate-patterns.md](references/integrity-gate-patterns.md) before drafting, benchmark review, final polish, formatting, or any claim about code/data/results.
+8. Apply [writing-chain-gates.md](references/writing-chain-gates.md) when the project is entering field confirmation, evidence-gap handling, reviewer-comment response, post-draft review, or final polish.
+9. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claims.
+10. Apply [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when two or more reviewer, editor, committee, or supervisor comments are provided.
+11. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before lossy manuscript, figure, table, formula, citation, or cross-reference conversion.
+12. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
+13. Route execution to the focused skill that owns the current stage.
+14. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -95,6 +97,8 @@ For narrow requests, run only the relevant stage and state what was intentionall
 Read [stage-map.md](references/stage-map.md) when a full project needs a compact stage checklist or when resuming a long-running thesis workflow.
 
 Read [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) before selecting shared protocol references for cross-skill coordination.
+
+Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) when planning default parallel checks for substantial paper workflows, including literature verification, draft review, sentence-level language review, figure/format QA, or reviewer-comment action decomposition.
 
 Read [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request could trigger multiple academic skills or when deciding whether the orchestrator should own the task.
 

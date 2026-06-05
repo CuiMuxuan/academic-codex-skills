@@ -1,6 +1,6 @@
 ---
 name: paper-writing-workflow
-description: "Plan, draft, revise, and integrate academic papers, theses, dissertations, review papers, experimental papers, and manuscript chapters from verified evidence. Use when the user asks for chapter outlines, paper structure, academic prose, bilingual Chinese-English writing, literature-backed claims, section-by-section drafting, revision, supervisor or reviewer comment response planning, introduction logic, abbreviation-first-use checks, evidence-gap marking, field terminology control, or integrated manuscript assembly. Chinese triggers: 论文写作, 章节写作, 论文润色, 综述写作, 毕业论文正文, 学术表达, 引言逻辑, 文献缺口, 待补证据, 评审意见修改, 术语规范."
+description: "Plan, draft, revise, and integrate academic papers, theses, dissertations, review papers, experimental papers, and manuscript chapters from verified evidence. Use when the user asks for chapter outlines, paper structure, academic prose, bilingual Chinese-English writing, literature-backed claims, section-by-section drafting, revision, supervisor or reviewer comment response planning, introduction logic, abbreviation-first-use checks, evidence-gap marking, field terminology control, integrated manuscript assembly, or multi-agent/sub-agent parallel checks for writing evidence support, subsection language audit, citation-distance audit, or reviewer-comment action decomposition. Chinese triggers: 论文写作, 章节写作, 论文润色, 综述写作, 毕业论文正文, 学术表达, 引言逻辑, 文献缺口, 待补证据, 评审意见修改, 术语规范, 多agent写作审查, 子agent证据检查, 并行语言审查."
 ---
 
 # Paper Writing Workflow
@@ -45,6 +45,7 @@ Do not:
 13. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
 14. Apply the shared citation-proximity gate when placing or revising citations.
 15. Apply the shared cross-disciplinary language review gate before approving formal body-text or rebuttal prose when wording, terminology, sentence purpose, or support clarity is in question.
+16. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
 
 ## Intake
 
@@ -72,12 +73,13 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claim wording.
 8. Apply [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, or auditing citations.
 9. Apply [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) only when the user asks for language or terminology review, strict sentence-by-sentence checking, or when formal body text or rebuttal prose clearly shows abstract terms, undefined local labels, operation-record residue, unclear sentence purpose, unsupported proxy wording, citation-distance problems, or bilingual strength drift.
-10. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
-11. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
-12. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
-13. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
-14. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
-15. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
+10. Apply [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent writing-related checks such as evidence support review, subsection language audit, citation-distance audit, or reviewer-comment action decomposition.
+11. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
+12. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
+13. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
+14. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
+15. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
+16. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
 
 ## Reference
 
@@ -96,6 +98,8 @@ Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-r
 Read [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, reviewing, or auditing citations in manuscript text.
 
 Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when the user asks for language review, terminology review, abstract-expression cleanup, operation-record cleanup, or strict sentence-by-sentence review of formal body text or rebuttal prose.
+
+Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before planning parallel writing-related checks. Use it to decide when to propose sub-agents, when to skip them for simple local tasks, what output format to require, and how the main agent should merge results.
 
 Read [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md) for language baseline, abbreviation-first-use, paragraph logic, contribution framing, and claim evidence rules.
 

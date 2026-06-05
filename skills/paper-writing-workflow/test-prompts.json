@@ -33,5 +33,10 @@
     "id": 7,
     "prompt": "Use $paper-writing-workflow to handle three reviewer comments on my draft. Decide what to accept, partly accept, or reject, and give me the next revision plan before editing.",
     "expected": "Uses comment-response mode, analyzes each comment, assigns acceptance status, priority, value, risks, and external dependencies, then asks for confirmation before substantial edits."
+  },
+  {
+    "id": 8,
+    "prompt": "Use $paper-writing-workflow to plan sub-agent parallel checks for my discussion section: evidence support, citation distance, strict language audit, and reviewer-comment action decomposition.",
+    "expected": "Reads the multi-agent academic workflow gate, proposes independent writing-related check scopes and structured outputs, asks for confirmation before launching sub-agents unless already authorized, and keeps rewriting decisions with the main agent."
   }
 ]

@@ -7,6 +7,7 @@ Use this shared index when coordinating multiple academic skills. Keep cross-ski
 | protocol | read when | owner |
 |---|---|---|
 | Workflow mode | selecting or changing the current stage, resuming a project, or deciding the next user confirmation gate | orchestrator |
+| Multi-agent academic workflow | planning default parallel review, verification, QA, or action-plan decomposition for substantial paper workflows | orchestrator + writing + post-manuscript benchmark review |
 | Material passport | tracking artifacts that move across research, parsing, writing, figures, review, polishing, or formatting | orchestrator |
 | Claim evidence anchor | drafting, verifying, reviewing, polishing, or captioning central claims | writing + research verification |
 | Literature gap handoff | moving `LIT_GAP` items between writing and research verification | writing + research verification |
@@ -28,6 +29,7 @@ Use `academic-paper-orchestrator` as the only skill entrypoint that directly rea
 Ask for user confirmation before moving past:
 
 - inferred or unclear research field or terminology baseline;
+- multi-agent parallel checks before starting sub-agents, unless the user has already granted full permission or automatic-execution permission;
 - user-requested strict sentence-by-sentence language review before expanding beyond the specified chapter, subsection, paragraph, or sentence;
 - project design document and chapter outline;
 - initial verified evidence register or gap-resolution handoff;
@@ -38,6 +40,8 @@ Ask for user confirmation before moving past:
 - external image-generation use;
 - lossy formula, superscript/subscript, citation, cross-reference, or figure/table conversion;
 - formatting baseline before final DOCX normalization.
+
+If sub-agent tools are unavailable or disallowed by the current environment, run planned parallel checks serially and state that limitation instead of silently dropping them.
 
 When a field is unclear and the user also declines to set it, default to computer science and electronic information, then mark the assumption.
 

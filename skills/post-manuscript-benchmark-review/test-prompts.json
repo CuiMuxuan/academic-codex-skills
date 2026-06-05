@@ -18,5 +18,10 @@
     "id": 4,
     "prompt": "用 $post-manuscript-benchmark-review 处理完整初稿收到的审稿意见：请逐条判断哪些采纳、哪些部分采纳、哪些不采纳，并给下一阶段修改方案。",
     "expected": "Confirms a complete draft exists, analyzes each comment against evidence and benchmark expectations, assigns accept/partly_accept/reject/needs_new_literature or data statuses, reports priorities, risks, dependencies, and asks for confirmation before execution."
+  },
+  {
+    "id": 5,
+    "prompt": "Use $post-manuscript-benchmark-review to run a multi-agent readiness review of my complete draft, with parallel checks for structure, evidence support, language gate issues, citation proximity, and figure/format QA.",
+    "expected": "Reads the multi-agent academic workflow gate, proposes parallel review scopes and structured sub-agent outputs, waits for user confirmation before launching sub-agents unless already authorized, and states that the main agent will merge findings and keep final readiness judgment."
   }
 ]

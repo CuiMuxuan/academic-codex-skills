@@ -1,6 +1,6 @@
 ---
 name: post-manuscript-benchmark-review
-description: "Post-draft academic manuscript review against benchmark papers. Use only after an initial full manuscript draft, thesis chapter draft, or journal paper draft exists and the user asks for review, grading, gap analysis, target-paper comparison, SCI/Q1 readiness assessment, benchmark-literature comparison, reviewer-comment response planning, or next-version optimization planning. Do not use during outline planning, literature search, figure generation, citation verification, formatting, or de-AI polishing unless a complete draft already exists. Chinese triggers: 初版论文后评审, 论文生成后评审, 对标文献差距, SCI一区评审, 论文质量评判, 下一版优化方案, 与对标论文比较, 审稿意见处理."
+description: "Post-draft academic manuscript review against benchmark papers. Use only after an initial full manuscript draft, thesis chapter draft, or journal paper draft exists and the user asks for review, grading, gap analysis, target-paper comparison, SCI/Q1 readiness assessment, benchmark-literature comparison, reviewer-comment response planning, next-version optimization planning, or multi-agent/sub-agent parallel review across structure logic, evidence support, language audit, citation proximity, figure/format QA, and reviewer-comment action planning. Do not use during outline planning, literature search, figure generation, citation verification, formatting, or de-AI polishing unless a complete draft exists. Chinese triggers: 初版论文后评审, 论文生成后评审, 对标文献差距, SCI一区评审, 论文质量评判, 下一版优化方案, 与对标论文比较, 审稿意见处理, 多agent论文评审, 子agent并行评审, 多智能体稿件审查."
 ---
 
 # Post-Manuscript Benchmark Review
@@ -52,8 +52,9 @@ If key inputs are unavailable, produce a provisional review plan and materials r
 5. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
 6. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before approving factual, boundary, subjective, contribution, limitation, or rebuttal judgments.
 7. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when formal review output must judge abstract wording, undefined local labels, operation-record prose, sentence purpose, citation proximity, proxy validity, or bilingual claim-strength consistency.
-8. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
-9. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
+8. Use [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent review checks for structure logic, evidence support, language gate issues, citation proximity, figure/format QA, or reviewer-comment action planning.
+9. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
+10. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
 
 ## Quality Gate
 
@@ -66,6 +67,7 @@ The review is high quality only if it:
 - marks missing evidence, benchmark access limits, and material dependencies explicitly.
 - turns two or more review comments into a triaged action plan before manuscript rewriting.
 - applies the cross-disciplinary language review gate when wording quality, terminology clarity, sentence purpose, or support distance is part of the review.
+- plans multi-agent parallel checks by default for substantial benchmark review, language audit, evidence-support review, figure/format QA, or reviewer-comment decomposition, then merges findings before final judgment.
 
 ## Reference
 
@@ -82,5 +84,7 @@ Read [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before treating benchmark, readiness, contribution, limitation, or rebuttal judgments as final prose.
 
 Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when reviewing formal body text or rebuttal prose for abstract, mechanical, internally defensive, undefined-term, citation-unclear, proxy-unsupported, or cross-language-inconsistent wording.
+
+Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) when a complete draft review can be split into parallel checks. Use it for sub-agent scope, output format, confirmation gates, conflict handling, and main-agent merge rules.
 
 Read [review-output-template.md](references/review-output-template.md) when producing a formal report, Chinese evaluation, SCI/Q1 readiness judgment, or benchmark gap table.
