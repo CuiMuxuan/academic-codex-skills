@@ -24,6 +24,8 @@ If one sentence contains multiple claims supported by different sources:
 
 Do not let one citation appear to support claims it does not actually cover.
 
+When grouping several citations, make the grouping basis or evidence role clear. Do not attach experimental papers, mechanism studies, reviews, theoretical sources, standards, datasets, or benchmark reports to one broad claim as if they provide the same support.
+
 ## Punctuation And Style
 
 Citation punctuation placement follows the target journal, school, or citation style.
@@ -44,4 +46,5 @@ Flag:
 - citations far from the supported claim;
 - citations attached to overly broad sentences;
 - citation groups hiding disagreement or distinct evidence roles;
+- citation groups without a clear grouping basis;
 - citation movement caused by DOCX, Markdown, or reference-manager conversion.

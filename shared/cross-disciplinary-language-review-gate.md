@@ -34,6 +34,8 @@ For each terminology judgment, be able to answer: is this a field-standard term,
 
 Every judgment sentence must state the object, condition, and consequence. Do not rely on empty relations such as "related", "influences", "determines", "has significance", "supports", "controls", or "transforms into" without saying what changes under which condition.
 
+The consequence must also answer at least one practical or argumentative question: so what, why it matters, what treatment or methodological consequence follows, or what boundary applies. If the sentence only says that a relation exists, rewrite it so the reader can see what comparison, mechanism, evaluation, interpretation, or application decision changes.
+
 Bad pattern:
 
 - "This factor is directly related to N2O."
@@ -49,6 +51,7 @@ object:
 condition:
 consequence:
 support or locator:
+why_it_matters_or_boundary:
 ```
 
 If any field is missing, rewrite, split, soften, or mark the sentence as needing support.
@@ -155,7 +158,27 @@ For each reviewed sentence, identify its job:
 
 If a sentence only piles up terminology, repeats prior content, or does not advance the argument, delete, split, or rewrite it. For Chinese review, judge by whether the sentence itself can be understood on first reading, not whether a specialized reader can infer the missing meaning from context.
 
-## 10. Citation Proximity And Support
+## 10. Logic Connectors, Literature Roles, And Table/Figure Wording
+
+Use connectors only when they match the actual relation:
+
+- contrast;
+- cause;
+- consequence;
+- progression;
+- temporal, mechanistic, or analytical sequence;
+- parallel relation;
+- clarification.
+
+Avoid "therefore", "thus", "thereby", "then", "subsequently", "随后", "因此", or "由此" when the preceding sentence only says that literature exists, a table is provided, or a topic has been introduced. A source, table, or review does not by itself prove a conclusion; the sentence must name what it shows and why that matters.
+
+Do not turn source existence into a causal relation. A study or review may provide measurements, definitions, property context, comparison data, methodological precedent, or interpretive framing, but it is not the reason why the phenomenon exists. State the disciplinary role first, then name the source role.
+
+When several sources are grouped, name the grouping basis or evidence role. Do not combine experimental results, mechanism studies, review papers, theoretical arguments, clinical guidelines, policy documents, and benchmark reports as if they provide the same kind of support. If the sources play different roles, split the sentence or cite each role separately.
+
+Table and figure sentences should not stop at "Table 1 shows", "Figure 2 presents", or similar display verbs. State the comparison, boundary, trend, limitation, method implication, or decision supported by the table or figure. If the sentence only locates information, keep it in the caption, table note, or a concise parenthetical reference.
+
+## 11. Citation Proximity And Support
 
 Use [citation-proximity-and-style-gate.md](citation-proximity-and-style-gate.md) for citation placement.
 
@@ -163,7 +186,7 @@ Citation must support the nearest concrete judgment. If one sentence contains se
 
 If the claim lacks support, use [main-text-and-rebuttal-claim-support-gate.md](main-text-and-rebuttal-claim-support-gate.md) and stop before final wording.
 
-## 11. Use "Report" Carefully
+## 12. Use "Report" Carefully
 
 When the intended meaning is that a study or manuscript should provide parameters, variables, data, or method details:
 
@@ -177,7 +200,7 @@ In review-paper body text, often prefer a relation-based sentence over an instru
 - not "studies should report humidity";
 - but "humidity affects site occupation and pore condensation, so comparisons across adsorbents are difficult when humidity is not specified."
 
-## 12. Cross-Language Consistency
+## 13. Cross-Language Consistency
 
 For bilingual manuscripts, do not require word-by-word correspondence. Require consistency in:
 
@@ -190,7 +213,11 @@ For bilingual manuscripts, do not require word-by-word correspondence. Require c
 
 Chinese must not be stronger than English, and English must not add unsupported claims that are absent from Chinese.
 
-## 13. Required Output When Reviewing A User-Flagged Passage
+Do not mechanically mirror long modifier chains from one language into the other. If the Chinese becomes clearer by splitting a sentence or naming the object directly, simplify or split the English as well so the research object, condition, support, boundary, and conclusion strength still match.
+
+If a term is changed from an abstract label to a concrete object in one language, update the other language's object too. Preserve stable sentence IDs when needed, but do not preserve awkward wording only to keep one-to-one syntax.
+
+## 14. Required Output When Reviewing A User-Flagged Passage
 
 When the user points to a language problem:
 
@@ -221,7 +248,7 @@ remaining_questions:
 
 For strict subsection review, include every sentence in `sentence_review`, including sentences that are acceptable.
 
-## 14. Quality Gate
+## 15. Quality Gate
 
 Do not approve formal body text, rebuttal text, or final polished prose unless:
 
@@ -232,6 +259,9 @@ Do not approve formal body text, rebuttal text, or final polished prose unless:
 - noun lists are same-level or split;
 - operation-record and internal-review wording has been removed or recast;
 - proxies and substitutions state relation, scope, and limits;
+- logical connectors match real contrast, cause, consequence, sequence, parallel relation, or clarification;
+- source mentions state the source's evidence role instead of turning source existence into a causal claim;
+- table and figure sentences state the comparison, boundary, trend, limitation, or method implication they support;
 - citations sit near concrete supported claims;
 - unsupported claims are blocked, softened, or turned into material requests;
 - bilingual versions preserve the same object, condition, support, boundary, and conclusion strength.

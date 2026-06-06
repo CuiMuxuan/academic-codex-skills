@@ -56,10 +56,12 @@ Before claiming a writing task is complete, check:
 - citations are present where needed;
 - citations follow [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md);
 - draft citation keys have been audited against the evidence register when a register exists;
+- grouped citations state a clear evidence role or grouping basis when sources differ;
 - first-use abbreviations follow `full term (abbreviation)` unless the target style says otherwise;
 - field-specific terminology matches the confirmed field and target venue;
 - repeated expressions across subsections have been removed, merged, or justified;
 - each sentence has been checked for ambiguity, vague abstraction, undefined referents, concepts introduced without setup, and the object-condition-consequence rule in [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md);
+- logic connectors, source-role wording, table/figure sentences, and bilingual sentence structure follow [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md);
 - no bibliography-only source is implied as cited;
 - terminology is consistent;
 - Chinese and English terms are paired consistently in bilingual work;
