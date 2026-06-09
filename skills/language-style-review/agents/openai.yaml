@@ -1,0 +1,4 @@
+interface:
+  display_name: "Language Style Review"
+  short_description: "Review academic language without changing revision state."
+  default_prompt: "Use $language-style-review to audit this academic manuscript, chapter, paragraph, sentence, translation, figure text, or citation wording for language style, clarity, terminology, AI-like patterns, and residue, returning scored findings and candidate rewrites without modifying the draft."

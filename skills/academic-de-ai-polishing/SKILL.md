@@ -16,6 +16,7 @@ Do:
 - Remove or recast internal project notes, operation logs, prompt traces, TODO markers, and draft-management residue.
 - Preserve or strengthen evidence-grounded authorial judgment.
 - Enforce final-polish boundaries after writing, evidence, and structure are stable.
+- Execute confirmed local rewrite tasks from `$revision-control` when the task is language-level and state boundaries are already set.
 
 Do not:
 
@@ -24,6 +25,9 @@ Do not:
 - Claim detector percentages or guarantee AIGC-score outcomes.
 - Regenerate whole sections unless the user explicitly asks.
 - Use polish to bypass missing evidence, unresolved `LIT_GAP` markers, or unstable manuscript structure.
+- Act as a language-style review skill; route diagnosis-only requests to `$language-style-review`.
+- Maintain sentence-level revision status, object libraries, latest drafts, or round logs; route those tasks to `$revision-control`.
+- Handle literature补充, structural reorganization, or large-scale manuscript rewriting as the owner skill.
 
 ## Core Rules
 
@@ -36,6 +40,7 @@ Do not:
 7. Treat accurate, direct, concise, understandable writing as the baseline; style elevation is optional and must stay evidence-safe.
 8. In main text and rebuttal prose, do not polish unsupported claims into final language; request support or soften the claim.
 9. Use the shared cross-disciplinary language review gate before finalizing formal body-text or rebuttal rewrites with abstract terms, local labels, operation-record residue, unclear sentence purpose, proxy wording, or bilingual inconsistency.
+10. When called by `$revision-control`, only return the confirmed local rewrite and hand state updates back to `$revision-control`.
 
 ## Pre-Edit Gate
 
@@ -74,7 +79,7 @@ Classify each target paragraph:
 5. Use [section-playbooks.md](references/section-playbooks.md) when the rewrite problem is section-dependent.
 6. Use [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) when main text contains project, operation, prompt, or file-management traces.
 7. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) when final main-text or rebuttal wording contains factual, boundary, subjective, contribution, or limitation claims.
-8. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when the user asks for language review, terminology review, strict sentence-by-sentence checking, abstract wording cleanup, or operation-record cleanup.
+8. Route diagnosis-only language review, terminology review, and strict sentence-by-sentence checking to `$language-style-review`; use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) only as a local safeguard during rewriting.
 9. After each rewrite, verify meaning, citations, terminology, claim anchors, support wording, and technical scope.
 
 ## Material Request
@@ -111,5 +116,7 @@ Read [manuscript-residue-cleanup.md](references/manuscript-residue-cleanup.md) f
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before polishing unsupported main-text or rebuttal claims into final prose, and when replacing generic "evidence" wording with a more precise support term.
 
 Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) before strict language review or final polishing of formal body text or rebuttal prose that may contain abstract wording, undefined local terms, operation-record traces, unclear sentence function, unsupported proxies, citation-distance problems, or bilingual claim-strength drift.
+
+Read [revision-control-contract.md](../../shared/revision-control-contract.md) when a rewrite task arrives from `$revision-control`.
 
 Read [ai-trace-assessment.md](references/ai-trace-assessment.md) when the user asks for AI-trace or AIGC-risk assessment.

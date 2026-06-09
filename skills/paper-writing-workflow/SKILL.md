@@ -5,7 +5,7 @@ description: "Plan, draft, revise, and integrate academic papers, theses, disser
 
 # Paper Writing Workflow
 
-Use this skill for academic writing after the writing goal and evidence baseline are clear. It owns structure, argument, chapter drafting, revision, and integration.
+Use this skill for academic writing after the writing goal and evidence baseline are clear. It owns structure, argument, detailed design documents, chapter drafting, ordinary prose revision, and integration.
 
 ## Boundaries
 
@@ -17,6 +17,7 @@ Do:
 - Improve academic clarity in English, Chinese, or bilingual manuscripts.
 - Track claims that still need evidence.
 - Prepare comment-response revision plans before editing.
+- Execute approved structure, section, or chapter rewrites when `$revision-control` escalates beyond sentence-level editing.
 
 Do not:
 
@@ -27,25 +28,29 @@ Do not:
 - Create nontrivial figures as the primary task; route to `$academic-figure-workflow`.
 - Perform final de-AI style polishing as the primary task after content is stable; route to `$academic-de-ai-polishing`.
 - Judge a complete manuscript against benchmark papers as the primary task; route to `$post-manuscript-benchmark-review`.
+- Perform language-style review as the primary task; route to `$language-style-review`.
+- Maintain formal sentence-level revision state, pass/fail status, round numbers, complete latest review drafts, or object libraries; route to `$revision-control`.
 
 ## Core Rules
 
 1. Write from an approved outline or propose one first.
-2. Keep claims proportional to evidence.
-3. Mark unsupported claims with `LIT_GAP` or `needs evidence`; do not fabricate citations.
-4. Draft in Markdown by default unless the user asks for another format.
-5. Work chapter by chapter for long papers.
-6. Preserve the user's required language and citation style.
-7. Do not overwrite the only working draft.
-8. Stop for confirmation after each major chapter or integrated manuscript.
-9. During drafting and revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass.
-10. From the first body-text section onward, write the full term followed by the abbreviation in parentheses on first use unless the target style guide says otherwise; title, abstract, and highlights are exempt by default.
-11. Judge manuscript quality by whether the problem is clear, the method is reasonable, the experiments support the conclusion, and the contribution is explicit.
-12. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, highlights, and graphical abstract are exempt unless the target rules require otherwise.
-13. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
-14. Apply the shared citation-proximity gate when placing or revising citations.
-15. Apply the shared cross-disciplinary language review gate before approving formal body-text or rebuttal prose when wording, terminology, sentence purpose, or support clarity is in question.
-16. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
+2. Insert a detailed paper or chapter design document between material preparation and formal drafting.
+3. Keep claims proportional to evidence.
+4. Mark unsupported claims with `LIT_GAP` or `needs evidence`; do not fabricate citations.
+5. Draft in Markdown by default unless the user asks for another format.
+6. Work chapter by chapter for long papers.
+7. Preserve the user's required language and citation style.
+8. Do not overwrite the only working draft.
+9. Stop for confirmation after each major chapter or integrated manuscript.
+10. During drafting and ordinary revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass.
+11. From the first body-text section onward, write the full term followed by the abbreviation in parentheses on first use unless the target style guide says otherwise; title, abstract, and highlights are exempt by default.
+12. Judge manuscript quality by whether the problem is clear, the method is reasonable, the experiments support the conclusion, and the contribution is explicit.
+13. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, highlights, and graphical abstract are exempt unless the target rules require otherwise.
+14. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
+15. After an initial full draft, hand complex sentence-by-sentence revision, pass/fail confirmation, and latest-draft state management to `$revision-control`.
+16. Apply the shared citation-proximity gate when placing or revising citations.
+17. Route strict language-style diagnosis to `$language-style-review`; use local language checks only as part of drafting or ordinary revision.
+18. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
 
 ## Intake
 
@@ -67,7 +72,7 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 1. Diagnose the writing mode and active gate with [writing-stage-gates.md](references/writing-stage-gates.md).
 2. Set or confirm the current research field and terminology boundary with [field-and-terminology-control.md](references/field-and-terminology-control.md).
 3. Normalize inputs and downstream handoffs with [writing-input-handoffs.md](references/writing-input-handoffs.md).
-4. Build or confirm the design document: problem, scope, contribution, section map, evidence needed, figures/tables, and risks.
+4. Build or confirm the detailed design document before drafting: target venue, article type, chapter structure, each chapter's goal, each section's task, expected word counts, evidence needs, figure/table plan, risks, and missing materials.
 5. Run outline-level evidence precheck with [literature-gap-and-evidence-precheck.md](references/literature-gap-and-evidence-precheck.md) before drafting substantive claims.
 6. Apply [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) for central claims, contribution statements, result claims, benchmark comparisons, and code/data/experiment statements.
 7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claim wording.
@@ -80,6 +85,7 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 14. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
 15. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
 16. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
+17. When `$revision-control` escalates a confirmed issue to chapter/section rewrite, execute only the approved rewrite scope and return outputs to `$revision-control` for object-library rebuild and renumbering.
 
 ## Reference
 
@@ -108,6 +114,8 @@ Read [introduction-logic-playbook.md](references/introduction-logic-playbook.md)
 Read [chapter-drafting-checklist.md](references/chapter-drafting-checklist.md) when drafting long chapters, responding to supervisor comments, or integrating multiple sections.
 
 Read [writing-output-templates.md](references/writing-output-templates.md) when creating a paper design document, evidence-to-section map, section draft packet, benchmark-calibrated section packet, or revision report.
+
+Read [revision-control-contract.md](../../shared/revision-control-contract.md) when receiving an approved structure, section, chapter, or large-rewrite handoff from `$revision-control`.
 
 Read [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) when using target examples or benchmark papers to shape a section.
 

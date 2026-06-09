@@ -1,0 +1,4 @@
+interface:
+  display_name: "Revision Control"
+  short_description: "Manage sentence-level manuscript revision rounds."
+  default_prompt: "Use $revision-control to manage sentence-level revision for this manuscript, build or update the object library, track round state, confirmation logs, latest review drafts, project standards, material dependencies, and escalation plans before writing formal changes."

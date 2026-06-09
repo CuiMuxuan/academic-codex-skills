@@ -23,9 +23,11 @@ except ImportError:  # pragma: no cover - reported as an actionable error.
 
 CORE_SKILLS = {
     "academic-paper-orchestrator",
+    "language-style-review",
     "paper-writing-workflow",
     "academic-research-verification",
     "post-manuscript-benchmark-review",
+    "revision-control",
 }
 
 MANAGED_SKILLS = {
@@ -34,9 +36,11 @@ MANAGED_SKILLS = {
     "academic-formatting-workflow",
     "academic-paper-orchestrator",
     "academic-research-verification",
+    "language-style-review",
     "paper-writing-workflow",
     "pdf-docx-parsing-workflow",
     "post-manuscript-benchmark-review",
+    "revision-control",
 }
 
 REQUIRED_SHARED_FILES = {
@@ -44,6 +48,11 @@ REQUIRED_SHARED_FILES = {
     "trigger-conflict-matrix.md",
     "handoff-field-schema.md",
     "validation-policy.md",
+    "revision-control-contract.md",
+    "language-style-review-schema.md",
+    "project-review-standards-schema.md",
+    "manuscript-object-model.md",
+    "revision-upgrade-plan-schema.md",
 }
 
 REQUIRED_REPO_SCRIPTS = {
@@ -209,10 +218,15 @@ def check_python_scripts(root: Path, findings: list[Finding]) -> None:
             add(findings, "error", path, f"Python syntax error: {exc.msg}", root)
 
 
-def run_quick_validate(root: Path, findings: list[Finding]) -> None:
+def run_quick_validate(root: Path, findings: list[Finding], target: str = "codex") -> None:
     quick_validate = detect_quick_validate()
     if quick_validate is None:
-        add(findings, "warning", root, "quick_validate.py not found; skipped official skill validation", root)
+        if target == "claude":
+            # quick_validate.py ships with the Codex skill-creator only; Claude Code
+            # has no equivalent, so its absence is expected and not a warning.
+            print("[info] quick_validate.py not found; skipped (Codex-only check, target=claude)")
+        else:
+            add(findings, "warning", root, "quick_validate.py not found; skipped official skill validation", root)
         return
     for skill_dir in managed_skill_dirs(root):
         result = subprocess.run(
@@ -307,7 +321,7 @@ def check_skills(root: Path, findings: list[Finding]) -> None:
         check_skill_references(root, skill_md, findings)
 
 
-def validate(root: Path, strict: bool) -> int:
+def validate(root: Path, strict: bool, target: str = "codex") -> int:
     findings: list[Finding] = []
     root = root.resolve()
     check_shared(root, findings)
@@ -316,13 +330,14 @@ def validate(root: Path, strict: bool) -> int:
     check_markdown_links(root, findings)
     check_yaml_and_json(root, findings)
     check_python_scripts(root, findings)
-    run_quick_validate(root, findings)
+    run_quick_validate(root, findings, target)
     check_core_alignment(root, findings)
 
     errors = [item for item in findings if item.level == "error"]
     warnings = [item for item in findings if item.level == "warning"]
 
     print(f"root={root}")
+    print(f"target={target}")
     print(f"errors={len(errors)} warnings={len(warnings)}")
     for item in findings:
         print(f"[{item.level}] {item.path}: {item.message}")
@@ -336,10 +351,11 @@ def validate(root: Path, strict: bool) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1], help="Repository root or Codex home containing skills/ and shared/")
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1], help="Repository root or skill home containing skills/ and shared/")
     parser.add_argument("--strict", action="store_true", help="Treat warnings as failures")
+    parser.add_argument("--target", choices=("codex", "claude"), default="codex", help="Installation target; 'claude' treats the Codex-only quick_validate.py as not applicable instead of a warning")
     args = parser.parse_args()
-    return validate(args.root, args.strict)
+    return validate(args.root, args.strict, args.target)
 
 
 if __name__ == "__main__":

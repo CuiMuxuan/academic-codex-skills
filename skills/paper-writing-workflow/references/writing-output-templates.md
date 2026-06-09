@@ -119,6 +119,17 @@ Research problem:
 Central argument or contribution:
 Scope:
 Exclusions:
+Chapter structure:
+- Chapter:
+  - Chapter goal:
+  - Sections:
+    - Section:
+      - Section task:
+      - Expected word count:
+      - Evidence needed:
+      - Figure/table needs:
+      - Risks:
+      - Missing materials:
 Section map:
 Evidence required by section:
 Figure/table plan:

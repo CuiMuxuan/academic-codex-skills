@@ -19,6 +19,8 @@ Use this skill to coordinate a complete academic paper workflow. Do not do every
 | Create mechanism figures, SVG diagrams, draw.io engineering diagrams, or approved OpenAI generated images | `$academic-figure-workflow` |
 | Apply school handbook, Word template, journal guide, or general academic formatting | `$academic-formatting-workflow` |
 | Review a complete initial draft against 3-10 benchmark papers and plan the next revision | `$post-manuscript-benchmark-review` |
+| Review language style, wording, grammar, AI-like phrasing, terminology, translation accuracy, figure/table wording, or citation sentence style without editing | `$language-style-review` |
+| Manage formal sentence-level revision rounds, object libraries, pass/fail confirmations, latest sentence-review drafts, project standards, material dependencies, and upgrade plans | `$revision-control` |
 | Polish stable manuscript prose, reduce AI-like cadence, or remove internal project/operation traces | `$academic-de-ai-polishing` |
 
 If a focused skill is unavailable, follow the same ownership boundaries and tell the user which part was handled without the dedicated skill.
@@ -35,6 +37,7 @@ If a focused skill is unavailable, follow the same ownership boundaries and tell
 8. Stop main-text or rebuttal writing when required support is missing; request the missing material before continuing.
 9. Treat formulas, superscripts/subscripts, citations, cross-references, figures, and tables as conversion-sensitive artifacts.
 10. For substantial paper workflows, plan multi-agent parallel review, verification, QA, or action-plan decomposition by default, but start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
+11. For combined post-draft quality and language review, run quality review first, language-style review second, then send the unified priority queue to `$revision-control`.
 
 ## Intake
 
@@ -71,7 +74,8 @@ Fallback if unavailable:
 11. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before lossy manuscript, figure, table, formula, citation, or cross-reference conversion.
 12. Apply [dependency-and-software-guide.md](references/dependency-and-software-guide.md) when a stage may need Pandoc, Word, PDF/OCR tools, draw.io, Matplotlib, Graphviz, Inkscape, network APIs, or project-specific Python packages.
 13. Route execution to the focused skill that owns the current stage.
-14. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
+14. When quality review and language review are both requested, sequence `$post-manuscript-benchmark-review` then `$language-style-review`, mark suggestions that could roll back quality priorities, and hand the confirmed queue to `$revision-control`.
+15. At each gate, report completed work, artifacts, decisions, risks, missing materials, and recommended next step.
 
 For narrow requests, run only the relevant stage and state what was intentionally skipped.
 
@@ -101,6 +105,10 @@ Read [workflow-protocol-index.md](../../shared/workflow-protocol-index.md) befor
 Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) when planning default parallel checks for substantial paper workflows, including literature verification, draft review, sentence-level language review, figure/format QA, or reviewer-comment action decomposition.
 
 Read [trigger-conflict-matrix.md](../../shared/trigger-conflict-matrix.md) when a request could trigger multiple academic skills or when deciding whether the orchestrator should own the task.
+
+Read [revision-control-contract.md](../../shared/revision-control-contract.md) when routing formal revision work, sentence pass/fail state, object libraries, project standards, or upgrade plans.
+
+Read [language-style-review-schema.md](../../shared/language-style-review-schema.md) when consuming a language-style review report or merging it with quality review findings.
 
 Read [handoff-field-schema.md](../../shared/handoff-field-schema.md) when checking field names for workflow modes, material passports, claim anchors, literature gaps, writing-ready handoffs, or benchmark reports.
 

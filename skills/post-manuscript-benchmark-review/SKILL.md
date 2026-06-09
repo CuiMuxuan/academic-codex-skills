@@ -20,13 +20,15 @@ Do:
 - Judge a full draft against target standards and 3-10 benchmark papers.
 - Identify manuscript gaps, claim risks, evidence needs, and next-version P0/P1/P2 actions.
 - Analyze reviewer/editor/supervisor comments in the context of a complete draft.
+- Produce a ten-dimension 100-point quality review and target-readiness judgment.
 
 Do not:
 
 - Fabricate benchmark papers, DOI records, journal levels, acceptance probabilities, or benchmark-paper contents.
 - Treat abstract-only or metadata-only benchmark information as full-paper evidence.
-- Rewrite the manuscript as the primary task; route confirmed revisions to `$paper-writing-workflow`.
+- Rewrite the manuscript as the primary task; route confirmed revision execution to `$revision-control`.
 - Perform citation identity checks as final authority; route to `$academic-research-verification`.
+- Maintain sentence-level revision state, object libraries, or pass/fail decisions; route to `$revision-control`.
 
 ## Intake
 
@@ -47,14 +49,14 @@ If key inputs are unavailable, produce a provisional review plan and materials r
 
 1. Confirm the post-draft gate and review target.
 2. Build or validate the 3-10 benchmark set with [benchmark-selection-and-extraction.md](references/benchmark-selection-and-extraction.md).
-3. Apply the four-criterion review and claim triage in [review-rubric.md](references/review-rubric.md).
+3. Apply the ten-dimension 100-point review, four-criterion diagnostic lens, and claim triage in [review-rubric.md](references/review-rubric.md).
 4. Use [benchmark-report-schema.md](references/benchmark-report-schema.md) to keep benchmark facts, access limits, manuscript claim records, gap severity, and next-version actions auditable.
 5. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
 6. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before approving factual, boundary, subjective, contribution, limitation, or rebuttal judgments.
 7. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when formal review output must judge abstract wording, undefined local labels, operation-record prose, sentence purpose, citation proximity, proxy validity, or bilingual claim-strength consistency.
 8. Use [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent review checks for structure logic, evidence support, language gate issues, citation proximity, figure/format QA, or reviewer-comment action planning.
 9. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
-10. Return readiness level, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, and handoff packets.
+10. Return readiness level, ten-dimension scores, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, rollback risks, and `$revision-control` handoff packets.
 
 ## Quality Gate
 
@@ -68,6 +70,7 @@ The review is high quality only if it:
 - turns two or more review comments into a triaged action plan before manuscript rewriting.
 - applies the cross-disciplinary language review gate when wording quality, terminology clarity, sentence purpose, or support distance is part of the review.
 - plans multi-agent parallel checks by default for substantial benchmark review, language audit, evidence-support review, figure/format QA, or reviewer-comment decomposition, then merges findings before final judgment.
+- does not directly edit the manuscript; it sends confirmed modification tasks to `$revision-control`.
 
 ## Reference
 
@@ -88,3 +91,5 @@ Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinar
 Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) when a complete draft review can be split into parallel checks. Use it for sub-agent scope, output format, confirmation gates, conflict handling, and main-agent merge rules.
 
 Read [review-output-template.md](references/review-output-template.md) when producing a formal report, Chinese evaluation, SCI/Q1 readiness judgment, or benchmark gap table.
+
+Read [revision-control-contract.md](../../shared/revision-control-contract.md) when turning review findings into a formal revision queue.

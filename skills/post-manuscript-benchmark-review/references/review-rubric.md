@@ -1,6 +1,32 @@
 # Review Rubric And Benchmark Protocol
 
-## Four-Criterion Review Rubric
+## Ten-Dimension 100-Point Score
+
+Use this ten-dimension score for formal readiness judgment. Each dimension is scored from 0.0 to 10.0; total score is 100.
+
+| dimension | score focus |
+|---|---|
+| 1. Research innovation | novelty type, differentiation from benchmark papers, contribution visibility |
+| 2. Problem importance | theoretical/practical significance and reviewer-relevant problem pressure |
+| 3. Research design rigor | design validity, data provenance, leakage control, reproducibility |
+| 4. Method and analysis reliability | method justification, baselines, ablations, statistics, robustness |
+| 5. Results presentation and data quality | figures, tables, metrics, uncertainty, result traceability |
+| 6. Discussion and conclusion depth | interpretation, limitation honesty, implication strength |
+| 7. Literature review quality | recency, benchmark coverage, synthesis into a problem chain |
+| 8. Writing and organization | structure, local section purpose, sentence clarity, citation placement |
+| 9. Target venue fit | scope, article type, evidence density, formatting and audience expectations |
+| 10. Academic ethics and norms | citation integrity, data/code transparency, authorship and research ethics risk |
+
+Readiness guide:
+
+- `80-100`: can usually submit or proceed with minor revision if no blocking item remains.
+- `60-79`: needs targeted revision before submission.
+- `<60`: usually not suitable for submission to the target venue.
+- If dimension 10 is below `3.0`, trigger a veto and normally recommend against submission.
+
+When the target journal or school clearly weights dimensions differently, use a 1.5-2.0 multiplier for the relevant dimensions and report both raw and weighted totals.
+
+## Four-Criterion Diagnostic Lens
 
 Use this rubric to produce defensible, evidence-backed review judgments. Do not treat the four criteria as independent checkboxes: a weak evidence design can lower innovation value, and weak benchmark positioning can weaken the literature-review score.
 

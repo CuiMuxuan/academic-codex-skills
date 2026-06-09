@@ -15,7 +15,11 @@ Use the canonical `claim_anchor` field names in [handoff-field-schema.md](../../
 - unresolved `LIT_GAP` or `needs evidence` markers are not being hidden by rewrite;
 - the user wants language refinement rather than new evidence, new structure, or new analysis.
 
-If these conditions are not met, route back to `$paper-writing-workflow`, `$academic-research-verification`, or `$post-manuscript-benchmark-review`.
+If these conditions are not met, route back to `$paper-writing-workflow`, `$academic-research-verification`, `$post-manuscript-benchmark-review`, or `$revision-control`.
+
+If the user asks for diagnosis without rewrite, route to `$language-style-review`.
+
+If the user asks to manage sentence pass/fail status, round state, latest drafts, or object-library changes, route to `$revision-control`.
 
 ## What Polish May Do
 

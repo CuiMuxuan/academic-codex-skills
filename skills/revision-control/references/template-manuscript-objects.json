@@ -1,0 +1,17 @@
+{
+  "paper": {
+    "paper_id": "P001",
+    "title": "",
+    "language_mode": "bilingual",
+    "target_scope": "full_manuscript",
+    "current_round": "round_001",
+    "objects": {
+      "chapters": [],
+      "sections": [],
+      "paragraphs": [],
+      "sentences": [],
+      "figure_table_text_objects": []
+    }
+  },
+  "id_mapping_history": []
+}

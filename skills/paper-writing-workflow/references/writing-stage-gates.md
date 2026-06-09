@@ -33,5 +33,7 @@ Stop for confirmation before drafting substantial body text from a new paper des
 - Field/terminology gate: confirm the research field when it is inferred or unclear; if the user still does not set a field, proceed with `computer and electronic information` as a provisional fallback.
 - Evidence precheck gate: before substantive drafting, classify core claims and identify unsupported claims that need `LIT_GAP`.
 - Draft gate: stop after each major section or chapter draft for user confirmation.
+- Detailed design gate: after material preparation and before formal drafting, confirm target venue, article type, chapter/section tasks, expected word counts, evidence needs, figure/table plan, risks, and missing materials.
 - Comment-response gate: when comments are substantial, present the revision plan before editing.
+- Revision-control gate: after an initial full draft, route formal sentence-level revision state, pass/fail confirmation, latest review drafts, and round logs to `$revision-control`.
 - Final-polish gate: enter style polishing only after structure, evidence, and claim strength are stable; route heavy de-AI polishing to `$academic-de-ai-polishing`.
