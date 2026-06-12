@@ -13,6 +13,22 @@ Use the shared schema in [manuscript-object-model.md](../../../shared/manuscript
 
 正文中的图表引用句进入 `Sentence` 对象。图题、图注、表题、表注、图中文字另建 `FigureTableTextObject`。
 
+## Object Library Source Rules
+
+Build the object library from the canonical active manuscript draft, not from a sentence-aligned bilingual review draft.
+
+- `Chapter` and `Section` objects follow the active manuscript's heading structure.
+- `Paragraph` objects follow the active manuscript's natural paragraphs or true structural blocks, such as list items, table rows, figure/table text references, or DOCX paragraphs.
+- `Sentence` objects are segmented inside their parent paragraph. Multiple sentence objects may share one `paragraph_id` when the manuscript paragraph contains multiple sentences.
+- A sentence-aligned bilingual review draft may supply `alignment_source_id`, English/Chinese paired sentence text, review notes, or latest review text, but it must not be the source of paragraph boundaries unless the original manuscript itself is already a sentence-aligned list.
+- If only a sentence-aligned review draft is available, mark `paragraph_source_mode: sentence_aligned_review_only`, use `source_block_type: sentence_aligned_item_group`, and treat paragraph-level/section-flow review as context-limited until the object library is rebuilt from the main manuscript.
+
+Before accepting a generated object library, run a source sanity check:
+
+- compare the declared source file against the active main manuscript path;
+- compare the number of paragraph objects with the main manuscript's natural paragraphs/blocks;
+- flag the library for rebuild when most paragraph objects contain exactly one sentence and `paragraph_role` or `source_block_type` indicates sentence-aligned item groups.
+
 ## Sentence State
 
 Each sentence object tracks:

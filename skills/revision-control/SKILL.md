@@ -48,13 +48,23 @@ When the user asks to run, open, start, or use the paper revision annotation UI,
 - Chinese examples: `运行论文修改UI`, `打开论文修改界面`, `启动批注UI`, `打开审稿批注界面`, `用界面做逐句修改`, `用鼠标批注论文`, `运行这个UI进行论文修改`, `打开 revision annotation UI`.
 - English examples: `run the revision annotation UI`, `open the manuscript annotation UI`, `start the paper revision UI`, `use the UI for sentence revision annotations`.
 
-Before launch, locate the active `revision_workbench` and round id. If both are clear, run:
+Before launch, locate the active `revision_workbench` and round id. Ensure required UI support resources exist first. This includes `shared/project_review_standards.*`, `shared/terminology_glossary.*`, `shared/problem_words.*`, and `shared/material_dependencies.*`. If any are missing, create them before opening the UI; generate `terminology_glossary.yaml/md` as project-specific candidate terminology from the manuscript object library, with entries marked unconfirmed until the user edits or confirms them. For bilingual projects, each English term should include likely `chinese_translations` inferred from the aligned Chinese review text when possible, and Chinese terms/translations must also be available for shallow-green terminology highlighting in the UI. The project supplemental review standards template must state the paper's research field when known and include a candidate rule to avoid unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless those terms genuinely belong to the paper's field or the user confirms them. Generic cross-field terms do not need special restriction.
+
+If support resources are missing, run:
+
+```bash
+python skills/revision-control/scripts/ensure_revision_ui_resources.py --path <revision_workbench_path_or_round_path>
+```
+
+Then launch the UI:
 
 ```bash
 python skills/revision-control/scripts/revision_annotation_ui.py --workbench <revision_workbench_path> --round <round_id> --open
 ```
 
 If the workbench or round id is missing, ask one concise question for the missing path or round. If no object library exists at `revision_workbench/bilingual_revision/manuscript_objects.json`, do not launch; create or request the object library first. The UI remains an annotation collector only and must write only `revision_workbench/bilingual_revision/rounds/<round_id>/user_annotations.json`.
+
+The bundled UI is Chinese-English bilingual for visible controls while preserving English JSON enum values. It uses a chapter stepper plus active-chapter virtual scrolling to keep large bilingual manuscripts responsive.
 
 ## Workflow
 
@@ -138,3 +148,5 @@ Read [annotation-ui-technical-plan.md](references/annotation-ui-technical-plan.m
 ## Bundled Utilities
 
 - `scripts/revision_annotation_ui.py`: starts the lightweight local browser UI for collecting user annotations from `manuscript_objects.json` and writing only `rounds/<round_id>/user_annotations.json`.
+- `scripts/ensure_revision_ui_resources.py`: creates required UI support resources under `revision_workbench/shared/`, including project supplemental review standards, terminology glossary candidates generated from `manuscript_objects.json`, problem-word records, and material-dependency records. Run this before launching the annotation UI.
+- `scripts/rebuild_manuscript_objects_from_main.py`: rebuilds `manuscript_objects.json` from the canonical active main manuscript while preserving existing sentence ids and bilingual sentence text from a sentence-aligned review draft; use when paragraph objects were incorrectly created from sentence-aligned review items.

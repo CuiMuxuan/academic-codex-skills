@@ -43,7 +43,7 @@ revision_workbench/
 | artifact | role |
 |---|---|
 | `project_review_standards.*` | user-confirmed supplemental review standards |
-| `terminology_glossary.*` | professional terms, proper nouns, allowed translations |
+| `terminology_glossary.*` | professional terms, proper nouns, accepted variants, and Chinese translations used for terminology highlighting |
 | `problem_words.*` | project-specific banned, risky, or user-disliked expressions |
 | `material_dependencies.*` | support material paths, purpose, state, and change records |
 | `manifest.yaml` | revision project metadata and current round pointer |

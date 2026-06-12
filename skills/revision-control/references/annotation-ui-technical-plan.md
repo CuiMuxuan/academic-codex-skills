@@ -4,7 +4,7 @@
 
 Build a lightweight local annotation UI for `revision-control`. The UI collects user feedback on manuscript sections, paragraphs, sentences, text spans, and sentence gaps, then writes a fixed JSON file that `revision-control` can read before formal modification.
 
-The UI is an annotation collector only. It must not rewrite the manuscript, update pass/fail state, update the latest full review draft, or create official modification logs by itself.
+The UI is an annotation collector only. It must not rewrite the manuscript, update official pass/fail state in `manuscript_objects.json` or round logs, update the latest full review draft, or create official modification logs by itself. It may collect user pass/fail decisions inside `user_annotations.json` for later `revision-control` processing.
 
 ## Minimal Technology Stack
 
@@ -22,6 +22,8 @@ skills/revision-control/scripts/revision_annotation_ui.py
 ```
 
 The Python script should embed the HTML, CSS, and JavaScript as strings and serve them through a local HTTP server.
+
+Keep this stack unless profiling shows a single rendered chapter is still too large to scroll smoothly. The first performance lever is not a framework replacement; it is reducing live DOM size, rendering only the active chapter, and virtualizing that chapter's paragraph rows with measured dynamic row heights. Browser-native lazy layout can be considered for non-virtual static lists, but virtual paragraph rows must not rely on low fixed intrinsic heights that can clip long paragraphs. Consider a heavier frontend stack only after chapter-scoped rendering, virtual scrolling, and native browser optimizations are insufficient.
 
 Run command:
 
@@ -52,7 +54,13 @@ revision_workbench/bilingual_revision/figure_table_text_objects.json
 revision_workbench/bilingual_revision/latest_full_bilingual_review.md
 revision_workbench/bilingual_revision/partial_failed_sentence_review.md
 revision_workbench/bilingual_revision/rounds/<round_id>/sentence_check_results.md
+revision_workbench/shared/terminology_glossary.yaml
+revision_workbench/shared/terminology_glossary.md
 ```
+
+Before opening the UI, `revision-control` should create the shared project-support files if they are missing. At minimum this includes `project_review_standards.*`, `terminology_glossary.*`, `problem_words.*`, and `material_dependencies.*` under `revision_workbench/shared/`. Initialize `terminology_glossary.yaml/md` from the manuscript object library as project-specific, unconfirmed candidate terminology. In bilingual projects, each English term should carry likely `chinese_translations` inferred from the aligned Chinese review text when possible. If `shared/terminology_glossary.yaml` still does not exist, the manuscript view must not render terminology highlighting.
+
+Initialize `project_review_standards.yaml/md` as a project supplemental standard template. The template should name the research field when known and include a candidate rule that warns against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless such terminology belongs to the paper's field or is user-confirmed. Generic terms broadly understood across academic fields do not need special restriction.
 
 Do not parse DOCX, PDF, or free Markdown as the UI source. Those formats must first go through `revision-control` or upstream parsing to generate `manuscript_objects.json`.
 
@@ -66,6 +74,17 @@ revision_workbench/bilingual_revision/rounds/<round_id>/user_annotations.json
 
 Autosave after each annotation change. Also provide a manual "Save" button.
 
+The manual save button is a fallback/flush control only. Normal text-span annotations, issue edits, deletes, and sentence pass/fail decisions should autosave immediately after the user action.
+
+The terminology-management page writes only:
+
+```text
+revision_workbench/shared/terminology_glossary.yaml
+revision_workbench/shared/terminology_glossary.md
+```
+
+Creating, editing, or deleting terminology entries in that page is a user-confirmed standards update. The manuscript annotation view must only read the glossary for highlighting and must not silently add terms.
+
 If the round directory does not exist, the Python service may create it only after explicit user confirmation in the UI or a command-line flag:
 
 ```text
@@ -78,7 +97,7 @@ Use one object library and two views.
 
 ### Full Manuscript View
 
-Render every object from `manuscript_objects.json`:
+Read every object from `manuscript_objects.json`, but do not render the complete manuscript into the DOM at once. Show a chapter stepper above the manuscript. Switching chapters replaces the active chapter model while preserving the shared annotation document. Within the active chapter, virtualize section/paragraph rows so that only the visible rows plus an overscan buffer are mounted in the DOM. Virtualized paragraph rows must not use a fixed clipping height: estimate initial height from text length, then measure the mounted DOM row and update subsequent offsets from the real rendered height so long paragraphs render completely.
 
 ```text
 Paper
@@ -100,6 +119,8 @@ user_annotations.json
 ```
 
 The partial view must keep parent chapter, section, and paragraph nodes visible so context is not lost.
+
+The partial view uses the same chapter stepper. Only chapters containing failed, targeted, or annotated sentences should contribute visible content in this view.
 
 Do not treat the partial failed draft as a separate manuscript source. It is only a filtered view over the complete object library.
 
@@ -125,6 +146,18 @@ Use browser-native elements where possible:
 - `<span>` for sentences and selectable text.
 - Small inline button or gutter marker for sentence-gap insertion comments.
 
+The UI chrome and controls should be Chinese-English bilingual. Keep saved JSON enum values in English, but display dropdown labels and status messages as Chinese label plus English enum/value.
+
+For bilingual sentence text, preserve the source object text and render visible Chinese and English drafts on separate lines when the object text already contains explicit line breaks or an English/Chinese boundary. This display split must not overwrite `manuscript_objects.json` or change the annotation schema. Span annotations should continue to store character offsets against the normalized source sentence text.
+
+Terminology highlighting is a visual layer only. Match terms, preferred forms, accepted variants, and `chinese_translations` from `shared/terminology_glossary.yaml` against the normalized source sentence text and render shallow green backgrounds for both English and Chinese occurrences without changing sentence text, character offsets, `manuscript_objects.json`, or `user_annotations.json` span schemas.
+
+Span annotations must be rendered as local text-range highlights using `char_start` and `char_end`, not only as whole-sentence or whole-paragraph markers. When a span annotation is deleted, its text-range highlight must disappear immediately from the visible virtual rows.
+
+Virtual scrolling must preserve annotation behavior. Rendered rows must still expose `data-chapter-id`, `data-section-id`, `data-paragraph-id`, and `data-sentence-id` attributes where applicable. Selecting an existing annotation should switch to the owning chapter and scroll the virtual list to the target row. Do not combine virtual rows with CSS that forces a fixed intrinsic paragraph height, such as a low `contain-intrinsic-size`; row measurement must allow long natural manuscript paragraphs to determine their own visible height.
+
+If the object library contains sentence-aligned paragraph objects, the UI must not pretend these are natural manuscript paragraphs. Display the paragraph role/id from `manuscript_objects.json` and keep any regrouping work upstream in object-library creation from the main manuscript source.
+
 Every rendered node must carry object id data attributes:
 
 ```html
@@ -147,11 +180,19 @@ The user selects text with the mouse. The UI resolves the selection to:
 - `selected_text`
 - `text_hash`
 
+The same sentence may have any number of independent span annotations. Each newly selected word, phrase, or fragment should create a separate annotation object with its own `annotation_id`; do not collapse all issues in a sentence into one record. This lets one sentence carry separate comments such as terminology, grammar, and unsupported-claim issues at different offsets.
+
+If the user selects the whole visible sentence text, store it as a `span_issue` with the normal `char_start`/`char_end` range and `selection_scope: "whole_sentence"`. Clicking a sentence without selecting text remains a `sentence_issue`; use this when the problem belongs to the whole sentence rather than to a highlighted text range.
+
+For advanced cases where one single issue needs to point to several non-contiguous spans within the same sentence, the UI and downstream readers may use optional `target.ranges`. Each range item must contain `char_start`, `char_end`, `selected_text`, and optional `text_hash`. Keep the top-level `target.sentence_id`, `paragraph_id`, `section_id`, and `chapter_id` as the shared owner. Use this only when the multiple fragments are one logical issue; otherwise create multiple independent `span_issue` annotations.
+
 If a selection crosses multiple sentences, split it into sentence-level annotations or ask the user to narrow the selection.
 
 ### Sentence Annotation
 
 Clicking a sentence without selecting text should allow annotating the whole sentence.
+
+Each sentence row should show its current status and allow the user to toggle `pass` / `fail`. The UI must not mutate `manuscript_objects.json`; store user status decisions in `user_annotations.json` under a separate `sentence_status_decisions` object keyed by `sentence_id`.
 
 ### Paragraph Annotation
 
@@ -178,9 +219,9 @@ The marker creates an annotation with:
 
 This records "insert a sentence here" or "add explanation here" without modifying text.
 
-## Right Panel
+## Annotation Management Panels
 
-The right panel edits the currently selected annotation.
+Use a three-column desktop layout: manuscript content, current-annotation editor, and saved-annotations browser. The current-annotation editor edits the currently selected annotation. The saved-annotations browser must be a separate panel to the right of the editor, not a long card list inside the editor.
 
 Required field:
 
@@ -194,6 +235,10 @@ Optional fields:
 - Status display.
 
 The text box is optional. The user may select only a problem type and save.
+
+Provide a clear-selection control that deselects the current annotation in the editor without deleting the saved annotation. Deleting a saved annotation is a separate action and must update both the saved annotation list and the visible manuscript highlights.
+
+The saved-annotations browser should use an expandable/collapsible list. The collapsed row shows a short annotation id, problem type, and annotation type. Expanding a row reveals target details, suggested action, status, and comment. Selecting a saved annotation must load it into the current-annotation editor, scroll the manuscript to the target, and mark the selected saved-annotation row with a visible border. On narrow screens, move the saved-annotations panel below the current-annotation editor.
 
 ## Problem Type Dropdown
 
@@ -266,9 +311,32 @@ Write one file:
   "view_mode": "full_manuscript",
   "created_at": "2026-06-10T00:00:00+08:00",
   "updated_at": "2026-06-10T00:00:00+08:00",
-  "annotations": []
+  "annotations": [],
+  "sentence_status_decisions": {}
 }
 ```
+
+### Sentence Status Decision
+
+```json
+{
+  "sentence_status_decisions": {
+    "S2.1.4": {
+      "status": "fail",
+      "updated_at": "2026-06-10T00:00:00+08:00"
+    }
+  }
+}
+```
+
+Allowed user status values are:
+
+```text
+pass
+fail
+```
+
+Clicking the active status again may clear the user decision and return the sentence to pending display.
 
 ### Span Issue
 
@@ -284,6 +352,7 @@ Write one file:
     "sentence_id": "S2.1.4",
     "char_start": 12,
     "char_end": 28,
+    "selection_scope": "text_span",
     "selected_text": "优于现有所有方法",
     "text_hash": "sha256..."
   },
@@ -291,6 +360,43 @@ Write one file:
   "severity": "P0",
   "suggested_action": "upgrade_required",
   "comment": "",
+  "status": "user_commented"
+}
+```
+
+### Multi-Range Span Issue
+
+Use this only when several non-contiguous fragments in the same sentence are one logical issue. Otherwise prefer separate `span_issue` objects.
+
+```json
+{
+  "annotation_id": "A001B",
+  "annotation_type": "span_issue",
+  "target": {
+    "chapter_id": "CH_2",
+    "section_id": "SEC_2_1",
+    "paragraph_id": "P_2_1_03",
+    "sentence_id": "S2.1.4",
+    "selection_scope": "multi_span",
+    "ranges": [
+      {
+        "char_start": 12,
+        "char_end": 18,
+        "selected_text": "显著提高",
+        "text_hash": "sha256..."
+      },
+      {
+        "char_start": 42,
+        "char_end": 51,
+        "selected_text": "明显优于",
+        "text_hash": "sha256..."
+      }
+    ]
+  },
+  "issue_type": "unsupported_superiority_claim",
+  "severity": "P0",
+  "suggested_action": "upgrade_required",
+  "comment": "两个片段属于同一个过强比较问题。",
   "status": "user_commented"
 }
 ```
@@ -517,7 +623,7 @@ No user_annotations.json found. Continue from user-provided conversational instr
 - The UI must not overwrite `manuscript_objects.json`.
 - The UI must not write `latest_full_bilingual_review.md`.
 - The UI must not write `modification_log.md`.
-- The UI must not finalize pass/fail status.
+- The UI must not finalize pass/fail status in `manuscript_objects.json` or official round logs. It may autosave user pass/fail decisions to `user_annotations.json`.
 - The UI must not add project standards directly.
 - The UI only writes `user_annotations.json`.
 
@@ -544,16 +650,23 @@ No user_annotations.json found. Continue from user-provided conversational instr
 3. Implement object-library loader and normalizer.
 4. Implement annotation file loader/writer.
 5. Implement embedded HTML/CSS/JS.
-6. Implement tree rendering.
-7. Implement selection capture and sentence-id resolution.
-8. Implement right-panel annotation editor.
-9. Implement autosave and manual save.
-10. Add `revision-control` reference note telling agents to read this plan before implementing or running the UI.
+6. Implement chapter-scoped tree rendering with a chapter stepper; do not render the full manuscript DOM at once.
+7. Implement virtual scrolling for active-chapter section and paragraph rows, including dynamic row height correction.
+8. Implement bilingual visible labels and bilingual sentence line display without changing source objects or schema values.
+9. Implement selection capture and sentence-id resolution against normalized source sentence text.
+10. Implement right-panel annotation editor.
+11. Implement autosave and manual save.
+12. Add `revision-control` reference note telling agents to read this plan before implementing or running the UI.
 
 ## Acceptance Criteria
 
 - Runs with Python 3 and no third-party dependencies.
 - Renders a tree from `manuscript_objects.json`.
+- Shows Chinese-English UI labels while preserving English schema enum values.
+- Shows Chinese and English drafts on separate visible lines when sentence text is bilingual.
+- Highlights project terminology with shallow green backgrounds for English terms, accepted variants, preferred forms, and Chinese translations from `terminology_glossary.yaml`.
+- Provides a chapter stepper and virtualizes the selected chapter so only visible rows plus overscan are mounted in the DOM.
+- Shows sentence pass/fail/pending status and autosaves user pass/fail decisions to `user_annotations.json`.
 - Supports full manuscript view and failed/targeted filtered view.
 - Supports span, sentence, paragraph, section/chapter, and sentence-gap annotations.
 - Requires problem type; comment is optional.

@@ -10,6 +10,9 @@ title:
 language_mode:
 target_journal_or_school:
 manuscript_path:
+source_manuscript_path:
+alignment_review_source_path:
+paragraph_source_mode: main_manuscript | sentence_aligned_review_only
 current_round:
 object_library_version:
 ```
@@ -34,6 +37,8 @@ notes:
 paragraph_id:
 section_id:
 paragraph_role:
+source_paragraph_index:
+source_block_type: natural_paragraph | list_item | table_row | figure_or_table_text_reference | subheading | sentence_aligned_item_group
 main_claim:
 evidence_ids: []
 sentence_ids: []
@@ -49,6 +54,8 @@ notes:
 sentence_id:
 round_sentence_id:
 paragraph_id:
+source_sentence_index:
+alignment_source_id:
 original_text:
 latest_text:
 suggested_status:

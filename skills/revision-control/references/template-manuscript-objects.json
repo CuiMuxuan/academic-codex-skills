@@ -4,6 +4,9 @@
     "title": "",
     "language_mode": "bilingual",
     "target_scope": "full_manuscript",
+    "source_manuscript_path": "",
+    "alignment_review_source_path": "",
+    "paragraph_source_mode": "main_manuscript",
     "current_round": "round_001",
     "objects": {
       "chapters": [],

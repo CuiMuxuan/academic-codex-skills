@@ -2,13 +2,33 @@
 
 ## Startup
 
-1. Confirm project path, manuscript path, target scope, language, and output format.
+1. Confirm project path, canonical active manuscript path, optional sentence-aligned bilingual review path, target scope, language, and output format.
 2. Locate or create `revision_workbench`.
-3. Build the complete manuscript object library.
-4. Generate the complete original bilingual sentence review draft.
-5. Generate the complete latest bilingual sentence review draft.
-6. Read project standards, terminology, problem-word list, and material dependency records.
-7. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
+3. Build the complete manuscript object library from the canonical active manuscript so paragraph objects preserve the manuscript's natural paragraph or structural-block boundaries.
+4. Use any sentence-aligned bilingual review draft only as an alignment/review-text source, not as the paragraph-boundary source.
+5. Generate the complete original bilingual sentence review draft.
+6. Generate the complete latest bilingual sentence review draft.
+7. Run the object-library source sanity check from [object-model-and-state.md](object-model-and-state.md).
+8. Before launching or entering the annotation UI, ensure the project-level shared resources exist: `project_review_standards.*`, `terminology_glossary.*`, `problem_words.*`, and `material_dependencies.*`. If missing, generate them under `revision_workbench/shared/`; initialize terminology candidates from the current `manuscript_objects.json`, include likely `chinese_translations` for English terms from aligned Chinese review text when available, and mark them unconfirmed.
+9. Initialize the project supplemental review standards template with the research field when known and a candidate rule warning against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless the current paper's field requires it or the user confirms it. Do not restrict generic terms broadly understood across fields.
+10. Read project standards, terminology, problem-word list, and material dependency records.
+11. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
+
+## Object-Library Source Gate
+
+Do not treat a sentence-aligned review draft as a natural paragraph object library. If the generated object library's source is a sentence-by-sentence review draft, or if most paragraph objects contain exactly one sentence because they were created from `S0001`, `S0002`, etc. items, mark the library as `paragraph_source_mode: sentence_aligned_review_only` and rebuild from the active main manuscript before paragraph-level or section-flow revision.
+
+Allowed with a sentence-aligned-only object library:
+
+- sentence-level annotation;
+- sentence pass/fail collection;
+- text-span comments within known sentence ids.
+
+Blocked until rebuild from the active main manuscript:
+
+- natural paragraph-level logic review;
+- paragraph sequencing and section-flow judgments;
+- UI claims that paragraph cards correspond to main-manuscript paragraphs.
 
 ## Missing Workbench Gate
 

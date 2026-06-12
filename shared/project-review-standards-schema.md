@@ -29,6 +29,7 @@ terminology_glossary:
     language:
     preferred_form:
     accepted_variants: []
+    chinese_translations: []
     forbidden_variants: []
     reason:
     confirmed: false
@@ -45,5 +46,6 @@ problem_words:
 
 - Confirmed user standards outrank general style guidance.
 - Candidate rules remain advisory until user confirmation.
+- For bilingual projects, `chinese_translations` records likely Chinese renderings of English terms; both source English terms and Chinese translations may be used by the annotation UI for visual terminology highlighting before confirmation, but they are not final terminology standards until confirmed.
 - Keep Markdown readable for human review and YAML structured for automation.
 - Record source and confirmation history for every confirmed rule.
