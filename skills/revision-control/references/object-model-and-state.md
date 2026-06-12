@@ -51,4 +51,6 @@ Each sentence object tracks:
 
 ## User Confirmation
 
-The agent may suggest `pass`, `fail`, `needs_user_decision`, or `upgrade_required`. Only the user can finalize pass/fail status.
+Persisted user sentence status has only two values: `pass` and `fail`. Default every sentence to `fail` until the user explicitly confirms `pass`, either in conversation or by clicking the annotation UI status control.
+
+The agent may suggest sentence ids that appear ready for `pass`, or may route a sentence to `upgrade_required` in analysis. Suggestions and routing labels are not persisted pass/fail states. Only the user can finalize `pass`; unconfirmed, missing, invalid, or legacy pending values remain `fail`.

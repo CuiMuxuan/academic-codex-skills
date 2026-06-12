@@ -81,14 +81,16 @@ Allowed now:
 1. Create `rounds/round_NNN`.
 2. If the user explicitly asks for benchmark or quality review, incorporate `$post-manuscript-benchmark-review` output; otherwise skip it.
 3. Run sentence-level check for the target scope.
-4. Produce suggested pass/fail status.
-5. Wait for user confirmation.
+4. Produce suggested pass/fail status. Treat every sentence as `fail` by default until the user confirms `pass`.
+5. You may proactively list sentence ids that appear ready to pass. These are suggestions only, not final state.
+6. Wait for user confirmation, either in conversation or through the annotation UI pass/fail controls.
 
 Accepted confirmation examples:
 
 - `2.1 全部通过`
 - `第 3 段未通过`
 - `S2.1.4-S2.1.9 通过，S2.1.10 回退未通过`
+- `接受你建议的通过句子`
 - `Only revise failed sentences in Section 4.2`
 
 ## Modification Execution

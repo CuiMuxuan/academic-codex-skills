@@ -192,7 +192,7 @@ If a selection crosses multiple sentences, split it into sentence-level annotati
 
 Clicking a sentence without selecting text should allow annotating the whole sentence.
 
-Each sentence row should show its current status and allow the user to toggle `pass` / `fail`. The UI must not mutate `manuscript_objects.json`; store user status decisions in `user_annotations.json` under a separate `sentence_status_decisions` object keyed by `sentence_id`.
+Each sentence row should show only `pass` or `fail` status and allow the user to click `pass` / `fail` tags or buttons. Default every sentence to `fail` when no user decision exists. The UI must not mutate `manuscript_objects.json`; store user status decisions in `user_annotations.json` under a separate `sentence_status_decisions` object keyed by `sentence_id`.
 
 ### Paragraph Annotation
 
@@ -336,7 +336,7 @@ pass
 fail
 ```
 
-Clicking the active status again may clear the user decision and return the sentence to pending display.
+There is no `pending` sentence state. Missing, invalid, or legacy `pending` values must display and save as `fail`. Clicking the active status again keeps that same explicit status; it must not clear the sentence back to a third state.
 
 ### Span Issue
 
@@ -559,7 +559,7 @@ Each sentence node should include:
   "node_type": "sentence",
   "sentence_id": "S2.1.4",
   "text": "...",
-  "status": "pending",
+  "status": "fail",
   "revision_count": 0,
   "hash": "sha256..."
 }
@@ -624,6 +624,7 @@ No user_annotations.json found. Continue from user-provided conversational instr
 - The UI must not write `latest_full_bilingual_review.md`.
 - The UI must not write `modification_log.md`.
 - The UI must not finalize pass/fail status in `manuscript_objects.json` or official round logs. It may autosave user pass/fail decisions to `user_annotations.json`.
+- The UI must treat all sentences without an explicit user `pass` decision as `fail`, including the failed/targeted filtered view.
 - The UI must not add project standards directly.
 - The UI only writes `user_annotations.json`.
 
@@ -666,7 +667,7 @@ No user_annotations.json found. Continue from user-provided conversational instr
 - Shows Chinese and English drafts on separate visible lines when sentence text is bilingual.
 - Highlights project terminology with shallow green backgrounds for English terms, accepted variants, preferred forms, and Chinese translations from `terminology_glossary.yaml`.
 - Provides a chapter stepper and virtualizes the selected chapter so only visible rows plus overscan are mounted in the DOM.
-- Shows sentence pass/fail/pending status and autosaves user pass/fail decisions to `user_annotations.json`.
+- Shows sentence pass/fail status only, defaults missing decisions to fail, and autosaves user pass/fail decisions to `user_annotations.json`.
 - Supports full manuscript view and failed/targeted filtered view.
 - Supports span, sentence, paragraph, section/chapter, and sentence-gap annotations.
 - Requires problem type; comment is optional.

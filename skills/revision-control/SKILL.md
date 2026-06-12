@@ -41,6 +41,15 @@ Do not:
 9. If the user provides only a local paragraph and asks for direct sentence edits, respond with `context_insufficient_for_formal_revision`, list required materials, and offer to create the workbench; do not present a polished replacement as the official modification.
 10. If the requested sentence depends on missing benchmark literature, baseline experiments, metrics, data, or evidence, respond with `upgrade_required` and draft an upgrade plan instead of giving a formal replacement sentence.
 
+## Sentence Pass/Fail Rules
+
+- Sentence status has only two user states: `pass` and `fail`.
+- Treat every sentence as `fail` by default until the user explicitly marks it `pass`.
+- You may proactively suggest which sentence ids appear ready to pass, but the suggestion is not final status.
+- Accept user confirmation from conversation, such as "S2.1.4 通过" or "接受你刚才建议的通过句子", and record those sentence ids as user-confirmed `pass`.
+- In the annotation UI, the user may click the `通过 / Pass` or `未通过 / Fail` tag/button on a sentence row to change that sentence's user state.
+- Do not use `pending`, `needs_user_decision`, or assistant suggestions as UI sentence states. Use upgrade or decision-needed wording only in analysis, comments, or task routing, not as the persisted sentence pass/fail state.
+
 ## Automatic Annotation UI Launch
 
 When the user asks to run, open, start, or use the paper revision annotation UI, launch the bundled UI instead of only explaining it. Treat these as launch requests:

@@ -342,8 +342,7 @@ class AppState:
         data.setdefault("sentence_status_decisions", {})
         if not isinstance(data["annotations"], list):
             data["annotations"] = []
-        if not isinstance(data["sentence_status_decisions"], dict):
-            data["sentence_status_decisions"] = {}
+        data["sentence_status_decisions"] = sentence_status_decisions(data)
         return data
 
     def save_annotations(self, document: dict[str, Any]) -> dict[str, Any]:
@@ -358,6 +357,7 @@ class AppState:
         document.setdefault("created_at", now_iso())
         document["round"] = self.round_id
         document["source_object_library"] = self.source_object_library()
+        document["sentence_status_decisions"] = sentence_status_decisions(document)
         tmp = self.annotation_path.with_suffix(".json.tmp")
         with tmp.open("w", encoding="utf-8", newline="\n") as handle:
             json.dump(document, handle, ensure_ascii=False, indent=2)
@@ -415,6 +415,13 @@ class AppState:
                     ids.add(str(value))
         return ids
 
+    def failed_sentence_ids_for_tree(self, tree: dict[str, Any]) -> set[str]:
+        ids = collect_sentence_ids(tree) | self.failed_sentence_ids()
+        decisions = sentence_status_decisions(self.load_annotations())
+        pass_ids = {sentence_id for sentence_id, decision in decisions.items() if decision.get("status") == "pass"}
+        fail_ids = {sentence_id for sentence_id, decision in decisions.items() if decision.get("status") == "fail"}
+        return (ids | fail_ids) - pass_ids
+
 
 def object_list(objects: dict[str, Any], *names: str) -> list[dict[str, Any]]:
     for name in names:
@@ -426,6 +433,41 @@ def object_list(objects: dict[str, Any], *names: str) -> list[dict[str, Any]]:
 
 FRONT_MATTER_CHAPTER_ID = "__front_matter"
 FIGURE_TABLE_CHAPTER_ID = "__figure_table_chapter"
+
+
+def normalize_sentence_status(value: Any) -> str:
+    return "pass" if str(value or "").strip().lower() == "pass" else "fail"
+
+
+def sentence_status_decisions(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    raw_decisions = document.get("sentence_status_decisions", {})
+    if not isinstance(raw_decisions, dict):
+        return {}
+    decisions: dict[str, dict[str, Any]] = {}
+    for sentence_id, raw_decision in raw_decisions.items():
+        if not sentence_id:
+            continue
+        if isinstance(raw_decision, str):
+            decisions[str(sentence_id)] = {"status": normalize_sentence_status(raw_decision)}
+        elif isinstance(raw_decision, dict):
+            decision = dict(raw_decision)
+            decision["status"] = normalize_sentence_status(decision.get("status"))
+            decisions[str(sentence_id)] = decision
+        else:
+            decisions[str(sentence_id)] = {"status": "fail"}
+    return decisions
+
+
+def collect_sentence_ids(tree: dict[str, Any]) -> set[str]:
+    ids: set[str] = set()
+    if tree.get("node_type") == "sentence":
+        sentence_id = first_value(tree, "sentence_id", "id", default="")
+        if sentence_id:
+            ids.add(sentence_id)
+    for child in tree.get("children", []):
+        if isinstance(child, dict):
+            ids.update(collect_sentence_ids(child))
+    return ids
 
 
 def normalized_heading(value: Any) -> str:
@@ -897,7 +939,9 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
             paragraph_id=paragraph_id,
             user_confirmed_status=first_value(sentence, "user_confirmed_status", default=""),
             suggested_status=first_value(sentence, "suggested_status", default=""),
-            status=first_value(sentence, "user_confirmed_status", "suggested_status", "status", default="pending"),
+            status=normalize_sentence_status(
+                first_value(sentence, "user_confirmed_status", "suggested_status", "status", default="fail")
+            ),
             revision_count=sentence.get("revision_count", 0),
             hash=stable_hash(text),
         )
@@ -1015,7 +1059,7 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
                 text=paper_title,
                 sentence_id=title_sentence_id,
                 paragraph_id=title_paragraph_id,
-                status="pending",
+                status="fail",
                 revision_count=0,
                 hash=stable_hash(paper_title),
             )
@@ -1971,9 +2015,7 @@ HTML_PAGE = r"""<!doctype html>
     };
     const SENTENCE_DECISION_LABELS = {
       pass: '已通过 / Pass',
-      fail: '未通过 / Fail',
-      pending: '待定 / Pending',
-      pending_user_annotation: '待批注 / Pending annotation'
+      fail: '未通过 / Fail'
     };
     let manuscript = null;
     let annotationDoc = null;
@@ -2073,7 +2115,7 @@ HTML_PAGE = r"""<!doctype html>
     }
 
     function sentenceDecisionLabel(value) {
-      return SENTENCE_DECISION_LABELS[value] || value || SENTENCE_DECISION_LABELS.pending;
+      return SENTENCE_DECISION_LABELS[value] || SENTENCE_DECISION_LABELS.fail;
     }
 
     function fillSelects() {
@@ -2637,15 +2679,15 @@ HTML_PAGE = r"""<!doctype html>
 
     function sentenceEffectiveStatus(n) {
       const sentenceId = n.sentence_id || n.id || '';
-      return sentenceDecision(sentenceId) || n.user_confirmed_status || n.suggested_status || n.status || 'pending';
+      const status = sentenceDecision(sentenceId) || 'fail';
+      return status === 'pass' ? 'pass' : 'fail';
     }
 
     function renderSentenceStatusControls(n) {
       const sentenceId = htmlEscape(n.sentence_id || n.id || '');
-      const status = sentenceEffectiveStatus(n);
-      const normalized = status === 'pass' || status === 'fail' ? status : 'pending';
+      const normalized = sentenceEffectiveStatus(n);
       return `<div class="sentence-tools" onclick="event.stopPropagation()">
-        <span class="sentence-status-badge ${normalized}">${sentenceDecisionLabel(status)}</span>
+        <span class="sentence-status-badge ${normalized}">${sentenceDecisionLabel(normalized)}</span>
         <button class="status-toggle ${normalized === 'pass' ? 'active pass' : ''}" title="标记为通过 / Mark as pass" onclick="setSentenceStatus('${sentenceId}', 'pass', event)">通过 / Pass</button>
         <button class="status-toggle ${normalized === 'fail' ? 'active fail' : ''}" title="标记为未通过 / Mark as fail" onclick="setSentenceStatus('${sentenceId}', 'fail', event)">未通过 / Fail</button>
       </div>`;
@@ -2980,16 +3022,11 @@ HTML_PAGE = r"""<!doctype html>
       }
       if (!annotationDoc) return;
       annotationDoc.sentence_status_decisions = annotationDoc.sentence_status_decisions || {};
-      const current = sentenceDecision(sentenceId);
-      if (current === status) {
-        delete annotationDoc.sentence_status_decisions[sentenceId];
-        status = 'pending';
-      } else {
-        annotationDoc.sentence_status_decisions[sentenceId] = {
-          status,
-          updated_at: new Date().toISOString()
-        };
-      }
+      const normalized = status === 'pass' ? 'pass' : 'fail';
+      annotationDoc.sentence_status_decisions[sentenceId] = {
+        status: normalized,
+        updated_at: new Date().toISOString()
+      };
       refreshCurrentViewHighlights();
       try {
         annotationDoc = await fetchJSON('/api/save', {
@@ -2998,7 +3035,7 @@ HTML_PAGE = r"""<!doctype html>
           body: JSON.stringify(annotationDoc || {})
         });
         refreshCurrentViewHighlights();
-        setSaveState(status === 'pending' ? '句子状态已清除 / Sentence status cleared' : `句子状态已保存：${sentenceDecisionLabel(status)} / Saved`);
+        setSaveState(`句子状态已保存：${sentenceDecisionLabel(normalized)} / Saved`);
       } catch (error) {
         setSaveState('句子状态保存失败 / Status save failed: ' + error.message);
       }
@@ -3313,7 +3350,7 @@ class AnnotationHandler(BaseHTTPRequestHandler):
         data = self.state.read_object_library()
         root, paper = normalize_tree(data)
         view = (query.get("view") or ["full_manuscript"])[0]
-        failed_ids = sorted(self.state.failed_sentence_ids())
+        failed_ids = sorted(self.state.failed_sentence_ids_for_tree(root))
         active_root = root
         if view == "failed_or_targeted":
             active_root = filter_tree_for_sentences(root, set(failed_ids)) or dict(root, children=[])
