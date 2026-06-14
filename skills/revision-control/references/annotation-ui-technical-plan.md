@@ -158,6 +158,8 @@ Formula rendering is also a visual layer. Apply [equation-and-formula-standard.m
 
 Span annotations must be rendered as local text-range highlights using `char_start` and `char_end`, not only as whole-sentence or whole-paragraph markers. When a span annotation is deleted, its text-range highlight must disappear immediately from the visible virtual rows.
 
+If a sentence has been revised and the text at a stored span's `char_start`/`char_end` no longer matches `selected_text`, do not auto-relocate the highlight by searching for the old text elsewhere in the sentence. Suppress that stale span highlight until the user reselects the current text. This prevents old annotation backgrounds from appearing on the wrong words after revision shifts character positions.
+
 Virtual scrolling must preserve annotation behavior. Rendered rows must still expose `data-chapter-id`, `data-section-id`, `data-paragraph-id`, and `data-sentence-id` attributes where applicable. Selecting an existing annotation should switch to the owning chapter and scroll the virtual list to the target row. Do not combine virtual rows with CSS that forces a fixed intrinsic paragraph height, such as a low `contain-intrinsic-size`; row measurement must allow long natural manuscript paragraphs to determine their own visible height.
 
 If the object library contains sentence-aligned paragraph objects, the UI must not pretend these are natural manuscript paragraphs. Display the paragraph role/id from `manuscript_objects.json` and keep any regrouping work upstream in object-library creation from the main manuscript source.
@@ -197,6 +199,8 @@ If a selection crosses multiple sentences, split it into sentence-level annotati
 Clicking a sentence without selecting text should allow annotating the whole sentence.
 
 Each sentence row should show only `pass` or `fail` status and allow the user to click `pass` / `fail` tags or buttons. Default every sentence to `fail` when no user decision exists. The UI must not mutate `manuscript_objects.json`; store user status decisions in `user_annotations.json` under a separate `sentence_status_decisions` object keyed by `sentence_id`.
+
+When a user marks a sentence `pass`, remove active annotations whose `target.sentence_id` is that sentence from `annotations` before saving. This also removes the old span or sentence highlight from the manuscript view, which is necessary after the sentence text has been revised and old character offsets no longer describe the current text. If the active round already has a non-empty `modification_log.md`, delete those resolved annotations entirely. If no formal modification log entry exists yet, move a copy of each removed annotation into `resolved_annotations` with `resolution: "sentence_marked_pass"` so the UI action remains auditable without creating an official modification log.
 
 ### Paragraph Annotation
 
@@ -241,6 +245,8 @@ Optional fields:
 The text box is optional. The user may select only a problem type and save.
 
 Provide a clear-selection control that deselects the current annotation in the editor without deleting the saved annotation. Deleting a saved annotation is a separate action and must update both the saved annotation list and the visible manuscript highlights.
+
+Provide a clear-comment control beside save, clear selection, and delete. It clears only the comment textarea for the current annotation and then autosaves that annotation. Clear selection must also clear the visible comment textarea without modifying the saved annotation.
 
 The saved-annotations browser should use an expandable/collapsible list. The collapsed row shows a short annotation id, problem type, and annotation type. Expanding a row reveals target details, suggested action, status, and comment. Selecting a saved annotation must load it into the current-annotation editor, scroll the manuscript to the target, and mark the selected saved-annotation row with a visible border. On narrow screens, move the saved-annotations panel below the current-annotation editor.
 
@@ -316,9 +322,12 @@ Write one file:
   "created_at": "2026-06-10T00:00:00+08:00",
   "updated_at": "2026-06-10T00:00:00+08:00",
   "annotations": [],
+  "resolved_annotations": [],
   "sentence_status_decisions": {}
 }
 ```
+
+`resolved_annotations` is a UI audit trail only. It stores annotations removed because a user marked the owning sentence `pass` when no formal round `modification_log.md` entry exists. It must not be treated as an active task queue and must not replace the official modification log required by the revision workflow.
 
 ### Sentence Status Decision
 
@@ -627,6 +636,7 @@ No user_annotations.json found. Continue from user-provided conversational instr
 - The UI must not overwrite `manuscript_objects.json`.
 - The UI must not write `latest_full_bilingual_review.md`.
 - The UI must not write `modification_log.md`.
+- The UI may write `resolved_annotations` inside `user_annotations.json` only as a non-official audit trail for annotations removed after a sentence is marked pass when no formal modification log exists.
 - The UI must not finalize pass/fail status in `manuscript_objects.json` or official round logs. It may autosave user pass/fail decisions to `user_annotations.json`.
 - The UI must treat all sentences without an explicit user `pass` decision as `fail`, including the failed/targeted filtered view.
 - The UI must not add project standards directly.

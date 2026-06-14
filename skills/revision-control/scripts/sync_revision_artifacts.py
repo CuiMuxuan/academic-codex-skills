@@ -726,6 +726,11 @@ def run_sync(args: argparse.Namespace) -> dict[str, Any]:
         },
         "annotation_counts": {
             "annotations": len(annotations_doc.get("annotations", []) if isinstance(annotations_doc.get("annotations"), list) else []),
+            "resolved_annotations": len(
+                annotations_doc.get("resolved_annotations", [])
+                if isinstance(annotations_doc.get("resolved_annotations"), list)
+                else []
+            ),
             "sentence_status_decisions": len(decisions if isinstance(decisions, dict) else {}),
         },
         "written_files": written,

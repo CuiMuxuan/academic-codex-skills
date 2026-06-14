@@ -280,6 +280,7 @@ class AppState:
         self.object_path = self.bilingual_dir / "manuscript_objects.json"
         self.round_dir = self.bilingual_dir / "rounds" / round_id
         self.annotation_path = self.round_dir / "user_annotations.json"
+        self.modification_log_path = self.round_dir / "modification_log.md"
         self.terminology_yaml_path = self.shared_dir / "terminology_glossary.yaml"
         self.terminology_md_path = self.shared_dir / "terminology_glossary.md"
 
@@ -329,6 +330,7 @@ class AppState:
             "created_at": stamp,
             "updated_at": stamp,
             "annotations": [],
+            "resolved_annotations": [],
             "sentence_status_decisions": {},
         }
 
@@ -347,11 +349,38 @@ class AppState:
         data.setdefault("created_at", now_iso())
         data.setdefault("updated_at", now_iso())
         data.setdefault("annotations", [])
+        data.setdefault("resolved_annotations", [])
         data.setdefault("sentence_status_decisions", {})
         if not isinstance(data["annotations"], list):
             data["annotations"] = []
+        if not isinstance(data["resolved_annotations"], list):
+            data["resolved_annotations"] = []
         data["sentence_status_decisions"] = sentence_status_decisions(data)
         return data
+
+    def has_modification_log_entries(self) -> bool:
+        if not self.modification_log_path.exists():
+            return False
+        text = self.modification_log_path.read_text(encoding="utf-8-sig", errors="replace")
+        for raw_line in text.splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            compact = line.replace("|", "").replace("-", "").replace(":", "").strip()
+            if not compact:
+                continue
+            lower = line.lower()
+            if "timestamp" in lower and "sentence_id" in lower and "revision_count" in lower:
+                continue
+            return True
+        return False
+
+    def decorate_annotation_document(self, document: dict[str, Any], id_map: dict[str, str] | None = None) -> dict[str, Any]:
+        document["annotation_path"] = self.annotation_path.as_posix()
+        document["modification_log_exists"] = self.has_modification_log_entries()
+        if id_map is not None:
+            document["annotation_id_map"] = id_map
+        return document
 
     def save_annotations(self, document: dict[str, Any]) -> dict[str, Any]:
         if not self.round_dir.exists():
@@ -365,13 +394,22 @@ class AppState:
         document.setdefault("created_at", now_iso())
         document["round"] = self.round_id
         document["source_object_library"] = self.source_object_library()
+        document["annotations"] = document.get("annotations", [])
+        document["resolved_annotations"] = document.get("resolved_annotations", [])
+        if not isinstance(document["annotations"], list):
+            document["annotations"] = []
+        if not isinstance(document["resolved_annotations"], list):
+            document["resolved_annotations"] = []
         document["sentence_status_decisions"] = sentence_status_decisions(document)
+        id_map = renumber_annotation_ids(document)
+        for key in ("annotation_path", "modification_log_exists", "annotation_id_map"):
+            document.pop(key, None)
         tmp = self.annotation_path.with_suffix(".json.tmp")
         with tmp.open("w", encoding="utf-8", newline="\n") as handle:
             json.dump(document, handle, ensure_ascii=False, indent=2)
             handle.write("\n")
         tmp.replace(self.annotation_path)
-        return document
+        return self.decorate_annotation_document(document, id_map)
 
     def load_terminology_glossary(self) -> dict[str, Any]:
         exists = self.terminology_yaml_path.exists()
@@ -1237,6 +1275,30 @@ def next_annotation_id(document: dict[str, Any]) -> str:
     return f"A{max_id + 1:04d}"
 
 
+def renumber_annotation_ids(document: dict[str, Any]) -> dict[str, str]:
+    annotations = document.get("annotations", [])
+    if not isinstance(annotations, list):
+        document["annotations"] = []
+        return {}
+    id_map: dict[str, str] = {}
+    for index, annotation in enumerate(annotations, start=1):
+        if not isinstance(annotation, dict):
+            continue
+        old_id = str(annotation.get("annotation_id", "")).strip()
+        new_id = f"A{index:04d}"
+        annotation["annotation_id"] = new_id
+        if old_id:
+            id_map[old_id] = new_id
+    last_saved = str(document.get("last_saved_annotation_id", "")).strip()
+    if last_saved and last_saved in id_map:
+        document["last_saved_annotation_id"] = id_map[last_saved]
+    elif annotations:
+        document["last_saved_annotation_id"] = str(annotations[-1].get("annotation_id", ""))
+    else:
+        document.pop("last_saved_annotation_id", None)
+    return id_map
+
+
 HTML_PAGE = r"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -1920,6 +1982,7 @@ HTML_PAGE = r"""<!doctype html>
       <div class="button-row">
         <button class="primary" id="saveAnnotation">立即保存当前批注 / Save now</button>
         <button id="clearSelection">取消选择 / Clear</button>
+        <button id="clearComment">清除备注 / Clear comment</button>
         <button class="danger" id="deleteAnnotation">删除 / Delete</button>
       </div>
 
@@ -2580,18 +2643,12 @@ HTML_PAGE = r"""<!doctype html>
     function resolveSpanRangeFromTarget(rangeTarget, rawText) {
       let start = Number(rangeTarget.char_start);
       let end = Number(rangeTarget.char_end);
-      const selectedText = normalizeUiText(rangeTarget.selected_text || '');
-      const rangedText = Number.isFinite(start) && Number.isFinite(end) && end > start
-        ? normalizeUiText(rawText.slice(start, end))
-        : '';
-      if (selectedText && rangedText !== selectedText) {
-        const fallbackIndex = rawText.indexOf(selectedText);
-        if (fallbackIndex >= 0) {
-          start = fallbackIndex;
-          end = fallbackIndex + selectedText.length;
-        }
-      }
       if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return null;
+      const selectedText = normalizeUiText(rangeTarget.selected_text || '');
+      const rangedText = normalizeUiText(rawText.slice(start, end));
+      if (selectedText && rangedText !== selectedText) {
+        return null;
+      }
       return {start, end};
     }
 
@@ -3049,6 +3106,77 @@ HTML_PAGE = r"""<!doctype html>
       currentAnnotation.status = 'user_commented';
     }
 
+    function clearCommentText(autosave = true) {
+      clearTimeout(saveTimer);
+      commentIsComposing = false;
+      document.getElementById('comment').value = '';
+      if (currentAnnotation) {
+        updateCurrentFromPanel();
+        currentAnnotation.comment = '';
+        if (autosave) scheduleSaveCurrent();
+      }
+      if (autosave) setSaveState('备注已清除 / Comment cleared');
+    }
+
+    function resetCurrentAnnotationPanel() {
+      currentAnnotation = null;
+      clearTimeout(saveTimer);
+      document.getElementById('comment').value = '';
+      document.getElementById('targetBox').textContent = '请选择文本、句子、段落、章节或插入标记 / Select text, a sentence, a paragraph, a section, or an insertion marker.';
+      document.getElementById('statusBox').textContent = '尚未选择批注 / No annotation selected.';
+    }
+
+    function currentAnnotationIdAfterSave(result) {
+      if (!currentAnnotation) return '';
+      const oldId = currentAnnotation.annotation_id || '';
+      const idMap = result?.annotation_id_map || {};
+      return idMap[oldId] || oldId || result?.last_saved_annotation_id || '';
+    }
+
+    function syncCurrentAnnotationAfterSave(result) {
+      const targetId = currentAnnotationIdAfterSave(result);
+      if (!targetId) return;
+      const saved = (result.annotations || []).find(a => a.annotation_id === targetId);
+      if (saved) {
+        currentAnnotation = structuredClone(saved);
+        document.getElementById('statusBox').textContent = `${currentAnnotation.annotation_id || '新建 / new'} | ${annotationTypeLabel(currentAnnotation.annotation_type)} | ${statusLabel(currentAnnotation.status || 'user_commented')}`;
+      } else {
+        resetCurrentAnnotationPanel();
+      }
+    }
+
+    function annotationTargetsSentence(annotation, sentenceId) {
+      const target = annotation?.target || {};
+      return Boolean(sentenceId && target.sentence_id === sentenceId);
+    }
+
+    function appendResolvedAnnotations(sentenceId, removedAnnotations) {
+      if (!removedAnnotations.length || annotationDoc?.modification_log_exists) return;
+      annotationDoc.resolved_annotations = Array.isArray(annotationDoc.resolved_annotations) ? annotationDoc.resolved_annotations : [];
+      const stamp = new Date().toISOString();
+      for (const annotation of removedAnnotations) {
+        annotationDoc.resolved_annotations.push({
+          resolved_at: stamp,
+          resolution: 'sentence_marked_pass',
+          sentence_id: sentenceId,
+          annotation: structuredClone(annotation),
+          note: 'UI-only resolution record because no formal modification_log.md entry was found when the sentence was marked pass.'
+        });
+      }
+    }
+
+    function removeAnnotationsForPassedSentence(sentenceId) {
+      const annotations = annotationDoc?.annotations || [];
+      const removed = annotations.filter(annotation => annotationTargetsSentence(annotation, sentenceId));
+      if (!removed.length) return [];
+      appendResolvedAnnotations(sentenceId, removed);
+      annotationDoc.annotations = annotations.filter(annotation => !annotationTargetsSentence(annotation, sentenceId));
+      if (currentAnnotation && annotationTargetsSentence(currentAnnotation, sentenceId)) {
+        resetCurrentAnnotationPanel();
+      }
+      return removed;
+    }
+
     function scheduleSaveCurrent() {
       if (commentIsComposing) return;
       clearTimeout(saveTimer);
@@ -3073,9 +3201,7 @@ HTML_PAGE = r"""<!doctype html>
           body: JSON.stringify({annotation: currentAnnotation})
         });
         annotationDoc = result;
-        const saved = result.annotations.find(a => a.annotation_id === (currentAnnotation.annotation_id || result.last_saved_annotation_id));
-        if (saved) currentAnnotation = structuredClone(saved);
-        document.getElementById('statusBox').textContent = `${currentAnnotation.annotation_id || '新建 / new'} | ${annotationTypeLabel(currentAnnotation.annotation_type)} | ${statusLabel(currentAnnotation.status || 'user_commented')}`;
+        syncCurrentAnnotationAfterSave(result);
         renderAnnotationList();
         refreshCurrentViewHighlights();
         setSaveState('已保存 / Saved');
@@ -3085,9 +3211,7 @@ HTML_PAGE = r"""<!doctype html>
     }
 
     function clearCurrentSelection() {
-      currentAnnotation = null;
-      document.getElementById('targetBox').textContent = '请选择文本、句子、段落、章节或插入标记 / Select text, a sentence, a paragraph, a section, or an insertion marker.';
-      document.getElementById('statusBox').textContent = '尚未选择批注 / No annotation selected.';
+      resetCurrentAnnotationPanel();
       renderAnnotationList();
       setSaveState('已取消选择 / Selection cleared');
       refreshCurrentViewHighlights();
@@ -3102,8 +3226,7 @@ HTML_PAGE = r"""<!doctype html>
           body: JSON.stringify({annotation_id: currentAnnotation.annotation_id})
         });
         currentAnnotation = null;
-        document.getElementById('targetBox').textContent = '请选择文本、句子、段落、章节或插入标记 / Select text, a sentence, a paragraph, a section, or an insertion marker.';
-        document.getElementById('statusBox').textContent = '尚未选择批注 / No annotation selected.';
+        resetCurrentAnnotationPanel();
         renderAnnotationList();
         refreshCurrentViewHighlights();
         setSaveState('已删除 / Deleted');
@@ -3119,6 +3242,9 @@ HTML_PAGE = r"""<!doctype html>
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(annotationDoc || {})
         });
+        syncCurrentAnnotationAfterSave(annotationDoc);
+        renderAnnotationList();
+        refreshCurrentViewHighlights();
         setSaveState('已保存 / Saved');
       } catch (error) {
         setSaveState('保存失败 / Save failed: ' + error.message);
@@ -3137,6 +3263,8 @@ HTML_PAGE = r"""<!doctype html>
         status: normalized,
         updated_at: new Date().toISOString()
       };
+      const removedAnnotations = normalized === 'pass' ? removeAnnotationsForPassedSentence(sentenceId) : [];
+      if (removedAnnotations.length) renderAnnotationList();
       refreshCurrentViewHighlights();
       try {
         annotationDoc = await fetchJSON('/api/save', {
@@ -3144,8 +3272,11 @@ HTML_PAGE = r"""<!doctype html>
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(annotationDoc || {})
         });
+        syncCurrentAnnotationAfterSave(annotationDoc);
+        renderAnnotationList();
         refreshCurrentViewHighlights();
-        setSaveState(`句子状态已保存：${sentenceDecisionLabel(normalized)} / Saved`);
+        const removedText = removedAnnotations.length ? `；已移除 ${removedAnnotations.length} 条同句批注 / removed ${removedAnnotations.length} annotation(s)` : '';
+        setSaveState(`句子状态已保存：${sentenceDecisionLabel(normalized)}${removedText} / Saved`);
       } catch (error) {
         setSaveState('句子状态保存失败 / Status save failed: ' + error.message);
       }
@@ -3301,7 +3432,7 @@ HTML_PAGE = r"""<!doctype html>
         return;
       }
       const selectedId = currentAnnotation?.annotation_id || '';
-      list.innerHTML = `<div class="annotation-list">${annotations.map(a => {
+      list.innerHTML = `<div class="annotation-list">${annotations.map((a, index) => {
         const id = a.annotation_id || '';
         const selected = selectedId && selectedId === id;
         const issue = optionLabel(PROBLEM_TYPE_LABELS, a.issue_type);
@@ -3310,10 +3441,11 @@ HTML_PAGE = r"""<!doctype html>
         const comment = String(a.comment || '').trim() || '无备注 / No comment';
         const status = statusLabel(a.status || 'user_commented');
         const action = optionLabel(ACTION_LABELS, a.suggested_action || '');
+        const displayNumber = `批注 ${index + 1} / #${index + 1}`;
         return `<details class="annotation-list-item${selected ? ' selected' : ''}" data-annotation-id="${htmlEscape(id)}" ${selected ? 'open' : ''}>
           <summary onclick="selectAnnotation('${htmlEscape(id)}')">
             <span class="annotation-list-title">
-              <strong>${htmlEscape(id)} ${htmlEscape(issue)}</strong>
+              <strong>${htmlEscape(displayNumber)} · ${htmlEscape(id)} ${htmlEscape(issue)}</strong>
               <span class="annotation-list-meta">${htmlEscape(type)}</span>
             </span>
             <span class="annotation-list-chevron">›</span>
@@ -3356,6 +3488,7 @@ HTML_PAGE = r"""<!doctype html>
     });
     document.getElementById('saveAnnotation').addEventListener('click', saveCurrent);
     document.getElementById('clearSelection').addEventListener('click', clearCurrentSelection);
+    document.getElementById('clearComment').addEventListener('click', () => clearCommentText(true));
     document.getElementById('deleteAnnotation').addEventListener('click', deleteCurrent);
     document.getElementById('manualSave').addEventListener('click', manualSave);
     document.getElementById('saveTerm').addEventListener('click', saveTerm);
@@ -3443,8 +3576,7 @@ class AnnotationHandler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/annotations":
                 payload = self.state.load_annotations()
-                payload["annotation_path"] = self.state.annotation_path.as_posix()
-                self.send_json(payload)
+                self.send_json(self.state.decorate_annotation_document(payload))
                 return
             if parsed.path == "/api/terminology":
                 self.send_json(self.state.load_terminology_glossary())

@@ -86,6 +86,9 @@ round:
 mode: write|check_only
 object_counts:
 annotation_counts:
+  annotations:
+  resolved_annotations:
+  sentence_status_decisions:
 written_files: []
 issues: []
 warnings: []
