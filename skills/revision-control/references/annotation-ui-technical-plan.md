@@ -202,6 +202,8 @@ Each sentence row should show only `pass` or `fail` status and allow the user to
 
 When a user marks a sentence `pass`, remove active annotations whose `target.sentence_id` is that sentence from `annotations` before saving. This also removes the old span or sentence highlight from the manuscript view, which is necessary after the sentence text has been revised and old character offsets no longer describe the current text. If the active round already has a non-empty `modification_log.md`, delete those resolved annotations entirely. If no formal modification log entry exists yet, move a copy of each removed annotation into `resolved_annotations` with `resolution: "sentence_marked_pass"` so the UI action remains auditable without creating an official modification log.
 
+If the user creates a new sentence-level or span-level annotation whose `target.sentence_id` matches a sentence currently marked `pass`, automatically change that sentence decision back to `fail` before the annotation is saved. This keeps the sentence state aligned with the presence of active review work. Sentence-gap insertion annotations do not force either neighboring sentence back to `fail` unless they also carry an explicit `target.sentence_id`.
+
 ### Paragraph Annotation
 
 Each paragraph has a paragraph-level comment button. The right panel can attach feedback to the paragraph object.

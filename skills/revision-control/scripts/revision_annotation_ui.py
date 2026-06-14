@@ -401,6 +401,7 @@ class AppState:
         if not isinstance(document["resolved_annotations"], list):
             document["resolved_annotations"] = []
         document["sentence_status_decisions"] = sentence_status_decisions(document)
+        mark_annotated_sentences_failed(document)
         id_map = renumber_annotation_ids(document)
         for key in ("annotation_path", "modification_log_exists", "annotation_id_map"):
             document.pop(key, None)
@@ -502,6 +503,33 @@ def sentence_status_decisions(document: dict[str, Any]) -> dict[str, dict[str, A
         else:
             decisions[str(sentence_id)] = {"status": "fail"}
     return decisions
+
+
+def target_sentence_id(annotation: dict[str, Any]) -> str:
+    target = annotation.get("target", {})
+    if not isinstance(target, dict):
+        return ""
+    return str(target.get("sentence_id", "")).strip()
+
+
+def mark_annotated_sentences_failed(document: dict[str, Any]) -> None:
+    decisions = sentence_status_decisions(document)
+    changed = False
+    stamp = now_iso()
+    for annotation in document.get("annotations", []):
+        if not isinstance(annotation, dict):
+            continue
+        sentence_id = target_sentence_id(annotation)
+        if not sentence_id:
+            continue
+        decision = dict(decisions.get(sentence_id, {}))
+        if decision.get("status") != "fail":
+            decision["status"] = "fail"
+            decision["updated_at"] = stamp
+            decisions[sentence_id] = decision
+            changed = True
+    if changed:
+        document["sentence_status_decisions"] = decisions
 
 
 def collect_sentence_ids(tree: dict[str, Any]) -> set[str]:
@@ -3188,6 +3216,20 @@ HTML_PAGE = r"""<!doctype html>
       return Boolean(sentenceId && target.sentence_id === sentenceId);
     }
 
+    function markAnnotatedSentenceFailed(annotation) {
+      const sentenceId = annotation?.target?.sentence_id || '';
+      if (!sentenceId || !annotationDoc) return false;
+      annotationDoc.sentence_status_decisions = annotationDoc.sentence_status_decisions || {};
+      const decision = annotationDoc.sentence_status_decisions[sentenceId];
+      const status = typeof decision === 'string' ? decision : decision?.status;
+      if (status !== 'pass') return false;
+      annotationDoc.sentence_status_decisions[sentenceId] = {
+        status: 'fail',
+        updated_at: new Date().toISOString()
+      };
+      return true;
+    }
+
     function appendResolvedAnnotations(sentenceId, removedAnnotations) {
       if (!removedAnnotations.length || annotationDoc?.modification_log_exists) return;
       annotationDoc.resolved_annotations = Array.isArray(annotationDoc.resolved_annotations) ? annotationDoc.resolved_annotations : [];
@@ -3232,6 +3274,8 @@ HTML_PAGE = r"""<!doctype html>
         setSaveState('必须选择问题类型 / Problem type is required');
         return;
       }
+      const changedPassToFail = markAnnotatedSentenceFailed(currentAnnotation);
+      if (changedPassToFail) refreshCurrentViewHighlights();
       try {
         const result = await fetchJSON('/api/annotations', {
           method: 'POST',
@@ -3242,7 +3286,9 @@ HTML_PAGE = r"""<!doctype html>
         syncCurrentAnnotationAfterSave(result);
         renderAnnotationList();
         refreshCurrentViewHighlights();
-        setSaveState('已保存 / Saved');
+        setSaveState(changedPassToFail
+          ? '已保存；该句新增批注后已自动改为未通过 / Saved; annotated sentence changed to fail'
+          : '已保存 / Saved');
       } catch (error) {
         setSaveState('保存失败 / Save failed: ' + error.message);
       }
