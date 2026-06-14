@@ -43,6 +43,7 @@ Before final delivery:
 - check that text and markers have enough luminance contrast against backgrounds;
 - avoid red/green pairs as the only distinction;
 - use a colour-blind-aware palette by default for categorical data.
+- when colour encodes categories, pair it with line style, marker shape, hatch, direct labels, or grayscale contrast so the figure still works in monochrome.
 
 ## Figure Descriptions And Alt Text
 

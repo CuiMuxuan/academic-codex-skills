@@ -10,12 +10,15 @@ Use this reference when choosing or polishing a data-backed plot, benchmark figu
 - Prefer source-data-driven scripts over manual chart editing.
 - Use consistent category order across panels.
 - Avoid chart junk: shadows, gradients, 3D bars, decorative icons, and heavy grid backgrounds.
+- For small samples, show individual observations rather than hiding them behind aggregates.
+- If a user requests a misleading chart type, explain the risk and propose a safer alternative before drawing.
 
 ## Bars
 
 Use for discrete comparisons, not continuous trends.
 
 - Keep a clear zero baseline unless a justified truncated axis is explicitly labelled.
+- Do not use mean-only bars for `n < 10` per group; use dot/strip plots, box plots, or violin plots with visible points.
 - Prefer horizontal bars for long method names or ablation components.
 - Use direct value labels sparingly; do not label every bar if axis reading is cleaner.
 - For many methods, use one hue family plus alpha or lightness changes for related variants.
@@ -25,6 +28,7 @@ Use for discrete comparisons, not continuous trends.
 
 Use for ordered x-values, time, training steps, or sample size trends.
 
+- Do not connect categorical or unordered x-values with lines unless the connection encodes a real paired/repeated-measure relation.
 - Keep line identities consistent across panels.
 - Use uncertainty bands with low alpha when uncertainty is available.
 - Use markers only when sample points matter or lines overlap.
@@ -45,7 +49,7 @@ Use for point-level relationships or projected spaces.
 Use for dense matrix-like relationships.
 
 - Include a readable colour bar with units or score definition.
-- Choose sequential, diverging, or categorical palettes according to the data type.
+- Choose sequential, diverging, or categorical palettes according to the data type; avoid rainbow/jet palettes for quantitative values.
 - Keep missing values visually distinct from low values.
 - Use text inside cells only when the matrix is small enough at final size.
 - For confusion matrices, state whether values are counts, row-normalized, column-normalized, or percentages.
@@ -76,6 +80,19 @@ Use only when visual comparison is stronger than a native table.
 - Highlight only the values that support the figure's claim.
 - Keep the source table or structured data available.
 
+## Intercept Checklist
+
+Before finalizing a data plot, reject or revise:
+
+- mean-only bars for small n;
+- dual y-axes for unrelated variables;
+- pie charts or 3D charts for precise comparisons;
+- truncated y-axes on bars without explicit visual break and justification;
+- continuous colour encodings without a labeled colorbar;
+- red/green-only encodings without marker, line, hatch, label, or grayscale redundancy;
+- overpacked legends or more than roughly 12 category combinations in one panel;
+- statistical stars without test, n, comparison, and correction context.
+
 ## Source Basis
 
-This reference adapts high-impact figure design patterns, Nature/PLOS readability constraints, and common ML/engineering paper plotting standards into chart-specific checks.
+This reference adapts high-impact figure design patterns, Nature/PLOS readability constraints, common ML/engineering paper plotting standards, and data-visualization advisor patterns from the referenced SciPilot figure skill into chart-specific checks.

@@ -242,7 +242,16 @@ def text_overlap_issues(fig, text_class) -> list[str]:
     issues: list[str] = []
     for i, (left_text, left_box) in enumerate(boxes):
         for right_text, right_box in boxes[i + 1 :]:
+            if left_text == right_text:
+                continue
             if left_box.overlaps(right_box):
+                x_overlap = max(0, min(left_box.x1, right_box.x1) - max(left_box.x0, right_box.x0))
+                y_overlap = max(0, min(left_box.y1, right_box.y1) - max(left_box.y0, right_box.y0))
+                overlap_area = x_overlap * y_overlap
+                left_area = max(1, left_box.width * left_box.height)
+                right_area = max(1, right_box.width * right_box.height)
+                if overlap_area / min(left_area, right_area) < 0.2:
+                    continue
                 issues.append(f"text overlap: {left_text[:20]!r} vs {right_text[:20]!r}")
                 if len(issues) >= 20:
                     return issues
@@ -291,11 +300,13 @@ def main() -> int:
     parser.add_argument("--stem", default="nature_multipanel")
     parser.add_argument("--column", choices=["single", "double"], default="double")
     parser.add_argument("--height-mm", type=float)
+    parser.add_argument("--lang", default="en", help="Figure text language hint, such as en or zh")
+    parser.add_argument("--cjk-serif", action="store_true", help="Prefer serif CJK fonts for Chinese thesis/journal figures")
     parser.add_argument("--copy-script", action="store_true", help="Copy this generator next to outputs for provenance")
     args = parser.parse_args()
 
     matplotlib, plt, mtext = require_matplotlib()
-    nstyle.apply_nature_style(matplotlib)
+    style_diagnostics = nstyle.apply_nature_style(matplotlib, lang=args.lang, cjk_serif=args.cjk_serif)
 
     panels = load_panel_specs(args.spec)
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -316,6 +327,7 @@ def main() -> int:
         axes[index // cols][index % cols].axis("off")
 
     issues.extend(text_overlap_issues(fig, mtext.Text))
+    issues.extend(nstyle.rendered_text_qa(fig))
     outputs = nstyle.save_nature_figure(fig, output_stem)
     plt.close(fig)
 
@@ -335,9 +347,11 @@ def main() -> int:
         "generator": str(Path(__file__)),
         "copied_generator": copied_script,
         "matplotlib_version": getattr(matplotlib, "__version__", ""),
+        "style_diagnostics": style_diagnostics,
         "panel_count": len(panels),
         "figure_size_inches": [width, height],
         "outputs": outputs,
+        "rendered_preview": outputs.get("preview_png", ""),
         "svg": svg_info,
         "issues": issues,
     }

@@ -14,6 +14,7 @@ Do:
 - Plan figure claims, panels, captions, source files, and exports.
 - Create SVG mechanism figures, Draw.io engineering diagrams, and reproducible Matplotlib figures.
 - Validate that every visual element traces to evidence, data, code, manuscript text, or user-approved facts.
+- For data-backed plots, act as a visualization advisor first: inspect the data and figure argument before choosing or drawing a chart.
 
 Do not:
 
@@ -51,7 +52,7 @@ If key evidence is missing, stop at a figure specification, storyboard, or provi
 |---|---|
 | Mechanism diagrams, conceptual models, moderately complex scholarly schematics | SVG |
 | Workflow, use-case, module, architecture, ER/data-flow, software process diagrams | Draw.io |
-| Data-driven plots or multi-panel quantitative figures | Matplotlib Nature-grade protocol with source data, editable SVG/PDF export, and final raster preview |
+| Data-driven plots or multi-panel quantitative figures | Data-visualization advisor flow plus Matplotlib Nature-grade protocol with source data, editable SVG/PDF export, and final raster preview |
 | Photorealistic, illustrative, texture-like, or hard-to-specify visual assets | OpenAI image generation after user confirmation |
 | Simple numeric comparison | Native table or chart in manuscript tool |
 
@@ -74,13 +75,15 @@ Read [figure-method-selection.md](references/figure-method-selection.md) when a 
 1. Define the figure claim, target section, source facts, method, output files, and validation checks.
 2. For complex, multi-panel, submission-bound, code-backed, or data-backed figures, apply [figure-argument-contract.md](references/figure-argument-contract.md).
 3. For submission-quality or journal-facing figures, apply [publication-visual-standards.md](references/publication-visual-standards.md), [export-and-editability-standards.md](references/export-and-editability-standards.md), and [accessibility-and-color-standards.md](references/accessibility-and-color-standards.md).
-4. For Nature-style or multi-panel Matplotlib figures, apply [nature-matplotlib-protocol.md](references/nature-matplotlib-protocol.md), [multi-panel-layout-patterns.md](references/multi-panel-layout-patterns.md), and [chart-type-visual-standards.md](references/chart-type-visual-standards.md).
-5. For SVG mechanism diagrams or Draw.io engineering diagrams, apply [svg-and-drawio-diagrams.md](references/svg-and-drawio-diagrams.md); for Draw.io code-backed or engineering diagrams, also apply [drawio-engineering-diagram-standards.md](references/drawio-engineering-diagram-standards.md).
-6. For image plates, photographs, microscopy, heatmaps over images, or mixed raster/vector panels, apply [image-panel-integrity.md](references/image-panel-integrity.md).
-7. For AI-generated bitmap assets, apply [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before generation.
-8. When a venue-specific requirement, external visual example, or numeric artwork standard matters, apply [publisher-visual-source-map.md](references/publisher-visual-source-map.md) and verify the current official guide when possible.
-9. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure labels, formulas, superscripts/subscripts, citations, or cross-references may be converted.
-10. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, and unresolved issues.
+4. For data-backed plots, chart-choice questions, user-provided CSV/Excel/DataFrame files, or risky user-specified chart types, apply [data-visualization-advisor.md](references/data-visualization-advisor.md) before plotting.
+5. For Nature-style or multi-panel Matplotlib figures, apply [nature-matplotlib-protocol.md](references/nature-matplotlib-protocol.md), [multi-panel-layout-patterns.md](references/multi-panel-layout-patterns.md), and [chart-type-visual-standards.md](references/chart-type-visual-standards.md).
+6. For SVG mechanism diagrams or Draw.io engineering diagrams, apply [svg-and-drawio-diagrams.md](references/svg-and-drawio-diagrams.md); for Draw.io code-backed or engineering diagrams, also apply [drawio-engineering-diagram-standards.md](references/drawio-engineering-diagram-standards.md).
+7. For image plates, photographs, microscopy, heatmaps over images, or mixed raster/vector panels, apply [image-panel-integrity.md](references/image-panel-integrity.md).
+8. For AI-generated bitmap assets, apply [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before generation.
+9. When a venue-specific requirement, external visual example, or numeric artwork standard matters, apply [publisher-visual-source-map.md](references/publisher-visual-source-map.md) and verify the current official guide when possible.
+10. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure labels, formulas, superscripts/subscripts, citations, or cross-references may be converted.
+11. For any submission-quality generated or revised figure, apply [rendered-figure-qa.md](references/rendered-figure-qa.md) before calling it ready.
+12. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, rendered QA result, and unresolved issues.
 
 ## Validation
 
@@ -89,6 +92,7 @@ Before finishing:
 - confirm the method matches the figure type;
 - inspect generated source files when possible;
 - check label overlap, readability, export integrity, and editability;
+- inspect a rendered PNG preview at intended final size for submission-quality figures;
 - verify final-size readability, font consistency, line weight, colour meaning, grayscale or colour-blind-safe interpretation, and caption/description handoff when relevant;
 - report the editable source path, especially `.drawio` paths for workflow diagrams;
 - trace each panel, node, edge, label, plotted value, or annotation back to approved source facts;
@@ -108,6 +112,8 @@ Read [export-and-editability-standards.md](references/export-and-editability-sta
 
 Read [accessibility-and-color-standards.md](references/accessibility-and-color-standards.md) for colour-blind-safe design, grayscale checks, direct labels, contrast, and figure descriptions or alt text.
 
+Read [data-visualization-advisor.md](references/data-visualization-advisor.md) before choosing or drawing data-backed plots from CSV/Excel/DataFrame files, when the user asks what chart to use, or when a requested chart type may be misleading.
+
 Read [nature-matplotlib-protocol.md](references/nature-matplotlib-protocol.md) for Nature-grade Matplotlib figures.
 
 Read [multi-panel-layout-patterns.md](references/multi-panel-layout-patterns.md) for hero panels, asymmetric layouts, shared legends, panel order, and anti-redundancy layout rules.
@@ -125,6 +131,8 @@ Read [image-panel-integrity.md](references/image-panel-integrity.md) for photogr
 Read [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before using AI image generation.
 
 Read [publisher-visual-source-map.md](references/publisher-visual-source-map.md) when mapping standards to a specific publisher, journal family, venue, or external figure-standard source.
+
+Read [rendered-figure-qa.md](references/rendered-figure-qa.md) after generating or revising a submission-quality figure to run the rendered-preview QA loop before final export or delivery.
 
 ## Bundled Utilities
 

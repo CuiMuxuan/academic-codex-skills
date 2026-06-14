@@ -34,6 +34,7 @@ Before calling a figure ready:
 
 - inspect it at the intended print width, not only at full-screen zoom;
 - inspect a DOCX/PDF insertion preview when the figure is meant for a manuscript or thesis;
+- inspect a rendered PNG preview before final export for any submission-quality figure;
 - ensure figure text does not look smaller than the surrounding body text after insertion, unless the target venue explicitly requires a smaller final-size font;
 - ensure every label, tick, arrow label, legend entry, and panel letter remains legible;
 - remove or rewrite labels that require shrinking below the selected standard;
@@ -73,6 +74,7 @@ Reject or revise figures that contain:
 - project notes, operation logs, TODOs, source-file comments, or revision instructions inside the figure;
 - rasterized text in vector-style diagrams or plots;
 - dense labels that make the figure unreadable after insertion into DOCX/PDF.
+- missing CJK font support or minus-sign boxes in Chinese or bilingual figures.
 
 ## Source Basis
 

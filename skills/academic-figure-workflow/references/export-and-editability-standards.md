@@ -18,6 +18,8 @@ Never treat a screenshot as a final source for a plot, diagram, or table-like fi
 
 - Keep text editable in SVG/PDF/EPS unless the venue explicitly requires outlines.
 - For Matplotlib, set `svg.fonttype = "none"` and `pdf.fonttype = 42`.
+- For Matplotlib, use a final-size `figsize` and avoid resizing the figure later in Word, PowerPoint, or LaTeX unless the final text size is rechecked.
+- Export a PNG preview for visual QA before packaging final vector files.
 - Embed fonts in PDF/EPS when required by the target venue.
 - Use standard fonts such as Arial, Helvetica, Times, Courier, or Symbol when a publisher restricts font families.
 - Inspect exported vector files when possible. If text becomes paths unexpectedly, rerun export before final delivery.
@@ -42,6 +44,7 @@ When the venue specifies a maximum resolution or file size, obey it and report t
 
 - Use RGB unless the venue guide requires another colour space.
 - Crop tightly to the figure area; do not leave hidden or off-canvas data.
+- Use tight bounding boxes carefully: they should remove blank margins without clipping panel labels, axis labels, legends, or colorbars.
 - Keep one editable source file per figure and one export packet per intended use.
 - Name files so the figure number, short topic, and source/export role are unambiguous.
 - Do not place caption text, figure number/title, article title, or author names inside the image file unless a target template specifically requires it.
@@ -57,6 +60,7 @@ Editable source:
 Draw.io source, if applicable:
 Vector exports:
 Raster preview/submission exports:
+Rendered QA preview:
 Final size:
 DOCX/PDF insertion preview checked: yes/no
 Font/editability status:
