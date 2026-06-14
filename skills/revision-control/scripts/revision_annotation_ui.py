@@ -2146,6 +2146,7 @@ HTML_PAGE = r"""<!doctype html>
       offsets: [],
       totalHeight: 0,
       activeNodeId: '',
+      pendingScrollTarget: null,
       renderTimer: null,
       resizeTimer: null
     };
@@ -2499,6 +2500,41 @@ HTML_PAGE = r"""<!doctype html>
       }
     }
 
+    function targetSentenceId(target = {}) {
+      return target.sentence_id || target.after_sentence_id || target.before_sentence_id || '';
+    }
+
+    function scrollRenderedTargetIntoView(target, block = 'center') {
+      const list = document.getElementById('virtualList');
+      if (!list || !target) return false;
+      const sentenceId = targetSentenceId(target);
+      let selector = '';
+      if (sentenceId) selector = `.sentence[data-sentence-id="${CSS.escape(sentenceId)}"]`;
+      else if (target.paragraph_id) selector = `.paragraph[data-paragraph-id="${CSS.escape(target.paragraph_id)}"]`;
+      else if (target.object_id) selector = `.figure-text[data-figure-table-text-id="${CSS.escape(target.object_id)}"]`;
+      else if (target.section_id) selector = `.virtual-section-row[data-section-id="${CSS.escape(target.section_id)}"]`;
+      else if (target.chapter_id) selector = `article[data-chapter-id="${CSS.escape(target.chapter_id)}"]`;
+      if (!selector) return false;
+      const el = list.querySelector(selector);
+      if (!el) return false;
+      el.scrollIntoView({block, inline: 'nearest'});
+      el.classList.add('annotation-selected');
+      return true;
+    }
+
+    function refinePendingAnnotationScroll() {
+      const pending = virtualState.pendingScrollTarget;
+      if (!pending) return;
+      const target = pending.target || {};
+      const found = scrollRenderedTargetIntoView(target, pending.block || 'center');
+      pending.attempts = (pending.attempts || 0) + 1;
+      if (found || pending.attempts >= 8) {
+        virtualState.pendingScrollTarget = null;
+        return;
+      }
+      requestAnimationFrame(refinePendingAnnotationScroll);
+    }
+
     function renderVirtualRow(row) {
       if (!row) return '';
       if (row.kind === 'section') return renderSectionRow(row.node, row.context);
@@ -2582,6 +2618,8 @@ HTML_PAGE = r"""<!doctype html>
       if (index < 0) return;
       list.scrollTop = Math.max(0, (virtualState.offsets[index] || 0) - 70);
       renderVisibleRows();
+      virtualState.pendingScrollTarget = {target, attempts: 0, block: 'center'};
+      requestAnimationFrame(refinePendingAnnotationScroll);
     }
 
     function hasHan(text) {
@@ -3470,6 +3508,7 @@ HTML_PAGE = r"""<!doctype html>
       }
       showAnnotation(annotation, false);
       scrollToAnnotationTarget(annotation);
+      setTimeout(() => refinePendingAnnotationScroll(), 0);
       renderAnnotationList();
     }
 
