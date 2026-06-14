@@ -28,10 +28,12 @@ If a tool cannot preserve these elements, report the limitation and ask before u
 
 ## Formula Standard
 
+- Apply [equation-and-formula-standard.md](equation-and-formula-standard.md) before writing, revising, rendering, or converting formulas.
 - Treat LaTeX as the canonical source for formulas.
-- Preserve the original LaTeX expression in the Markdown source, conversion log, or handoff report.
+- Preserve the original LaTeX expression in the Markdown source, object library, conversion log, or handoff report.
 - Prefer editable Word equations for DOCX outputs.
 - Use rasterized formulas only when the user approves the loss of editability.
+- When no journal, school, or publisher rule is provided, use the default equation standard in the shared formula reference; when a target journal/template provides equation rules, those target rules override the default.
 
 ## Superscript And Subscript Checks
 

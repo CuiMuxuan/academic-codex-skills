@@ -83,6 +83,8 @@ The bundled UI is Chinese-English bilingual for visible controls while preservin
 4. Use [project-standards-and-materials.md](references/project-standards-and-materials.md) and [project-review-standards-schema.md](../../shared/project-review-standards-schema.md) for supplemental standards, terminology, problem words, and material dependencies.
 5. Use [upgrade-flow.md](references/upgrade-flow.md) and [revision-upgrade-plan-schema.md](../../shared/revision-upgrade-plan-schema.md) when sentence editing must pause for evidence, structure, or large rewrite work.
 6. Use [templates-and-logs.md](references/templates-and-logs.md) and the `template-*` files when creating object libraries, review drafts, logs, and upgrade plans.
+7. Use [artifact-synchronization.md](references/artifact-synchronization.md) after any object-library, latest-draft, annotation, pass/fail, or shared-resource change. Run the public sync utility and then check the sync report before continuing official revision.
+8. Use [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) whenever formulas, equations, inline math, chemical notation, unit notation, or equation references appear in manuscript objects, revision drafts, UI rendering, or formatting handoffs.
 
 ## Missing Context Response
 
@@ -154,8 +156,13 @@ Read [templates-and-logs.md](references/templates-and-logs.md) before writing an
 
 Read [annotation-ui-technical-plan.md](references/annotation-ui-technical-plan.md) before implementing, running, or modifying the lightweight local UI for collecting user annotations into `user_annotations.json`.
 
+Read [artifact-synchronization.md](references/artifact-synchronization.md) before regenerating or validating derived revision artifacts from `manuscript_objects.json`.
+
+Read [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) before changing, displaying, or handing off formulas/equations.
+
 ## Bundled Utilities
 
 - `scripts/revision_annotation_ui.py`: starts the lightweight local browser UI for collecting user annotations from `manuscript_objects.json` and writing only `rounds/<round_id>/user_annotations.json`.
 - `scripts/ensure_revision_ui_resources.py`: creates required UI support resources under `revision_workbench/shared/`, including project supplemental review standards, terminology glossary candidates generated from `manuscript_objects.json`, problem-word records, and material-dependency records. Run this before launching the annotation UI.
 - `scripts/rebuild_manuscript_objects_from_main.py`: rebuilds `manuscript_objects.json` from the canonical active main manuscript while preserving existing sentence ids and bilingual sentence text from a sentence-aligned review draft; use when paragraph objects were incorrectly created from sentence-aligned review items.
+- `scripts/sync_revision_artifacts.py`: public synchronization entry point. Regenerates and validates object-library summary, latest full bilingual review, partial failed/targeted review, manifest metadata, shared UI resources, and terminology schema from `manuscript_objects.json` plus the active round annotations. Run after object-library or official revision changes, then re-run with `--check-only`.

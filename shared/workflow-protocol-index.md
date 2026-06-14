@@ -22,6 +22,7 @@ Use this shared index when coordinating multiple academic skills. Keep cross-ski
 | Cross-disciplinary language review | drafting, reviewing, or polishing formal body text or rebuttal prose for abstract wording, undefined terms, operation-record residue, unclear support, or sentence-level ambiguity | writing + post-manuscript benchmark review + polishing |
 | Reviewer comment action plan | turning two or more review comments into accepted, partial, rejected, deferred, or material-blocked actions | writing + post-manuscript benchmark review |
 | Notation and conversion integrity | converting formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions across output formats | formatting + figures |
+| Equation and formula standard | writing, revising, displaying, converting, or formatting formulas and equation cross-references, including default LaTeX rules when no journal rule exists | writing + revision control + formatting |
 | Trigger conflict matrix | deciding which skill owns an ambiguous user request | orchestrator |
 | Validation policy | checking local or installed skills before use or release | repository validation script |
 

@@ -50,7 +50,8 @@ Do not:
 15. After an initial full draft, hand complex sentence-by-sentence revision, pass/fail confirmation, and latest-draft state management to `$revision-control`.
 16. Apply the shared citation-proximity gate when placing or revising citations.
 17. Route strict language-style diagnosis to `$language-style-review`; use local language checks only as part of drafting or ordinary revision.
-18. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
+18. Apply the shared equation/formula standard when writing or revising formulas, equations, inline math, chemical notation, unit notation, or equation cross-references. Use LaTeX as the canonical source. If no journal or school rule is supplied, use the default formula standard; if a target journal/template rule exists, follow it.
+19. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
 
 ## Intake
 
@@ -77,15 +78,16 @@ If evidence is missing, produce a writing plan with evidence gaps rather than fa
 6. Apply [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protocol.md) for central claims, contribution statements, result claims, benchmark comparisons, and code/data/experiment statements.
 7. Apply [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before final main-text or rebuttal claim wording.
 8. Apply [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, or auditing citations.
-9. Apply [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) only when the user asks for language or terminology review, strict sentence-by-sentence checking, or when formal body text or rebuttal prose clearly shows abstract terms, undefined local labels, operation-record residue, unclear sentence purpose, unsupported proxy wording, citation-distance problems, or bilingual strength drift.
-10. Apply [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent writing-related checks such as evidence support review, subsection language audit, citation-distance audit, or reviewer-comment action decomposition.
-11. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
-12. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
-13. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
-14. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
-15. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
-16. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
-17. When `$revision-control` escalates a confirmed issue to chapter/section rewrite, execute only the approved rewrite scope and return outputs to `$revision-control` for object-library rebuild and renumbering.
+9. Apply [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) whenever formulas, equations, math notation, chemical notation, unit notation, or equation references are written or revised.
+10. Apply [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) only when the user asks for language or terminology review, strict sentence-by-sentence checking, or when formal body text or rebuttal prose clearly shows abstract terms, undefined local labels, operation-record residue, unclear sentence purpose, unsupported proxy wording, citation-distance problems, or bilingual strength drift.
+11. Apply [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent writing-related checks such as evidence support review, subsection language audit, citation-distance audit, or reviewer-comment action decomposition.
+12. If target examples are available, use [target-benchmark-writing-alignment.md](references/target-benchmark-writing-alignment.md) and [writing-output-templates.md](references/writing-output-templates.md).
+13. Draft with [academic-prose-and-claim-standards.md](references/academic-prose-and-claim-standards.md): section purpose, subsection independence, evidence used, evidence gaps, draft, citation placeholders only for verified sources, and user-review items.
+14. Use [introduction-logic-playbook.md](references/introduction-logic-playbook.md) for Introduction, background, problem statement, or thesis-opening sections.
+15. Use [manuscript-type-playbooks.md](references/manuscript-type-playbooks.md) for review papers, experimental papers, theses, dissertations, and code-backed/system manuscripts.
+16. Use [revision-and-quality-checks.md](references/revision-and-quality-checks.md) before calling writing complete.
+17. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when the user provides two or more supervisor, reviewer, or committee comments during normal writing/revision.
+18. When `$revision-control` escalates a confirmed issue to chapter/section rewrite, execute only the approved rewrite scope and return outputs to `$revision-control` for object-library rebuild and renumbering.
 
 ## Reference
 
@@ -102,6 +104,8 @@ Read [claim-evidence-anchor-protocol.md](references/claim-evidence-anchor-protoc
 Read [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before writing final main-text or rebuttal sentences that make factual judgments, boundary statements, subjective evaluations, novelty claims, contribution claims, or limitation claims.
 
 Read [citation-proximity-and-style-gate.md](../../shared/citation-proximity-and-style-gate.md) when placing, moving, reviewing, or auditing citations in manuscript text.
+
+Read [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) before writing, revising, or handing off formulas, equations, inline math, chemical notation, unit notation, or equation cross-references.
 
 Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when the user asks for language review, terminology review, abstract-expression cleanup, operation-record cleanup, or strict sentence-by-sentence review of formal body text or rebuttal prose.
 

@@ -60,6 +60,8 @@ revision_workbench/shared/terminology_glossary.md
 
 Before opening the UI, `revision-control` should create the shared project-support files if they are missing. At minimum this includes `project_review_standards.*`, `terminology_glossary.*`, `problem_words.*`, and `material_dependencies.*` under `revision_workbench/shared/`. Initialize `terminology_glossary.yaml/md` from the manuscript object library as project-specific, unconfirmed candidate terminology. In bilingual projects, each English term should carry likely `chinese_translations` inferred from the aligned Chinese review text when possible. If `shared/terminology_glossary.yaml` still does not exist, the manuscript view must not render terminology highlighting.
 
+Each terminology entry must also carry `field`, `term_type`, and `source_provenance` so the UI can show why a term is treated as project-specific. The UI may highlight unconfirmed candidates, but the terminology-management page must let the user edit the field/domain and provenance before treating the entry as a durable project standard.
+
 Initialize `project_review_standards.yaml/md` as a project supplemental standard template. The template should name the research field when known and include a candidate rule that warns against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless such terminology belongs to the paper's field or is user-confirmed. Generic terms broadly understood across academic fields do not need special restriction.
 
 Do not parse DOCX, PDF, or free Markdown as the UI source. Those formats must first go through `revision-control` or upstream parsing to generate `manuscript_objects.json`.
@@ -151,6 +153,8 @@ The UI chrome and controls should be Chinese-English bilingual. Keep saved JSON 
 For bilingual sentence text, preserve the source object text and render visible Chinese and English drafts on separate lines when the object text already contains explicit line breaks or an English/Chinese boundary. This display split must not overwrite `manuscript_objects.json` or change the annotation schema. Span annotations should continue to store character offsets against the normalized source sentence text.
 
 Terminology highlighting is a visual layer only. Match terms, preferred forms, accepted variants, and `chinese_translations` from `shared/terminology_glossary.yaml` against the normalized source sentence text and render shallow green backgrounds for both English and Chinese occurrences without changing sentence text, character offsets, `manuscript_objects.json`, or `user_annotations.json` span schemas.
+
+Formula rendering is also a visual layer. Apply [equation-and-formula-standard.md](../../../shared/equation-and-formula-standard.md): preserve LaTeX as the canonical source, keep short inline math inline, render substantive formulas/display equations as separate centered read-only formula blocks when the object text contains display math, and keep the raw LaTeX visible or copyable. The UI must not transform source text in a way that changes span annotation offsets, selected text, or text hashes. If no math-rendering dependency is bundled, render formulas as styled monospace LaTeX rather than adding a new frontend stack.
 
 Span annotations must be rendered as local text-range highlights using `char_start` and `char_end`, not only as whole-sentence or whole-paragraph markers. When a span annotation is deleted, its text-range highlight must disappear immediately from the visible virtual rows.
 
@@ -666,6 +670,8 @@ No user_annotations.json found. Continue from user-provided conversational instr
 - Shows Chinese-English UI labels while preserving English schema enum values.
 - Shows Chinese and English drafts on separate visible lines when sentence text is bilingual.
 - Highlights project terminology with shallow green backgrounds for English terms, accepted variants, preferred forms, and Chinese translations from `terminology_glossary.yaml`.
+- Shows terminology field/domain and source provenance in the terminology-management page.
+- Shows formulas and equation-like LaTeX in readable read-only blocks or inline spans while preserving raw source text and annotation offsets.
 - Provides a chapter stepper and virtualizes the selected chapter so only visible rows plus overscan are mounted in the DOM.
 - Shows sentence pass/fail status only, defaults missing decisions to fail, and autosaves user pass/fail decisions to `user_annotations.json`.
 - Supports full manuscript view and failed/targeted filtered view.

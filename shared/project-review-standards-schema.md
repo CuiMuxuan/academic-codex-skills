@@ -31,6 +31,9 @@ terminology_glossary:
     accepted_variants: []
     chinese_translations: []
     forbidden_variants: []
+    field:
+    term_type:
+    source_provenance: []
     reason:
     confirmed: false
 
@@ -47,5 +50,7 @@ problem_words:
 - Confirmed user standards outrank general style guidance.
 - Candidate rules remain advisory until user confirmation.
 - For bilingual projects, `chinese_translations` records likely Chinese renderings of English terms; both source English terms and Chinese translations may be used by the annotation UI for visual terminology highlighting before confirmation, but they are not final terminology standards until confirmed.
+- Every terminology entry must record `field` and `source_provenance`. For professional terms, `field` states the discipline or subfield where the term is valid. For proper nouns, named methods, named datasets, software, regulations, or cited concepts, `source_provenance` should identify the cited paper, source material, or manuscript sentence where the name appears.
+- Use `term_type` values such as `professional_term`, `proper_noun_or_named_method`, `abbreviation`, `chemical_species`, `instrument_or_method`, `regulation_or_standard`, or `project_local_label`.
 - Keep Markdown readable for human review and YAML structured for automation.
 - Record source and confirmation history for every confirmed rule.

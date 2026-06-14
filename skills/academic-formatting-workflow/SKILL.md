@@ -68,9 +68,10 @@ Stop and ask before:
 2. Extract the formatting baseline from the official guide, template, target examples, or provisional baseline.
 3. Use [formatting-run-plan.md](references/formatting-run-plan.md) to create the rule table, pass plan, output naming, and report structure.
 4. Use [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when formulas, superscripts/subscripts, citations, cross-references, figures, tables, or captions may be converted.
-5. Use [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when source Markdown formulas, superscripts/subscripts, citations, bibliography entries, or cross-references must survive DOCX conversion.
-6. Apply formatting in separate passes and save a new output copy.
-7. Use [formatting-validation.md](references/formatting-validation.md) before calling the output ready.
+5. Use [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) for default LaTeX formula rules, journal/template equation overrides, and formula handoff fields.
+6. Use [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when source Markdown formulas, superscripts/subscripts, citations, bibliography entries, or cross-references must survive DOCX conversion.
+7. Apply formatting in separate passes and save a new output copy.
+8. Use [formatting-validation.md](references/formatting-validation.md) before calling the output ready.
 
 ## Reference
 
@@ -79,6 +80,8 @@ Read [formatting-rule-checklist.md](references/formatting-rule-checklist.md) whe
 Read [target-template-intake.md](references/target-template-intake.md) when the user lacks a strict handbook/template or wants formatting inferred from approved examples.
 
 Read [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) before converting or validating formulas, superscripts/subscripts, citations, cross-references, figures, tables, captions, or notation-heavy text.
+
+Read [equation-and-formula-standard.md](../../shared/equation-and-formula-standard.md) before applying default equation rules, journal-specific equation rules, LaTeX-to-DOCX conversion, formula numbering, or equation cross-reference handling.
 
 Read [markdown-to-docx-conversion.md](references/markdown-to-docx-conversion.md) when converting Markdown manuscripts to DOCX or validating converted formulas, superscripts/subscripts, citations, bibliography entries, and cross-references.
 

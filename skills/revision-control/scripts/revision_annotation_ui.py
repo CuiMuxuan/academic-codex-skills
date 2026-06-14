@@ -132,6 +132,9 @@ def normalize_terminology_item(item: dict[str, Any]) -> dict[str, Any]:
         "accepted_variants": as_string_list(item.get("accepted_variants", [])),
         "chinese_translations": as_string_list(item.get("chinese_translations", [])),
         "forbidden_variants": as_string_list(item.get("forbidden_variants", [])),
+        "field": str(item.get("field", "")).strip(),
+        "term_type": str(item.get("term_type", "")).strip(),
+        "source_provenance": as_string_list(item.get("source_provenance", [])),
         "reason": str(item.get("reason", "")).strip(),
         "confirmed": bool(item.get("confirmed", False)),
     }
@@ -154,7 +157,7 @@ def parse_terminology_yaml(text: str) -> list[dict[str, Any]]:
             continue
         if stripped.startswith("- "):
             body = stripped[2:].strip()
-            if pending_list_key and current is not None and ":" not in body:
+            if pending_list_key and current is not None and raw_line.startswith("    "):
                 current.setdefault(pending_list_key, []).append(parse_yaml_scalar(body))
                 continue
             current = {}
@@ -191,7 +194,7 @@ def dump_terminology_yaml(terms: list[dict[str, Any]]) -> str:
         lines.append(f"  - term: {yaml_quote(item['term'])}")
         lines.append(f"    language: {yaml_quote(item['language'])}")
         lines.append(f"    preferred_form: {yaml_quote(item['preferred_form'])}")
-        for key in ("accepted_variants", "chinese_translations", "forbidden_variants"):
+        for key in ("accepted_variants", "chinese_translations", "forbidden_variants", "source_provenance"):
             values = as_string_list(item.get(key, []))
             if values:
                 lines.append(f"    {key}:")
@@ -199,6 +202,8 @@ def dump_terminology_yaml(terms: list[dict[str, Any]]) -> str:
                     lines.append(f"      - {yaml_quote(value)}")
             else:
                 lines.append(f"    {key}: []")
+        lines.append(f"    field: {yaml_quote(item['field'])}")
+        lines.append(f"    term_type: {yaml_quote(item['term_type'])}")
         lines.append(f"    reason: {yaml_quote(item['reason'])}")
         lines.append(f"    confirmed: {str(bool(item['confirmed'])).lower()}")
     return "\n".join(lines) + "\n"
@@ -212,8 +217,8 @@ def dump_terminology_markdown(terms: list[dict[str, Any]]) -> str:
     lines = [
         "# Terminology Glossary",
         "",
-        "| term | language | preferred form | accepted variants | Chinese translations | forbidden variants | confirmed | reason |",
-        "|---|---|---|---|---|---|---|---|",
+        "| term | language | preferred form | accepted variants | Chinese translations | field | term type | source provenance | forbidden variants | confirmed | reason |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for raw_item in terms:
         item = normalize_terminology_item(raw_item)
@@ -226,6 +231,9 @@ def dump_terminology_markdown(terms: list[dict[str, Any]]) -> str:
                     markdown_escape_cell(item["preferred_form"]),
                     markdown_escape_cell(", ".join(item["accepted_variants"])),
                     markdown_escape_cell(", ".join(item["chinese_translations"])),
+                    markdown_escape_cell(item["field"]),
+                    markdown_escape_cell(item["term_type"]),
+                    markdown_escape_cell("; ".join(item["source_provenance"])),
                     markdown_escape_cell(", ".join(item["forbidden_variants"])),
                     "yes" if item["confirmed"] else "no",
                     markdown_escape_cell(item["reason"]),
@@ -1535,6 +1543,32 @@ HTML_PAGE = r"""<!doctype html>
     .sentence-line.english {
       color: #475467;
     }
+    .formula-inline {
+      display: inline;
+      padding: 1px 5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      background: #f8fafc;
+      color: #111827;
+      font-family: Consolas, "Liberation Mono", monospace;
+      font-size: 0.95em;
+      white-space: break-spaces;
+    }
+    .formula-block {
+      display: block;
+      margin: 6px 0;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: #f8fafc;
+      color: #111827;
+      font-family: Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+      text-align: center;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
     .sentence:hover {
       background: #eff6ff;
     }
@@ -1923,6 +1957,24 @@ HTML_PAGE = r"""<!doctype html>
       <label for="termChineseTranslations">中文译名 / Chinese translations</label>
       <textarea id="termChineseTranslations" placeholder="一行一个，例如：挥发性硫化合物 / One Chinese translation per line"></textarea>
 
+      <label for="termField">领域 / Field or domain</label>
+      <input id="termField" placeholder="例如：environmental catalysis / plasma-catalytic VSC treatment">
+
+      <label for="termType">术语类型 / Term type</label>
+      <select id="termType">
+        <option value="">未设置 / Not set</option>
+        <option value="professional_term">专业术语 / professional_term</option>
+        <option value="proper_noun_or_named_method">专有名词/命名方法 / proper_noun_or_named_method</option>
+        <option value="abbreviation">缩写 / abbreviation</option>
+        <option value="chemical_species">化学物种 / chemical_species</option>
+        <option value="instrument_or_method">仪器或方法 / instrument_or_method</option>
+        <option value="regulation_or_standard">法规或标准 / regulation_or_standard</option>
+        <option value="project_local_label">项目内标签 / project_local_label</option>
+      </select>
+
+      <label for="termSourceProvenance">来源依据 / Source provenance</label>
+      <textarea id="termSourceProvenance" placeholder="一行一个：句子ID、引用文献键、材料路径或来源说明 / One source per line"></textarea>
+
       <label for="termForbidden">不推荐/禁用变体 / Forbidden variants</label>
       <textarea id="termForbidden" placeholder="一行一个，或用逗号/分号分隔 / One per line, comma, or semicolon separated"></textarea>
 
@@ -2023,6 +2075,7 @@ HTML_PAGE = r"""<!doctype html>
     let currentAnnotation = null;
     let currentTermIndex = '';
     let saveTimer = null;
+    let commentIsComposing = false;
     let activeChapterIndex = 0;
     let virtualState = {
       rows: [],
@@ -2093,6 +2146,9 @@ HTML_PAGE = r"""<!doctype html>
         accepted_variants: uniqueStrings(Array.isArray(item?.accepted_variants) ? item.accepted_variants : splitListText(item?.accepted_variants || '')),
         chinese_translations: uniqueStrings(Array.isArray(item?.chinese_translations) ? item.chinese_translations : splitListText(item?.chinese_translations || '')),
         forbidden_variants: uniqueStrings(Array.isArray(item?.forbidden_variants) ? item.forbidden_variants : splitListText(item?.forbidden_variants || '')),
+        field: String(item?.field || '').trim(),
+        term_type: String(item?.term_type || '').trim(),
+        source_provenance: uniqueStrings(Array.isArray(item?.source_provenance) ? item.source_provenance : splitListText(item?.source_provenance || '')),
         reason: String(item?.reason || '').trim(),
         confirmed: Boolean(item?.confirmed)
       };
@@ -2599,6 +2655,52 @@ HTML_PAGE = r"""<!doctype html>
       return ranges.sort((a, b) => a.start - b.start || a.end - b.end);
     }
 
+    function latexFormulaRanges(partText) {
+      const ranges = [];
+      const pattern = /(\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\\\([\s\S]+?\\\)|\$[^$\n]+\$)/g;
+      for (const match of partText.matchAll(pattern)) {
+        const raw = match[0];
+        const block = raw.startsWith('$$') || raw.startsWith('\\[');
+        ranges.push({
+          start: match.index,
+          end: match.index + raw.length,
+          text: raw,
+          block
+        });
+      }
+      return ranges;
+    }
+
+    function renderFormulaAwareText(part, spanAnnotations = [], termAnnotations = []) {
+      const formulas = latexFormulaRanges(part.text);
+      if (!formulas.length) return renderTextWithHighlights(part, spanAnnotations, termAnnotations);
+      let cursor = 0;
+      const out = [];
+      for (const formula of formulas) {
+        if (formula.start > cursor) {
+          out.push(renderTextWithHighlights({
+            text: part.text.slice(cursor, formula.start),
+            start: (part.start || 0) + cursor
+          }, spanAnnotations, termAnnotations));
+        }
+        const formulaPart = {
+          text: formula.text,
+          start: (part.start || 0) + formula.start
+        };
+        const rendered = renderTextWithHighlights(formulaPart, spanAnnotations, termAnnotations);
+        const klass = formula.block ? 'formula-block' : 'formula-inline';
+        out.push(`<code class="${klass}" title="LaTeX source">${rendered}</code>`);
+        cursor = formula.end;
+      }
+      if (cursor < part.text.length) {
+        out.push(renderTextWithHighlights({
+          text: part.text.slice(cursor),
+          start: (part.start || 0) + cursor
+        }, spanAnnotations, termAnnotations));
+      }
+      return out.join('');
+    }
+
     function renderTextWithHighlights(part, spanAnnotations = [], termAnnotations = []) {
       const partStart = part.start || 0;
       const partEnd = partStart + part.text.length;
@@ -2666,7 +2768,7 @@ HTML_PAGE = r"""<!doctype html>
       if (!parts.length) return '';
       return parts.map(part => {
         const klass = hasLatin(part.text) && !hasHan(part.text) ? 'sentence-line english' : 'sentence-line';
-        return `<span class="${klass}" data-part-start="${part.start}">${renderTextWithHighlights(part, spanAnnotations, termAnnotations)}</span>`;
+        return `<span class="${klass}" data-part-start="${part.start}">${renderFormulaAwareText(part, spanAnnotations, termAnnotations)}</span>`;
       }).join('');
     }
 
@@ -2923,12 +3025,15 @@ HTML_PAGE = r"""<!doctype html>
         .join('\n') || '暂无目标 / No target';
     }
 
-    function showAnnotation(annotation, autosave) {
+    function showAnnotation(annotation, autosave, options = {}) {
       currentAnnotation = structuredClone(annotation);
       document.getElementById('issueType').value = currentAnnotation.issue_type || 'language_style';
       document.getElementById('severity').value = currentAnnotation.severity || '';
       document.getElementById('suggestedAction').value = currentAnnotation.suggested_action || issueDefaultAction(currentAnnotation.issue_type);
-      document.getElementById('comment').value = currentAnnotation.comment || '';
+      const preserveCommentDraft = options.preserveCommentDraft || commentIsComposing;
+      if (!preserveCommentDraft) {
+        document.getElementById('comment').value = currentAnnotation.comment || '';
+      }
       document.getElementById('targetBox').textContent = targetSummary(currentAnnotation);
       document.getElementById('statusBox').textContent = `${currentAnnotation.annotation_id || '新建 / new'} | ${annotationTypeLabel(currentAnnotation.annotation_type)} | ${statusLabel(currentAnnotation.status || 'user_commented')}`;
       refreshCurrentViewHighlights();
@@ -2945,12 +3050,17 @@ HTML_PAGE = r"""<!doctype html>
     }
 
     function scheduleSaveCurrent() {
+      if (commentIsComposing) return;
       clearTimeout(saveTimer);
       saveTimer = setTimeout(() => saveCurrent(), 450);
     }
 
     async function saveCurrent() {
       if (!currentAnnotation) return;
+      if (commentIsComposing) {
+        setSaveState('中文输入中，稍后自动保存 / IME composition in progress');
+        return;
+      }
       updateCurrentFromPanel();
       if (!currentAnnotation.issue_type) {
         setSaveState('必须选择问题类型 / Problem type is required');
@@ -2965,7 +3075,7 @@ HTML_PAGE = r"""<!doctype html>
         annotationDoc = result;
         const saved = result.annotations.find(a => a.annotation_id === (currentAnnotation.annotation_id || result.last_saved_annotation_id));
         if (saved) currentAnnotation = structuredClone(saved);
-        showAnnotation(currentAnnotation, false);
+        document.getElementById('statusBox').textContent = `${currentAnnotation.annotation_id || '新建 / new'} | ${annotationTypeLabel(currentAnnotation.annotation_type)} | ${statusLabel(currentAnnotation.status || 'user_commented')}`;
         renderAnnotationList();
         refreshCurrentViewHighlights();
         setSaveState('已保存 / Saved');
@@ -3058,6 +3168,9 @@ HTML_PAGE = r"""<!doctype html>
         accepted_variants: splitListText(document.getElementById('termAccepted').value),
         chinese_translations: splitListText(document.getElementById('termChineseTranslations').value),
         forbidden_variants: splitListText(document.getElementById('termForbidden').value),
+        field: document.getElementById('termField').value,
+        term_type: document.getElementById('termType').value,
+        source_provenance: splitListText(document.getElementById('termSourceProvenance').value),
         reason: document.getElementById('termReason').value,
         confirmed: document.getElementById('termConfirmed').checked
       });
@@ -3073,6 +3186,9 @@ HTML_PAGE = r"""<!doctype html>
       document.getElementById('termAccepted').value = term.accepted_variants.join('\n');
       document.getElementById('termChineseTranslations').value = term.chinese_translations.join('\n');
       document.getElementById('termForbidden').value = term.forbidden_variants.join('\n');
+      document.getElementById('termField').value = term.field;
+      document.getElementById('termType').value = term.term_type;
+      document.getElementById('termSourceProvenance').value = term.source_provenance.join('\n');
       document.getElementById('termReason').value = term.reason;
       document.getElementById('termConfirmed').checked = term.confirmed;
       document.getElementById('termSaveState').textContent = currentTermIndex === '' ? '新建术语 / New term' : `正在编辑第 ${Number(currentTermIndex) + 1} 条 / Editing term ${Number(currentTermIndex) + 1}`;
@@ -3099,15 +3215,17 @@ HTML_PAGE = r"""<!doctype html>
       }
       list.innerHTML = `<div class="term-table-wrap"><table class="term-table">
         <thead><tr>
-          <th>术语 / Term</th><th>推荐写法 / Preferred</th><th>语言 / Lang</th><th>中文译名 / Chinese</th><th>变体 / Variants</th><th>状态 / Status</th><th>操作 / Action</th>
+          <th>术语 / Term</th><th>推荐写法 / Preferred</th><th>领域 / Field</th><th>类型 / Type</th><th>中文译名 / Chinese</th><th>变体 / Variants</th><th>来源 / Source</th><th>状态 / Status</th><th>操作 / Action</th>
         </tr></thead>
         <tbody>${terms.map((term, index) => `
           <tr class="term-row${String(index) === String(currentTermIndex) ? ' selected' : ''}">
             <td><strong>${htmlEscape(term.term)}</strong><br><span class="term-source">${htmlEscape(term.reason || '')}</span></td>
             <td>${htmlEscape(term.preferred_form || term.term)}</td>
-            <td>${htmlEscape(term.language || '-')}</td>
+            <td>${htmlEscape(term.field || '-')}<br><span class="term-source">${htmlEscape(term.language || '-')}</span></td>
+            <td>${htmlEscape(term.term_type || '-')}</td>
             <td>${renderTermChips(term.chinese_translations)}</td>
             <td>${renderTermChips(term.accepted_variants)}${term.forbidden_variants.length ? '<br><span class="term-source">Forbidden:</span> ' + renderTermChips(term.forbidden_variants) : ''}</td>
+            <td>${renderTermChips(term.source_provenance)}</td>
             <td>${term.confirmed ? '已确认 / Confirmed' : '未确认 / Unconfirmed'}</td>
             <td><button onclick="selectTerm(${index})">编辑 / Edit</button></td>
           </tr>`).join('')}
@@ -3245,7 +3363,9 @@ HTML_PAGE = r"""<!doctype html>
     document.getElementById('deleteTerm').addEventListener('click', deleteTerm);
     document.getElementById('reloadTerms').addEventListener('click', reloadTerms);
     for (const id of ['issueType', 'severity', 'suggestedAction', 'comment']) {
-      document.getElementById(id).addEventListener('input', () => {
+      const field = document.getElementById(id);
+      field.addEventListener('input', event => {
+        if (id === 'comment' && (event.isComposing || commentIsComposing)) return;
         if (id === 'issueType') {
           const issue = document.getElementById('issueType').value;
           document.getElementById('suggestedAction').value = issueDefaultAction(issue);
@@ -3253,6 +3373,15 @@ HTML_PAGE = r"""<!doctype html>
         scheduleSaveCurrent();
       });
     }
+    const commentField = document.getElementById('comment');
+    commentField.addEventListener('compositionstart', () => {
+      commentIsComposing = true;
+      clearTimeout(saveTimer);
+    });
+    commentField.addEventListener('compositionend', () => {
+      commentIsComposing = false;
+      scheduleSaveCurrent();
+    });
 
     fillSelects();
     loadAll();

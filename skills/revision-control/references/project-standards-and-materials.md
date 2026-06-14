@@ -15,6 +15,14 @@ Before launching the annotation UI, these project-level shared resources must ex
 
 `terminology_glossary.yaml/md` should be initialized from the current manuscript object library so each paper project has its own professional-term and proper-noun candidate list. For bilingual projects, each English entry should include likely `chinese_translations` from the aligned Chinese review text when possible; both the English term/variants and the Chinese translations are used by the annotation UI for shallow-green terminology highlighting. Generated entries are candidates only and must use `confirmed: false` until the user edits or confirms them in the UI. Do not reuse another paper project's glossary.
 
+Every terminology record must include:
+
+- `field`: the discipline, subfield, or source domain where the term is valid;
+- `term_type`: professional term, proper noun or named method, abbreviation, chemical species, instrument/method, regulation/standard, or project-local label;
+- `source_provenance`: manuscript sentence ids, cited-paper keys, source-material paths, or notes showing where the term/proper noun appears.
+
+For proper nouns or named source-specific terms, `source_provenance` should identify the field or the cited paper/source where the noun appears. For common cross-field terms, keep the field broad and avoid over-highlighting generic vocabulary.
+
 `project_review_standards.yaml/md` should be initialized as a project supplemental review-standard template. It should identify the research field when known and include a candidate reminder to preserve discipline-appropriate terminology while avoiding unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless such terms genuinely belong to the current paper's field or the user confirms them. Generic professional terms broadly known across fields do not require special restriction.
 
 Inputs may come from:

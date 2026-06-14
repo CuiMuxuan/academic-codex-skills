@@ -359,6 +359,7 @@ BAD_CHINESE_TRANSLATION_STARTS = (
 )
 
 GENERIC_CHINESE_TRANSLATIONS = {"反应", "表面", "吸附", "氧化", "再生", "催化剂", "等离子体"}
+DEFAULT_FIELD = "environmental catalysis / plasma-catalytic treatment of volatile sulfur compounds"
 
 
 def chinese_hint_groups(term: str) -> list[list[str]]:
@@ -448,6 +449,9 @@ def generate_terminology(sentence_pairs: list[dict[str, str]], max_terms: int) -
                 "accepted_variants": accepted,
                 "chinese_translations": chinese_translations,
                 "forbidden_variants": [],
+                "field": DEFAULT_FIELD,
+                "term_type": infer_term_type(term),
+                "source_provenance": source_provenance_for_term(term, sentence_pairs),
                 "reason": "Auto-generated bilingual candidate from manuscript object library; Chinese translations are inferred from the aligned Chinese review text and should be confirmed, edited, or deleted before treating as project standards.",
                 "confirmed": False,
             }
@@ -455,6 +459,34 @@ def generate_terminology(sentence_pairs: list[dict[str, str]], max_terms: int) -
         if len(terms) >= max_terms:
             break
     return terms
+
+
+def infer_term_type(term: str) -> str:
+    if re.fullmatch(r"[A-Z][A-Z0-9-]{1,}", term):
+        return "abbreviation"
+    if re.search(r"\b(?:H2S|CO2|SO2|NOx|COS|CS2|CH3SH|CH3S)\b", term):
+        return "chemical_species"
+    if re.search(r"\b(?:XPS|DRIFTS|DFT|BET|DBD|LDH|PDS)\b", term):
+        return "instrument_or_method"
+    if re.search(r"[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+", term):
+        return "proper_noun_or_named_method"
+    return "professional_term"
+
+
+def source_provenance_for_term(term: str, sentence_pairs: list[dict[str, str]]) -> list[str]:
+    lower_term = term.lower()
+    locations: list[str] = []
+    for index, pair in enumerate(sentence_pairs, start=1):
+        english = pair.get("english", "")
+        if lower_term in english.lower():
+            citations = "; ".join(re.findall(r"\[@([^\]]+)\]", english))
+            location = f"sentence_pair_{index}"
+            if citations:
+                location += f"; citations: {citations}"
+            locations.append(location)
+        if len(locations) >= 5:
+            break
+    return locations or ["auto-generated from manuscript object library; source sentence not uniquely located"]
 
 
 def quote(value: Any) -> str:
@@ -477,7 +509,7 @@ def terminology_yaml(terms: list[dict[str, Any]]) -> str:
         lines.append(f"  - term: {quote(item['term'])}")
         lines.append(f"    language: {quote(item.get('language', ''))}")
         lines.append(f"    preferred_form: {quote(item.get('preferred_form', item['term']))}")
-        for key in ("accepted_variants", "chinese_translations", "forbidden_variants"):
+        for key in ("accepted_variants", "chinese_translations", "forbidden_variants", "source_provenance"):
             values = item.get(key, []) or []
             if values:
                 lines.append(f"    {key}:")
@@ -485,6 +517,8 @@ def terminology_yaml(terms: list[dict[str, Any]]) -> str:
                     lines.append(f"      - {quote(value)}")
             else:
                 lines.append(f"    {key}: []")
+        lines.append(f"    field: {quote(item.get('field', DEFAULT_FIELD))}")
+        lines.append(f"    term_type: {quote(item.get('term_type', infer_term_type(str(item.get('term', '')))))}")
         lines.append(f"    reason: {quote(item.get('reason', ''))}")
         lines.append("    confirmed: false")
     return "\n".join(lines) + "\n"
@@ -500,9 +534,10 @@ def terminology_md(terms: list[dict[str, Any]]) -> str:
         "",
         "This glossary is project-specific. Auto-generated entries are candidates, not confirmed standards.",
         "Confirm, edit, or delete entries in the UI before relying on them during revision.",
+        "Every entry should record its field/domain and source provenance so project-specific terms do not import unrelated disciplinary jargon.",
         "",
-        "| term | language | preferred form | accepted variants | Chinese translations | forbidden variants | confirmed | reason |",
-        "|---|---|---|---|---|---|---|---|",
+        "| term | language | preferred form | accepted variants | Chinese translations | field | term type | source provenance | forbidden variants | confirmed | reason |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for item in terms:
         lines.append(
@@ -514,6 +549,9 @@ def terminology_md(terms: list[dict[str, Any]]) -> str:
                     markdown_escape_cell(item.get("preferred_form", "")),
                     markdown_escape_cell(", ".join(item.get("accepted_variants", []) or [])),
                     markdown_escape_cell(", ".join(item.get("chinese_translations", []) or [])),
+                    markdown_escape_cell(item.get("field", DEFAULT_FIELD)),
+                    markdown_escape_cell(item.get("term_type", infer_term_type(str(item.get("term", ""))))),
+                    markdown_escape_cell("; ".join(item.get("source_provenance", []) or [])),
                     markdown_escape_cell(", ".join(item.get("forbidden_variants", []) or [])),
                     "no",
                     markdown_escape_cell(item.get("reason", "")),

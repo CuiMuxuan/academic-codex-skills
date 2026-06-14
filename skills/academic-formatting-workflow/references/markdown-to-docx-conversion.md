@@ -15,11 +15,12 @@ Before converting, identify:
 
 Do not install or upgrade converters silently. If Pandoc, a citation processor, a DOCX reference file, or Word automation is missing, report the limitation and ask before using a fallback that loses editability or links.
 
-For shared conversion-sensitive notation rules, apply [notation-and-conversion-integrity-gate.md](../../../shared/notation-and-conversion-integrity-gate.md).
+For shared conversion-sensitive notation rules, apply [notation-and-conversion-integrity-gate.md](../../../shared/notation-and-conversion-integrity-gate.md). For formula-specific source, default formatting, target-journal overrides, and handoff fields, apply [equation-and-formula-standard.md](../../../shared/equation-and-formula-standard.md).
 
 ## Formula Standard
 
 - Treat LaTeX as the canonical source for formulas. Preserve the original LaTeX expression in the Markdown source or a conversion log.
+- If no journal, school, or publisher rule is provided, use the default formula standard in the shared equation reference. If target rules exist, follow those target rules and record the source.
 - Prefer editable Word equations or Office Math Markup Language (OMML). Do not accept rasterized, flattened, or garbled formulas as final unless the user explicitly approves that fallback.
 - Keep inline math inline and display math as separate equation blocks.
 - Preserve equation labels and numbering when present. If automatic numbering is unavailable, mark equations that need Word refresh or manual numbering.

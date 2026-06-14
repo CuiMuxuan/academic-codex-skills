@@ -10,9 +10,11 @@
 6. Generate the complete latest bilingual sentence review draft.
 7. Run the object-library source sanity check from [object-model-and-state.md](object-model-and-state.md).
 8. Before launching or entering the annotation UI, ensure the project-level shared resources exist: `project_review_standards.*`, `terminology_glossary.*`, `problem_words.*`, and `material_dependencies.*`. If missing, generate them under `revision_workbench/shared/`; initialize terminology candidates from the current `manuscript_objects.json`, include likely `chinese_translations` for English terms from aligned Chinese review text when available, and mark them unconfirmed.
-9. Initialize the project supplemental review standards template with the research field when known and a candidate rule warning against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless the current paper's field requires it or the user confirms it. Do not restrict generic terms broadly understood across fields.
-10. Read project standards, terminology, problem-word list, and material dependency records.
-11. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
+9. Initialize terminology entries with field/domain, term type, and source provenance. If a term is a proper noun, named method, regulation, source-specific concept, or cited term, record the source sentence or cited paper where it appears.
+10. Initialize the project supplemental review standards template with the research field when known and a candidate rule warning against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless the current paper's field requires it or the user confirms it. Do not restrict generic terms broadly understood across fields.
+11. Run [artifact-synchronization.md](artifact-synchronization.md) before launching the UI or starting official modification so derived review drafts and shared resources agree with `manuscript_objects.json`.
+12. Read project standards, terminology, problem-word list, and material dependency records.
+13. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
 
 ## Object-Library Source Gate
 
@@ -100,9 +102,10 @@ Accepted confirmation examples:
 3. Use `$academic-de-ai-polishing` only for confirmed local mechanical-style or residue problems when evidence and structure are stable.
 4. Send structure, evidence, chapter logic, literature, and large rewrite issues to the upgrade flow.
 5. Increment `revision_count` for every modified sentence.
-6. Update complete latest review draft.
-7. Update partial failed-sentence review draft.
-8. Update object library, modification log, user confirmation log, and id mapping.
+6. Update `manuscript_objects.json` first, preserving sentence ids, split/merge/delete mappings, revision counts, and formula LaTeX source when present.
+7. Run `scripts/sync_revision_artifacts.py --workbench <revision_workbench> --round <round_id>` to regenerate the complete latest review draft, partial failed/targeted review draft, object-library summary, manifest, and project-resource schema.
+8. Re-run the same utility with `--check-only`. Do not continue if the sync report contains count mismatches, unknown target ids, malformed terminology records, or unresolved formula/equation integrity issues.
+9. Update modification log, user confirmation log, and id mapping.
 
 ## Round Close
 
@@ -114,3 +117,4 @@ Accepted confirmation examples:
 6. Save user confirmation log.
 7. Generate next-round todo list.
 8. Before the next round, renumber current ids and preserve history mapping.
+9. Run artifact synchronization and inspect `artifact_sync_report.json` before treating the round artifacts as closed.
