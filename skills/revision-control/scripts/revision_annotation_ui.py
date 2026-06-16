@@ -1493,9 +1493,10 @@ HTML_PAGE = r"""<!doctype html>
     }
     .step {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
       max-width: 220px;
+      white-space: normal;
     }
     .step.active {
       border-color: var(--accent);
@@ -1519,25 +1520,34 @@ HTML_PAGE = r"""<!doctype html>
       color: #fff;
     }
     .step-label {
+      display: block;
+      min-width: 0;
       overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      line-height: 1.25;
+      text-align: left;
     }
     .chapter-note {
       margin-top: 8px;
       color: var(--muted);
       font-size: 12px;
       overflow-wrap: anywhere;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
     .virtual-chapter-head {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       margin: 0 0 10px;
     }
     .virtual-chapter-head h2 {
       margin: 0;
       font-size: 18px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
     }
     .virtual-list {
       height: calc(100vh - 210px);
@@ -1571,6 +1581,7 @@ HTML_PAGE = r"""<!doctype html>
     .virtual-section-row .node-row {
       display: flex;
       justify-content: space-between;
+      align-items: flex-start;
       gap: 12px;
       width: 100%;
     }
@@ -1590,9 +1601,16 @@ HTML_PAGE = r"""<!doctype html>
       font-weight: 700;
     }
     .node-row {
-      display: inline-flex;
-      align-items: center;
+      display: flex;
+      align-items: flex-start;
       gap: 8px;
+      width: 100%;
+    }
+    .node-title {
+      display: block;
+      min-width: 0;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
     }
     .node-id {
       color: var(--muted);
@@ -1632,6 +1650,9 @@ HTML_PAGE = r"""<!doctype html>
     }
     .sentence-line.english {
       color: #475467;
+    }
+    .bilingual-display .sentence-line {
+      line-height: 1.25;
     }
     .formula-inline {
       display: inline;
@@ -2360,12 +2381,13 @@ HTML_PAGE = r"""<!doctype html>
       const active = items[activeChapterIndex];
       const stepButtons = items.map((item, index) => {
         const activeClass = index === activeChapterIndex ? ' active' : '';
-        const label = htmlEscape(item.node.title || item.node.id || `章节 / Chapter ${index + 1}`);
-        return `<button class="step${activeClass}" title="${label}" onclick="setActiveChapter(${index})"><span class="step-index">${index + 1}</span><span class="step-label">${label}</span></button>`;
+        const rawLabel = plainTitle(item.node.title, item.node.id || `章节 / Chapter ${index + 1}`);
+        const label = htmlEscape(rawLabel);
+        return `<button class="step${activeClass}" title="${label}" onclick="setActiveChapter(${index})"><span class="step-index">${index + 1}</span><span class="step-label">${renderBilingualTitle(rawLabel)}</span></button>`;
       }).join('');
       const sentenceCount = countNodeType(active.node, 'sentence');
       const paragraphCount = countNodeType(active.node, 'paragraph');
-      const activeTitle = htmlEscape(active.node.title || active.node.id || '');
+      const activeTitle = renderBilingualTitle(active.node.title, active.node.id || '');
       document.getElementById('chapterStepper').innerHTML = `
         <div class="stepper-head">
           <strong>按章步进 / Chapter stepper</strong>
@@ -2374,7 +2396,7 @@ HTML_PAGE = r"""<!doctype html>
         <div class="stepper-buttons">
           ${stepButtons}
         </div>
-        <div class="chapter-note">当前仅渲染 / Rendering only: ${activeTitle}</div>`;
+        <div class="chapter-note"><span>当前仅渲染 / Rendering only:</span><span>${activeTitle}</span></div>`;
     }
 
     function setActiveChapter(index) {
@@ -2438,7 +2460,7 @@ HTML_PAGE = r"""<!doctype html>
 
     function renderVirtualChapter(node) {
       const id = htmlEscape(node.id || '');
-      const title = htmlEscape(node.title || node.id || node.node_type || '');
+      const title = renderBilingualTitle(node.title, node.id || node.node_type || '');
       const rawRows = flattenVirtualRows(node);
       virtualState.rows = rawRows;
       virtualState.heights = rawRows.map(virtualRowEstimate);
@@ -2574,9 +2596,9 @@ HTML_PAGE = r"""<!doctype html>
 
     function renderSectionRow(n, context) {
       const id = htmlEscape(n.id || '');
-      const title = htmlEscape(n.title || n.id || '');
+      const title = renderBilingualTitle(n.title, n.id || '');
       return `<div class="virtual-section-row" data-chapter-id="${htmlEscape(context.chapter_id || '')}" data-section-id="${id}" data-node-type="section">
-        <span class="node-row"><span>${title}</span><span class="node-id">${id}</span>
+        <span class="node-row"><span class="node-title">${title}</span><span class="node-id">${id}</span>
         <button class="node-comment" onclick="event.preventDefault(); event.stopPropagation(); makeNodeAnnotation('section_comment', '${id}')">小节批注 / Comment section</button></span>
       </div>`;
     }
@@ -2696,6 +2718,38 @@ HTML_PAGE = r"""<!doctype html>
       }
       candidates.sort((a, b) => b.score - a.score);
       return candidates.length ? candidates[0].parts : [{text: normalized, start: 0}];
+    }
+
+    function splitBilingualTitleParts(text) {
+      const normalized = String(text ?? '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+      if (!normalized) return [];
+      const explicitParts = [];
+      for (const match of normalized.matchAll(/[^\n]+/g)) {
+        const rawLine = match[0];
+        const leading = rawLine.search(/\S/);
+        const trimmed = rawLine.trim();
+        if (trimmed) explicitParts.push({text: trimmed, start: match.index + Math.max(leading, 0)});
+      }
+      if (explicitParts.length > 1) return explicitParts;
+      const titleSplitPatterns = [
+        /\s*\/\s*/,
+        /\s*／\s*/,
+        /\s*\|\s*/,
+        /\s*｜\s*/
+      ];
+      for (const pattern of titleSplitPatterns) {
+        const parts = normalized.split(pattern).map(part => part.trim()).filter(Boolean);
+        if (parts.length === 2) {
+          const [left, right] = parts;
+          if ((hasHan(left) && hasLatin(right)) || (hasLatin(left) && hasHan(right))) {
+            return [
+              {text: left, start: 0},
+              {text: right, start: normalized.indexOf(right)}
+            ];
+          }
+        }
+      }
+      return splitBilingualParts(normalized);
     }
 
     function spanTargetRanges(annotation) {
@@ -2895,6 +2949,19 @@ HTML_PAGE = r"""<!doctype html>
       }).join('');
     }
 
+    function renderBilingualTitle(text, fallback = '') {
+      const parts = splitBilingualTitleParts(text || fallback);
+      if (!parts.length) return htmlEscape(fallback || '');
+      return `<span class="bilingual-display">${parts.map(part => {
+        const klass = hasLatin(part.text) && !hasHan(part.text) ? 'sentence-line english' : 'sentence-line';
+        return `<span class="${klass}">${htmlEscape(part.text)}</span>`;
+      }).join('')}</span>`;
+    }
+
+    function plainTitle(text, fallback = '') {
+      return String(text || fallback || '').trim();
+    }
+
     function sentenceDecision(sentenceId) {
       const decision = annotationDoc?.sentence_status_decisions?.[sentenceId];
       if (typeof decision === 'string') return decision;
@@ -2921,7 +2988,7 @@ HTML_PAGE = r"""<!doctype html>
     function renderNode(n, context = {}) {
       if (!n) return '';
       const id = htmlEscape(n.id || '');
-      const title = htmlEscape(n.title || n.id || n.node_type);
+      const title = renderBilingualTitle(n.title, n.id || n.node_type);
       if (n.node_type === 'paper') {
         return `<article data-paper-id="${id}"><h2>${title}</h2>${(n.children || []).map(child => renderNode(child, context)).join('')}</article>`;
       }
@@ -2932,7 +2999,7 @@ HTML_PAGE = r"""<!doctype html>
         const attr = n.node_type === 'chapter' ? 'data-chapter-id' : 'data-section-id';
         const commentType = n.node_type === 'chapter' ? 'chapter_comment' : 'section_comment';
         return `<details open ${attr}="${id}" data-node-type="${n.node_type}">
-          <summary><span class="node-row"><span>${title}</span><span class="node-id">${id}</span>
+          <summary><span class="node-row"><span class="node-title">${title}</span><span class="node-id">${id}</span>
           <button class="node-comment" onclick="event.preventDefault(); event.stopPropagation(); makeNodeAnnotation('${commentType}', '${id}')">批注 / Comment</button></span></summary>
           ${(n.children || []).map(child => renderNode(child, nextContext)).join('')}
         </details>`;
