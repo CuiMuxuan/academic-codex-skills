@@ -125,6 +125,44 @@ def parse_main_manuscript(path: Path) -> tuple[str, list[dict[str, Any]]]:
     return paper_title, chapters
 
 
+def title_bilingual_parts(title: str) -> dict[str, str]:
+    normalized = title.strip()
+    if not normalized:
+        return {"title_en": "", "title_zh": "", "bilingual_title": "", "title_translation_status": "missing", "title_translation_source": ""}
+    return {
+        "title_en": normalized,
+        "title_zh": "",
+        "bilingual_title": normalized,
+        "title_translation_status": "missing",
+        "title_translation_source": "source manuscript title only",
+    }
+
+
+def merged_title_record(title: str, bilingual: dict[str, str] | None = None) -> dict[str, str]:
+    base = title_bilingual_parts(title)
+    if bilingual:
+        for key in ("title_en", "title_zh", "bilingual_title", "title_translation_status", "title_translation_source"):
+            value = bilingual.get(key, "")
+            if value:
+                base[key] = value
+    return base
+
+
+def apply_title_fields(item: dict[str, Any], title: str, bilingual: dict[str, str] | None = None) -> dict[str, Any]:
+    record = merged_title_record(title, bilingual)
+    item.update(
+        {
+            "title": title,
+            "title_en": record["title_en"],
+            "title_zh": record["title_zh"],
+            "bilingual_title": record["bilingual_title"],
+            "title_translation_status": record["title_translation_status"],
+            "title_translation_source": record["title_translation_source"],
+        }
+    )
+    return item
+
+
 def sentence_estimate(block_type: str, text: str) -> int:
     if block_type == "subheading":
         return 0
@@ -194,6 +232,28 @@ def build_objects(
     old_sections = [item for item in objects.get("sections", []) if isinstance(item, dict)]
     old_sentences = [item for item in objects.get("sentences", []) if isinstance(item, dict)]
 
+    title_alignment: dict[str, dict[str, str]] = {}
+    for chapter in old_chapters:
+        chapter_id = str(chapter.get("chapter_id") or chapter.get("id") or "").strip()
+        if chapter_id:
+            title_alignment[chapter_id] = merged_title_record(str(chapter.get("title", "")), {
+                "title_en": str(chapter.get("title_en", "")),
+                "title_zh": str(chapter.get("title_zh", "")),
+                "bilingual_title": str(chapter.get("bilingual_title", "")),
+                "title_translation_status": str(chapter.get("title_translation_status", "")),
+                "title_translation_source": str(chapter.get("title_translation_source", "")),
+            })
+    for section in old_sections:
+        section_id = str(section.get("section_id") or section.get("id") or "").strip()
+        if section_id:
+            title_alignment[section_id] = merged_title_record(str(section.get("title", "")), {
+                "title_en": str(section.get("title_en", "")),
+                "title_zh": str(section.get("title_zh", "")),
+                "bilingual_title": str(section.get("bilingual_title", "")),
+                "title_translation_status": str(section.get("title_translation_status", "")),
+                "title_translation_source": str(section.get("title_translation_source", "")),
+            })
+
     old_section_counts: list[int] = []
     for section in old_sections:
         section_id = section.get("section_id") or section.get("id")
@@ -228,9 +288,9 @@ def build_objects(
             chapter_id = old_chapter.get("chapter_id") or old_chapter.get("id") or make_id("CH", chapter["title"], len(new_chapters) + 1)
             current_chapter_obj = {
                 "chapter_id": chapter_id,
-                "title": chapter["title"],
                 "section_ids": [],
             }
+            apply_title_fields(current_chapter_obj, chapter["title"], title_alignment.get(chapter_id))
             new_chapters.append(current_chapter_obj)
             previous_chapter_title = chapter["title"]
         assert current_chapter_obj is not None
@@ -300,12 +360,12 @@ def build_objects(
             {
                 "section_id": section_id,
                 "chapter_id": current_chapter_obj["chapter_id"],
-                "title": section["title"],
                 "paragraph_ids": section_paragraph_ids,
                 "source_heading_level": section.get("level", ""),
                 "source_manuscript_path": rel_path(main_path, workbench.parent),
             }
         )
+        apply_title_fields(new_section, section["title"], title_alignment.get(section_id))
         new_sections.append(new_section)
         current_chapter_obj["section_ids"].append(section_id)
         section_index += 1
@@ -314,9 +374,20 @@ def build_objects(
         raise ValueError(f"sentence assignment mismatch: assigned={old_sentence_cursor} existing={len(old_sentences)}")
 
     new_paper = dict(paper)
+    paper_title_fields = merged_title_record(
+        paper_title or paper.get("title", ""),
+        {
+            "title_en": str(paper.get("title_en", "")),
+            "title_zh": str(paper.get("title_zh", "")),
+            "bilingual_title": str(paper.get("bilingual_title", "")),
+            "title_translation_status": str(paper.get("title_translation_status", "")),
+            "title_translation_source": str(paper.get("title_translation_source", "")),
+        },
+    )
     new_paper.update(
         {
             "title": paper_title or paper.get("title", ""),
+            **paper_title_fields,
             "language_mode": paper.get("language_mode", "english_chinese_sentence_aligned"),
             "source_manuscript_path": rel_path(main_path, workbench.parent),
             "alignment_review_source_path": rel_path(alignment_path, workbench.parent),

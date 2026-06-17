@@ -23,5 +23,15 @@
     "id": 5,
     "prompt": "Use $post-manuscript-benchmark-review to run a multi-agent readiness review of my complete draft, with parallel checks for structure, evidence support, language gate issues, citation proximity, and figure/format QA.",
     "expected": "Reads the multi-agent academic workflow gate, proposes parallel review scopes and structured sub-agent outputs, waits for user confirmation before launching sub-agents unless already authorized, and states that the main agent will merge findings and keep final readiness judgment."
+  },
+  {
+    "id": 6,
+    "prompt": "用 $post-manuscript-benchmark-review 按编辑和审稿人的视角全面评估我的论文是否达到SCI一区期刊投稿标准，重点检查期刊匹配度、创新性和科学逻辑，并逐页逐段逐句给出拒稿风险。",
+    "expected": "触发 editorial-style SCI/Q1 screening，调用 standards-review-agent 进行 scope fit、novelty、scientific logic 三类检查，给出 Scope Fit 评分、是否可能直接拒稿、创新性证据与 Applied Energy 水平判断，以及逐条逻辑问题和修改方案。"
+  },
+  {
+    "id": 7,
+    "prompt": "Use $post-manuscript-benchmark-review to inspect my draft sentence by sentence for desk-reject risks, novelty exaggeration, and logical gaps before I submit to a Q1 journal.",
+    "expected": "Uses the standards review path, returns page/paragraph/sentence anchors when available, identifies likely desk-reject reasons, separates actual novelty from incremental or repeated claims, and marks logical issues with Critical/Major/Minor severity."
   }
 ]

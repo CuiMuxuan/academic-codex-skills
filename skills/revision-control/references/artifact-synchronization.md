@@ -51,6 +51,7 @@ Use `--overwrite-shared` only when the user intentionally wants to regenerate ex
    - partial failed review contains only known sentence ids or explicitly marked chapter/section items;
    - annotation target ids either exist or are marked for relocation;
    - terminology entries include field/domain and source provenance.
+   - bilingual paper/chapter/section title fields are present or reported as missing in the sync report.
 10. Write a machine-readable sync report.
 
 ## Required Recheck
@@ -96,6 +97,12 @@ terminology_schema:
   total:
   missing_field:
   missing_source_provenance:
+title_translation:
+  total:
+  confirmed_or_present:
+  inferred:
+  missing:
+  missing_ids: []
 review_drafts:
   full_sentence_count:
   partial_sentence_count:

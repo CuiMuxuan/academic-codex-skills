@@ -1,11 +1,11 @@
 ---
 name: academic-de-ai-polishing
-description: "Use when polishing stable paper, review, thesis, rebuttal, or other scholarly prose that reads mechanically, over-smoothed, obviously AI-assisted, or contaminated by internal project notes, operation logs, process records, TODOs, handoff language, or draft-management traces in the manuscript body. Best after content, structure, evidence, citations, and claim strength are stable, for section-by-section rewriting that preserves meaning, citations, and technical rigor while reducing templated transitions, repetitive cadence, formulaic academic phrasing, and non-manuscript operational residue. Chinese triggers: 论文降AI痕迹, 去AI味, 去模板化润色, 降低机械感, 学术润色, 最终润色, AIGC痕迹评估, 内部项目记录, 操作记录痕迹, 主文日志化."
+description: "Use when polishing stable paper, review, thesis, rebuttal, or other scholarly prose that reads mechanically, over-smoothed, obviously AI-assisted, or contaminated by internal project notes, operation logs, process records, TODOs, handoff language, or draft-management traces in the manuscript body. Best after content, structure, evidence, citations, and claim strength are stable, for section-by-section rewriting that preserves meaning, citations, and technical rigor while reducing templated transitions, repetitive cadence, formulaic academic phrasing, and non-manuscript operational residue. Also use when a paragraph needs section-appropriate rhetorical calibration between正文机理密度 and摘要/引言/过渡 compactness. Chinese triggers: 论文降AI痕迹, 去AI味, 去模板化润色, 降低机械感, 学术润色, 最终润色, AIGC痕迹评估, 正文机理升级, 摘要过渡压缩, 内部项目记录, 操作记录痕迹, 主文日志化."
 ---
 
 # Academic De-AI Polishing
 
-Use this skill to reduce mechanical or AI-like academic prose while preserving the core argument, evidence balance, citation logic, terminology, and technical scope.
+Use this skill to reduce mechanical or AI-like academic prose while preserving the core argument, evidence balance, citation logic, terminology, technical scope, and section-appropriate rhetorical mode.
 
 ## Boundaries
 
@@ -40,7 +40,8 @@ Do not:
 7. Treat accurate, direct, concise, understandable writing as the baseline; style elevation is optional and must stay evidence-safe.
 8. In main text and rebuttal prose, do not polish unsupported claims into final language; request support or soften the claim.
 9. Use the shared cross-disciplinary language review gate before finalizing formal body-text or rebuttal rewrites with abstract terms, local labels, operation-record residue, unclear sentence purpose, proxy wording, or bilingual inconsistency.
-10. When called by `$revision-control`, only return the confirmed local rewrite and hand state updates back to `$revision-control`.
+10. When the target is a正文机理段, allow denser conceptual compression and explicit logic chaining if the evidence and terminology support it; when the target is摘要、引言、结论 or a long transition, keep the chain compact and reduce connector stacking.
+11. When called by `$revision-control`, only return the confirmed local rewrite and hand state updates back to `$revision-control`.
 
 ## Pre-Edit Gate
 

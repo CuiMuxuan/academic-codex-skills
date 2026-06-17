@@ -252,6 +252,22 @@ def first_value(item: dict[str, Any], *names: str, default: str = "") -> str:
     return default
 
 
+def title_fields(item: dict[str, Any]) -> dict[str, str]:
+    title_en = first_value(item, "title_en", "title", "heading", "name")
+    title_zh = first_value(item, "title_zh", "chinese_title", "title_cn")
+    bilingual_title = first_value(item, "bilingual_title")
+    if not bilingual_title:
+        if title_en and title_zh and title_en != title_zh:
+            bilingual_title = f"{title_en}\n{title_zh}"
+        else:
+            bilingual_title = title_en or title_zh
+    return {
+        "title_en": title_en,
+        "title_zh": title_zh,
+        "bilingual_title": bilingual_title,
+    }
+
+
 def node(
     node_type: str,
     node_id: str,
@@ -267,6 +283,11 @@ def node(
         "children": [],
     }
     payload.update(extra)
+    if "title_en" not in payload or "title_zh" not in payload or "bilingual_title" not in payload:
+        fields = title_fields(payload)
+        payload.setdefault("title_en", fields["title_en"])
+        payload.setdefault("title_zh", fields["title_zh"])
+        payload.setdefault("bilingual_title", fields["bilingual_title"])
     return payload
 
 
@@ -944,7 +965,17 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
 
     paper_id = first_value(paper, "paper_id", "id", default="P001")
     paper_title = first_value(paper, "title", "name", default="未命名文稿 / Untitled manuscript")
-    root = node("paper", paper_id, title=paper_title, paper_id=paper_id)
+    root = node(
+        "paper",
+        paper_id,
+        title=paper_title,
+        paper_id=paper_id,
+        title_en=first_value(paper, "title_en", default=paper_title),
+        title_zh=first_value(paper, "title_zh", default=""),
+        bilingual_title=first_value(paper, "bilingual_title", default=paper_title),
+        title_translation_status=first_value(paper, "title_translation_status", default="missing"),
+        title_translation_source=first_value(paper, "title_translation_source", default=""),
+    )
 
     chapters = object_list(objects, "chapters", "chapter")
     sections = object_list(objects, "sections", "section")
@@ -962,7 +993,17 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
     for index, chapter in enumerate(chapters, start=1):
         chapter_id = first_value(chapter, "chapter_id", "id", "node_id", default=f"CH_{index}")
         chapter_title = first_value(chapter, "title", "name", default=chapter_id)
-        chapter_nodes[chapter_id] = node("chapter", chapter_id, title=chapter_title, chapter_id=chapter_id)
+        chapter_nodes[chapter_id] = node(
+            "chapter",
+            chapter_id,
+            title=chapter_title,
+            chapter_id=chapter_id,
+            title_en=first_value(chapter, "title_en", default=chapter_title),
+            title_zh=first_value(chapter, "title_zh", default=""),
+            bilingual_title=first_value(chapter, "bilingual_title", default=chapter_title),
+            title_translation_status=first_value(chapter, "title_translation_status", default="missing"),
+            title_translation_source=first_value(chapter, "title_translation_source", default=""),
+        )
 
     for index, section in enumerate(sections, start=1):
         section_id = first_value(section, "section_id", "id", "node_id", default=f"SEC_{index}")
@@ -974,6 +1015,11 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
             title=section_title,
             section_id=section_id,
             chapter_id=chapter_id,
+            title_en=first_value(section, "title_en", default=section_title),
+            title_zh=first_value(section, "title_zh", default=""),
+            bilingual_title=first_value(section, "bilingual_title", default=section_title),
+            title_translation_status=first_value(section, "title_translation_status", default="missing"),
+            title_translation_source=first_value(section, "title_translation_source", default=""),
             local_purpose=section.get("local_purpose", ""),
             status=section.get("status", ""),
         )
@@ -1115,6 +1161,11 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
             title="标题 / Title",
             section_id=f"{FRONT_MATTER_CHAPTER_ID}_title",
             chapter_id=FRONT_MATTER_CHAPTER_ID,
+            title_en="Title",
+            title_zh="标题",
+            bilingual_title="Title\n标题",
+            title_translation_status="confirmed",
+            title_translation_source="UI label",
         )
         title_paragraph_id = f"{FRONT_MATTER_CHAPTER_ID}_title_paragraph"
         title_sentence_id = f"{FRONT_MATTER_CHAPTER_ID}_title_sentence"
@@ -1125,6 +1176,11 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
             paragraph_id=title_paragraph_id,
             section_id=f"{FRONT_MATTER_CHAPTER_ID}_title",
             paragraph_role="front-matter title",
+            title_en="Title",
+            title_zh="标题",
+            bilingual_title="Title\n标题",
+            title_translation_status="confirmed",
+            title_translation_source="UI label",
         )
         title_paragraph["children"].append(
             node(
@@ -1150,6 +1206,11 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
         FIGURE_TABLE_CHAPTER_ID,
         title="图表章 / Figure and table text",
         chapter_id=FIGURE_TABLE_CHAPTER_ID,
+        title_en="Figure and table text",
+        title_zh="图表文字",
+        bilingual_title="Figure and table text\n图表文字",
+        title_translation_status="confirmed",
+        title_translation_source="UI label",
     )
     if chapter_nodes:
         for chapter_index, chapter in enumerate(chapters):
@@ -1273,6 +1334,11 @@ def normalize_tree(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]
     paper_meta = {
         "paper_id": paper_id,
         "title": paper_title,
+        "title_en": first_value(paper, "title_en", default=paper_title),
+        "title_zh": first_value(paper, "title_zh", default=""),
+        "bilingual_title": first_value(paper, "bilingual_title", default=paper_title),
+        "title_translation_status": first_value(paper, "title_translation_status", default="missing"),
+        "title_translation_source": first_value(paper, "title_translation_source", default=""),
         "language_mode": first_value(paper, "language_mode", default=""),
         "current_round": first_value(paper, "current_round", default=""),
     }
@@ -1463,6 +1529,7 @@ HTML_PAGE = r"""<!doctype html>
       background: #fff;
       padding: 10px 12px;
       margin-bottom: 16px;
+      overflow: hidden;
     }
     .stepper-head {
       display: flex;
@@ -1471,6 +1538,7 @@ HTML_PAGE = r"""<!doctype html>
       align-items: baseline;
       margin-bottom: 8px;
       font-size: 13px;
+      white-space: nowrap;
     }
     .stepper-head strong {
       font-size: 13px;
@@ -1482,6 +1550,7 @@ HTML_PAGE = r"""<!doctype html>
     }
     .stepper-buttons {
       display: flex;
+      flex-wrap: nowrap;
       gap: 6px;
       align-items: center;
       overflow-x: auto;
@@ -1490,13 +1559,14 @@ HTML_PAGE = r"""<!doctype html>
     .stepper-buttons button {
       min-height: 32px;
       white-space: nowrap;
+      flex: 0 0 auto;
     }
     .step {
       display: inline-flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 6px;
       max-width: 220px;
-      white-space: normal;
+      white-space: nowrap;
     }
     .step.active {
       border-color: var(--accent);
@@ -1523,9 +1593,10 @@ HTML_PAGE = r"""<!doctype html>
       display: block;
       min-width: 0;
       overflow: hidden;
-      white-space: normal;
+      white-space: nowrap;
       line-height: 1.25;
       text-align: left;
+      text-overflow: ellipsis;
     }
     .chapter-note {
       margin-top: 8px;
@@ -1607,10 +1678,19 @@ HTML_PAGE = r"""<!doctype html>
       width: 100%;
     }
     .node-title {
-      display: block;
+      display: flex;
+      flex-direction: column;
       min-width: 0;
       line-height: 1.25;
       overflow-wrap: anywhere;
+      white-space: nowrap;
+    }
+    .node-title .sentence-line {
+      display: block;
+      white-space: nowrap;
+    }
+    .node-title .sentence-line + .sentence-line {
+      margin-top: 0;
     }
     .node-id {
       color: var(--muted);
@@ -1653,6 +1733,7 @@ HTML_PAGE = r"""<!doctype html>
     }
     .bilingual-display .sentence-line {
       line-height: 1.25;
+      white-space: nowrap;
     }
     .formula-inline {
       display: inline;
@@ -2335,6 +2416,9 @@ HTML_PAGE = r"""<!doctype html>
           node_type: 'paper',
           id: root.id || 'manuscript',
           title: root.title || '全文 / Manuscript',
+          title_en: root.title_en || root.title || 'Manuscript',
+          title_zh: root.title_zh || '全文',
+          bilingual_title: root.bilingual_title || `${root.title_en || root.title || 'Manuscript'}\n${root.title_zh || '全文'}`,
           children
         }, virtual: true}];
       }
@@ -2345,6 +2429,9 @@ HTML_PAGE = r"""<!doctype html>
           node_type: 'chapter',
           id: '__unassigned_content',
           title: '未分章内容 / Unassigned content',
+          title_en: 'Unassigned content',
+          title_zh: '未分章内容',
+          bilingual_title: 'Unassigned content\n未分章内容',
           children: unassigned
         }, virtual: true});
       }
@@ -2381,13 +2468,14 @@ HTML_PAGE = r"""<!doctype html>
       const active = items[activeChapterIndex];
       const stepButtons = items.map((item, index) => {
         const activeClass = index === activeChapterIndex ? ' active' : '';
-        const rawLabel = plainTitle(item.node.title, item.node.id || `章节 / Chapter ${index + 1}`);
+        const rawLabel = plainTitle(item.node, item.node.id || `章节 / Chapter ${index + 1}`);
         const label = htmlEscape(rawLabel);
-        return `<button class="step${activeClass}" title="${label}" onclick="setActiveChapter(${index})"><span class="step-index">${index + 1}</span><span class="step-label">${renderBilingualTitle(rawLabel)}</span></button>`;
+        const compactLabel = htmlEscape(compactStepperTitle(rawLabel, `章节 ${index + 1}`));
+        return `<button class="step${activeClass}" title="${label}" onclick="setActiveChapter(${index})"><span class="step-index">${index + 1}</span><span class="step-label">${compactLabel}</span></button>`;
       }).join('');
       const sentenceCount = countNodeType(active.node, 'sentence');
       const paragraphCount = countNodeType(active.node, 'paragraph');
-      const activeTitle = renderBilingualTitle(active.node.title, active.node.id || '');
+      const activeTitle = htmlEscape(plainTitle(active.node, active.node.id || ''));
       document.getElementById('chapterStepper').innerHTML = `
         <div class="stepper-head">
           <strong>按章步进 / Chapter stepper</strong>
@@ -2460,7 +2548,7 @@ HTML_PAGE = r"""<!doctype html>
 
     function renderVirtualChapter(node) {
       const id = htmlEscape(node.id || '');
-      const title = renderBilingualTitle(node.title, node.id || node.node_type || '');
+      const title = renderBilingualTitle(node, node.id || node.node_type || '');
       const rawRows = flattenVirtualRows(node);
       virtualState.rows = rawRows;
       virtualState.heights = rawRows.map(virtualRowEstimate);
@@ -2596,7 +2684,7 @@ HTML_PAGE = r"""<!doctype html>
 
     function renderSectionRow(n, context) {
       const id = htmlEscape(n.id || '');
-      const title = renderBilingualTitle(n.title, n.id || '');
+      const title = renderBilingualTitle(n, n.id || '');
       return `<div class="virtual-section-row" data-chapter-id="${htmlEscape(context.chapter_id || '')}" data-section-id="${id}" data-node-type="section">
         <span class="node-row"><span class="node-title">${title}</span><span class="node-id">${id}</span>
         <button class="node-comment" onclick="event.preventDefault(); event.stopPropagation(); makeNodeAnnotation('section_comment', '${id}')">小节批注 / Comment section</button></span>
@@ -2732,16 +2820,29 @@ HTML_PAGE = r"""<!doctype html>
       }
       if (explicitParts.length > 1) return explicitParts;
       const titleSplitPatterns = [
-        /\s*\/\s*/,
-        /\s*／\s*/,
-        /\s*\|\s*/,
-        /\s*｜\s*/
+        /\s+(?:\/|／|\||｜)\s+/,
+        /\s+(?:\/|／|\||｜)/,
+        /(?:\/|／|\||｜)\s+/
       ];
       for (const pattern of titleSplitPatterns) {
         const parts = normalized.split(pattern).map(part => part.trim()).filter(Boolean);
         if (parts.length === 2) {
           const [left, right] = parts;
           if ((hasHan(left) && hasLatin(right)) || (hasLatin(left) && hasHan(right))) {
+            return [
+              {text: left, start: 0},
+              {text: right, start: normalized.indexOf(right)}
+            ];
+          }
+        }
+      }
+      const slashIndex = normalized.search(/\s[\/／]\s|\s[|｜]\s/);
+      if (slashIndex > 0) {
+        const separator = normalized.slice(slashIndex).match(/^\s[\/／|｜]\s/);
+        if (separator) {
+          const left = normalized.slice(0, slashIndex).trim();
+          const right = normalized.slice(slashIndex + separator[0].length).trim();
+          if (left && right && ((hasHan(left) && hasLatin(right)) || (hasLatin(left) && hasHan(right)))) {
             return [
               {text: left, start: 0},
               {text: right, start: normalized.indexOf(right)}
@@ -2949,8 +3050,24 @@ HTML_PAGE = r"""<!doctype html>
       }).join('');
     }
 
-    function renderBilingualTitle(text, fallback = '') {
-      const parts = splitBilingualTitleParts(text || fallback);
+    function titleTextForDisplay(value, fallback = '') {
+      if (value && typeof value === 'object') {
+        return value.bilingual_title || ((value.title_en || value.title || '') && value.title_zh
+          ? `${value.title_en || value.title}\n${value.title_zh}`
+          : (value.title_en || value.title || value.title_zh || fallback || ''));
+      }
+      return String(value || fallback || '').trim();
+    }
+
+    function titleTextForStepper(value, fallback = '') {
+      if (value && typeof value === 'object') {
+        return String(value.title_en || value.title || value.bilingual_title || fallback || '').replace(/\s+/g, ' ').trim();
+      }
+      return String(value || fallback || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function renderBilingualTitle(value, fallback = '') {
+      const parts = splitBilingualTitleParts(titleTextForDisplay(value, fallback));
       if (!parts.length) return htmlEscape(fallback || '');
       return `<span class="bilingual-display">${parts.map(part => {
         const klass = hasLatin(part.text) && !hasHan(part.text) ? 'sentence-line english' : 'sentence-line';
@@ -2958,8 +3075,17 @@ HTML_PAGE = r"""<!doctype html>
       }).join('')}</span>`;
     }
 
-    function plainTitle(text, fallback = '') {
-      return String(text || fallback || '').trim();
+    function compactStepperTitle(value, fallback = '') {
+      const stepperTitle = titleTextForStepper(value, fallback);
+      const parts = splitBilingualTitleParts(stepperTitle)
+        .map(part => String(part.text || '').replace(/\s+/g, ' ').trim())
+        .filter(Boolean);
+      if (!parts.length) return plainTitle(value, fallback);
+      return parts[0];
+    }
+
+    function plainTitle(value, fallback = '') {
+      return titleTextForStepper(value, fallback);
     }
 
     function sentenceDecision(sentenceId) {
@@ -2988,7 +3114,7 @@ HTML_PAGE = r"""<!doctype html>
     function renderNode(n, context = {}) {
       if (!n) return '';
       const id = htmlEscape(n.id || '');
-      const title = renderBilingualTitle(n.title, n.id || n.node_type);
+      const title = renderBilingualTitle(n, n.id || n.node_type);
       if (n.node_type === 'paper') {
         return `<article data-paper-id="${id}"><h2>${title}</h2>${(n.children || []).map(child => renderNode(child, context)).join('')}</article>`;
       }

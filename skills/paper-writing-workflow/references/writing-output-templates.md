@@ -167,6 +167,53 @@ User-review items:
 Next step:
 ```
 
+## Dual Rhetorical Upgrade Packet
+
+Use this when the user asks to upgrade a paragraph for stronger logic depth, academic continuity, or a style similar to provided before/after examples.
+
+```text
+Source paragraph:
+
+Detected issue:
+- repeated wording:
+- low-level concept:
+- weak causal chain:
+- list without hierarchy:
+
+### Option 1: High-Density Body / Mechanism Version
+Recommended use:正文、机理分析、工艺对比、结果讨论
+Rewrite:
+
+### Option 2: Compact Causal / Abstract-Introduction-Transition Version
+Recommended use:摘要、引言、结论、长句过渡
+Rewrite:
+
+Core revision explanation:
+1. Causal or mechanism upgrade:
+2. Terminology or concept upgrade:
+3. Logic hierarchy or compression:
+4. Evidence and claim-strength check:
+```
+
+## Data Figure Body Analysis Packet
+
+Use this when writing正文 around a data-backed figure.
+
+```text
+Figure:
+Figure type:
+Figure role in paper:
+Question answered:
+Key quantitative pattern:
+Best or strongest region:
+Worst or weakest region:
+Most concentrated region:
+Sparsest region:
+Supported implication:
+Boundary or limitation:
+Body-text paragraph:
+```
+
 ## Revision Report Template
 
 | item | location | issue | action | evidence status | user decision |

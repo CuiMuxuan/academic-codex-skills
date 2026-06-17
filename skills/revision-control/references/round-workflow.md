@@ -10,11 +10,12 @@
 6. Generate the complete latest bilingual sentence review draft.
 7. Run the object-library source sanity check from [object-model-and-state.md](object-model-and-state.md).
 8. Before launching or entering the annotation UI, ensure the project-level shared resources exist: `project_review_standards.*`, `terminology_glossary.*`, `problem_words.*`, and `material_dependencies.*`. If missing, generate them under `revision_workbench/shared/`; initialize terminology candidates from the current `manuscript_objects.json`, include likely `chinese_translations` for English terms from aligned Chinese review text when available, and mark them unconfirmed.
-9. Initialize terminology entries with field/domain, term type, and source provenance. If a term is a proper noun, named method, regulation, source-specific concept, or cited term, record the source sentence or cited paper where it appears.
-10. Initialize the project supplemental review standards template with the research field when known and a candidate rule warning against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless the current paper's field requires it or the user confirms it. Do not restrict generic terms broadly understood across fields.
-11. Run [artifact-synchronization.md](artifact-synchronization.md) before launching the UI or starting official modification so derived review drafts and shared resources agree with `manuscript_objects.json`.
-12. Read project standards, terminology, problem-word list, and material dependency records.
-13. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
+9. For bilingual projects, also ensure paper/chapter/section objects carry explicit bilingual title fields (`title_en`, `title_zh`, `bilingual_title`, `title_translation_status`, `title_translation_source`). If those fields are missing, add them during object-library initialization or run the title migration script with a title map before launching the UI.
+10. Initialize terminology entries with field/domain, term type, and source provenance. If a term is a proper noun, named method, regulation, source-specific concept, or cited term, record the source sentence or cited paper where it appears.
+11. Initialize the project supplemental review standards template with the research field when known and a candidate rule warning against unnecessary artificial-intelligence, computer-science, or electronic-information jargon unless the current paper's field requires it or the user confirms it. Do not restrict generic terms broadly understood across fields.
+12. Run [artifact-synchronization.md](artifact-synchronization.md) before launching the UI or starting official modification so derived review drafts and shared resources agree with `manuscript_objects.json`.
+13. Read project standards, terminology, problem-word list, and material dependency records.
+14. If the user selected a local scope, still load the complete object library to check context fit and duplicate arguments.
 
 ## Object-Library Source Gate
 

@@ -148,6 +148,25 @@ def first_value(item: dict[str, Any], *keys: str, default: str = "") -> str:
     return default
 
 
+def title_en(item: dict[str, Any]) -> str:
+    return first_value(item, "title_en", "title", "heading", "name")
+
+
+def title_zh(item: dict[str, Any]) -> str:
+    return first_value(item, "title_zh", "chinese_title", "title_cn")
+
+
+def bilingual_title(item: dict[str, Any]) -> str:
+    explicit = first_value(item, "bilingual_title")
+    if explicit:
+        return explicit
+    english = title_en(item)
+    chinese = title_zh(item)
+    if english and chinese and chinese != english:
+        return f"{english}\n{chinese}"
+    return english or chinese
+
+
 def paper_and_objects(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     paper = data.get("paper", data)
     if not isinstance(paper, dict):
@@ -234,8 +253,36 @@ def suggested_status(sentence: dict[str, Any]) -> str:
 
 def section_titles(objects: dict[str, Any]) -> dict[str, str]:
     return {
-        first_value(section, "section_id", "id"): first_value(section, "title", "name")
+        first_value(section, "section_id", "id"): bilingual_title(section)
         for section in object_items(objects, "sections")
+    }
+
+
+def title_translation_summary(paper: dict[str, Any], objects: dict[str, Any]) -> dict[str, Any]:
+    records = [paper, *object_items(objects, "chapters"), *object_items(objects, "sections")]
+    missing = []
+    inferred = []
+    confirmed = []
+    for item in records:
+        if not isinstance(item, dict):
+            continue
+        identifier = (
+            first_value(item, "paper_id", "chapter_id", "section_id", "id", default="<unknown>")
+        )
+        status = first_value(item, "title_translation_status", default="")
+        has_zh = bool(title_zh(item))
+        if has_zh or status == "confirmed":
+            confirmed.append(identifier)
+        elif status == "inferred":
+            inferred.append(identifier)
+        else:
+            missing.append(identifier)
+    return {
+        "total": len(records),
+        "confirmed_or_present": len(confirmed),
+        "inferred": len(inferred),
+        "missing": len(missing),
+        "missing_ids": missing,
     }
 
 
@@ -256,7 +303,7 @@ def render_manuscript_summary(paper: dict[str, Any], objects: dict[str, Any]) ->
         "",
         f"Generated at: {now_iso()}",
         f"Paper id: `{first_value(paper, 'paper_id', 'id')}`",
-        f"Title: {first_value(paper, 'title', 'name')}",
+        f"Title: {bilingual_title(paper)}",
         f"Current round: `{first_value(paper, 'current_round')}`",
         f"Paragraph source mode: `{first_value(paper, 'paragraph_source_mode')}`",
         "",
@@ -273,7 +320,7 @@ def render_manuscript_summary(paper: dict[str, Any], objects: dict[str, Any]) ->
         lines.append(f"| {label} | {len(object_items(objects, key))} |")
     lines.extend(["", "## Chapters", ""])
     for chapter in object_items(objects, "chapters"):
-        lines.append(f"- `{first_value(chapter, 'chapter_id', 'id')}` {first_value(chapter, 'title', 'name')}")
+        lines.append(f"- `{first_value(chapter, 'chapter_id', 'id')}` {bilingual_title(chapter)}")
     lines.append("")
     return "\n".join(lines)
 
@@ -291,7 +338,7 @@ def render_full_review(
         "",
         "## Metadata",
         "",
-        f"- manuscript: {first_value(paper, 'title', 'name')}",
+        f"- manuscript: {bilingual_title(paper)}",
         f"- round: {round_id}",
         "- version: latest",
         f"- generated_at: {now_iso()}",
@@ -388,7 +435,7 @@ def render_partial_review(
         "",
         "## Metadata",
         "",
-        f"- manuscript: {first_value(paper, 'title', 'name')}",
+        f"- manuscript: {bilingual_title(paper)}",
         f"- round: {round_id}",
         "- target_scope: UI annotations and user-confirmed failed sentences",
         f"- generated_at: {now_iso()}",
@@ -688,6 +735,7 @@ def run_sync(args: argparse.Namespace) -> dict[str, Any]:
 
     terminology_summary, terminology_written = sync_terminology(workbench, objects, args.check_only)
     written.extend(terminology_written)
+    title_summary = title_translation_summary(paper, objects)
 
     outputs = {
         bilingual / "manuscript_objects.md": render_manuscript_summary(paper, objects),
@@ -711,6 +759,8 @@ def run_sync(args: argparse.Namespace) -> dict[str, Any]:
         warnings.append(f"{terminology_summary['missing_field']} terminology records lack field/domain")
     if terminology_summary["missing_source_provenance"]:
         warnings.append(f"{terminology_summary['missing_source_provenance']} terminology records lack source provenance")
+    if title_summary["missing"]:
+        warnings.append(f"{title_summary['missing']} paper/chapter/section titles lack title_zh")
 
     report = {
         "generated_at": now_iso(),
@@ -737,6 +787,7 @@ def run_sync(args: argparse.Namespace) -> dict[str, Any]:
         "issues": issues,
         "warnings": warnings,
         "terminology_schema": terminology_summary,
+        "title_translation": title_summary,
         "review_drafts": {
             "full_sentence_count": full_count,
             "partial_sentence_count": len(partial_ids),

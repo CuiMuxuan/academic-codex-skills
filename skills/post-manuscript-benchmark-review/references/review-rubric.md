@@ -55,6 +55,27 @@ Score guide:
 - `3`: relevant topic and acceptable coverage, but the gap is broad, loosely tied to benchmark expectations, or missing recent competitors.
 - `1`: topic value is asserted rather than demonstrated; literature is a list, outdated, or disconnected from the manuscript's actual contribution.
 
+### 1A. Scope Fit And Desk-Reject Risk
+
+Use this editorial-style screen when the user asks whether the paper matches a target journal, is desk-reject prone, or resembles an Applied Energy-level submission.
+
+Check:
+
+- whether the research question fits the target journal scope;
+- whether the innovation direction matches the journal's typical concerns;
+- whether the paper is a methods paper disguised as an application paper;
+- whether the topic drifts away from the target venue;
+- what desk-reject reason an editor is most likely to cite.
+
+Report:
+
+- `Scope Fit` score on a 0-100 scale;
+- `Direct reject risk`: yes / no / uncertain;
+- `Likely desk-reject reasons`;
+- `Revision advice`.
+
+When scope is weak, treat fit problems as a target-venue blocker even if the technical content is otherwise plausible.
+
 ### 2. Foundational Knowledge And Research Capability
 
 Evaluate:
@@ -105,6 +126,26 @@ Score guide:
 - `3`: contribution is useful but incremental, under-evidenced, or insufficiently separated from close competitors.
 - `1`: novelty is cosmetic, unsupported, or not visible to likely reviewers.
 
+### 3A. Novelty Assessment
+
+Use this check when the user asks whether the claimed innovation is real, incremental, overstated, or duplicated.
+
+Check:
+
+- whether each claimed innovation point actually exists;
+- whether it is only a small improvement over existing methods;
+- whether it is merely incremental innovation;
+- whether the novelty is exaggerated;
+- whether the paper overlaps with prior literature.
+
+For each innovation point, record:
+
+- innovation degree;
+- whether the evidence is sufficient;
+- whether it reaches Applied Energy level.
+
+Treat unsupported novelty claims as a claim-discipline problem, not a styling issue.
+
 ### 4. Manuscript Norms And Writing Quality
 
 Evaluate:
@@ -119,6 +160,32 @@ Evaluate:
 - figure/table economy;
 - whether the manuscript reads like a paper rather than a project log;
 - whether limitations are honest and proportional.
+
+### 4A. Scientific Logic Audit
+
+Use this strict audit when the user asks for sentence-by-sentence or paragraph-by-paragraph logic review.
+
+Search for:
+
+- internal inconsistency across sections;
+- conflicts between chapter conclusions;
+- logical jumps;
+- broken inference chains;
+- hidden assumptions;
+- insufficient evidence;
+- discussion that exceeds what results support;
+- exaggerated conclusions;
+- misuse of causal language;
+- claims that violate basic scientific/common-sense constraints.
+
+For every issue, record:
+
+- the original wording or a precise quotation;
+- why it is a problem;
+- severity: `Critical`, `Major`, or `Minor`;
+- a concrete fix.
+
+Use page, paragraph, and sentence anchors whenever the manuscript source allows them.
 
 For high-quality SCI manuscripts, prefer a compact main story with supporting details in Supplement.
 
@@ -201,6 +268,9 @@ For formal manuscript review, check:
 - repeated wording across subsections is removed, merged, or justified;
 - every sentence is reviewed for ambiguous referents, vague abstractions, and undefined concepts;
 - citations follow [citation-proximity-and-style-gate.md](../../../shared/citation-proximity-and-style-gate.md).
+- use page, paragraph, and sentence anchors whenever available;
+- when the source format exposes page breaks, scan page by page before finalizing the audit;
+- when the user requests full editorial screening, include paragraph-level and sentence-level pass findings rather than only section-level comments.
 
 ## Next-Version Plan Template
 

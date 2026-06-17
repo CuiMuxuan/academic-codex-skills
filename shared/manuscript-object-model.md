@@ -7,6 +7,11 @@ Use this model when building or updating a manuscript object library for revisio
 ```yaml
 paper_id:
 title:
+title_en:
+title_zh:
+bilingual_title:
+title_translation_status: confirmed | inferred | missing | not_applicable
+title_translation_source:
 language_mode:
 target_journal_or_school:
 manuscript_path:
@@ -17,12 +22,33 @@ current_round:
 object_library_version:
 ```
 
+## Chapter
+
+```yaml
+chapter_id:
+title:
+title_en:
+title_zh:
+bilingual_title:
+title_translation_status: confirmed | inferred | missing | not_applicable
+title_translation_source:
+section_ids: []
+status:
+notes:
+```
+
 ## Section
 
 ```yaml
 section_id:
 parent_id:
+chapter_id:
 title:
+title_en:
+title_zh:
+bilingual_title:
+title_translation_status: confirmed | inferred | missing | not_applicable
+title_translation_source:
 local_purpose:
 evidence_scope:
 target_problem:

@@ -18,6 +18,14 @@ Use the shared schema in [manuscript-object-model.md](../../../shared/manuscript
 Build the object library from the canonical active manuscript draft, not from a sentence-aligned bilingual review draft.
 
 - `Chapter` and `Section` objects follow the active manuscript's heading structure.
+- `Paper`, `Chapter`, and `Section` objects must carry explicit bilingual title fields when the project is bilingual:
+  - keep `title` as the active manuscript heading, normally English or source-language text;
+  - set `title_en` to the English/source heading;
+  - set `title_zh` to the Chinese title used for review display;
+  - set `bilingual_title` to `title_en + "\n" + title_zh` when both exist;
+  - set `title_translation_status` to `confirmed`, `inferred`, `missing`, or `not_applicable`;
+  - set `title_translation_source` to the title map, user confirmation, or upstream bilingual heading source.
+- Do not rely on UI-side slash splitting to create bilingual chapter or section headings. If the active manuscript has only English headings, add the title comparison during object-library initialization or run `scripts/migrate_bilingual_titles.py` with a title map before launching the UI.
 - `Paragraph` objects follow the active manuscript's natural paragraphs or true structural blocks, such as list items, table rows, figure/table text references, or DOCX paragraphs.
 - `Sentence` objects are segmented inside their parent paragraph. Multiple sentence objects may share one `paragraph_id` when the manuscript paragraph contains multiple sentences.
 - A sentence-aligned bilingual review draft may supply `alignment_source_id`, English/Chinese paired sentence text, review notes, or latest review text, but it must not be the source of paragraph boundaries unless the original manuscript itself is already a sentence-aligned list.

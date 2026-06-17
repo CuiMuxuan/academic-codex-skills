@@ -1,6 +1,6 @@
 ---
 name: language-style-review
-description: "Review academic language style without modifying manuscript state. Use when the user asks for language style review, wording checks, grammar, AI-like phrasing, templated expression, Chinese-English translation accuracy, figure/table text wording, citation sentence style, sentence-level ambiguity, terminology acceptability, or operation-record residue checks in a paper, thesis, dissertation, review, rebuttal, chapter, section, paragraph, or sentence. May run independently or as an upstream report for revision-control or academic-paper-orchestrator. Chinese triggers: 语言风格审查, 检查语言, 用词检查, 语法检查, AI味, 模板化表达, 中文译文准确性, 图表文字, 引用句式, 逐句语言审查."
+description: "Review academic language style without modifying manuscript state. Use when the user asks for language style review, wording checks, grammar, AI-like phrasing, templated expression, Chinese-English translation accuracy, figure/table text wording, citation sentence style, sentence-level ambiguity, terminology acceptability, connector density by section, or operation-record residue checks in a paper, thesis, dissertation, review, rebuttal, chapter, section, paragraph, or sentence. May run independently or as an upstream report for revision-control or academic-paper-orchestrator. Chinese triggers: 语言风格审查, 检查语言, 用词检查, 语法检查, AI味, 模板化表达, 中文译文准确性, 图表文字, 引用句式, 逐句语言审查, 逻辑连接词, 正文机理段, 摘要过渡段."
 ---
 
 # Language Style Review
@@ -17,6 +17,7 @@ Do:
 - Provide candidate rewrites as suggestions only.
 - Explain why accepted professional terms or proper nouns should remain unchanged.
 - Create candidate project-standard items when the user asks to record a preference.
+- Distinguish between正文机理段 and摘要/引言/过渡段 when judging connector density, conceptual compression, and figure narration style.
 
 Do not:
 

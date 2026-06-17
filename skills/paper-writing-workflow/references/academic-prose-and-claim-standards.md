@@ -35,6 +35,19 @@ Use this reference for drafting, revising, and integrating academic prose. It is
 - Do not force bridges, transition paragraphs, or connective phrases between subsections when no real relationship exists.
 - If subsections do have a real relationship, state the relationship specifically: dependency, contrast, sequence, shared evidence, different scope, or different method role.
 
+## Data Figure Narrative
+
+For正文 paragraphs that interpret a data figure, state:
+
+- the figure's role in the argument;
+- the main quantitative pattern;
+- where the best/strongest and worst/weakest values appear when relevant;
+- where values are concentrated or sparse when the distribution matters;
+- what judgment or conclusion the figure supports;
+- any visible boundary, exception, or limitation.
+
+Do not stop at "Figure X shows". Turn the visible pattern into an argumentative sentence.
+
 ## Information Order And Forward Reference Discipline
 
 - Earlier text should not abruptly mention concepts, experiments, conclusions, methods, or terms that only become meaningful later.

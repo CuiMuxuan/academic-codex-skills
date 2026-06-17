@@ -148,7 +148,7 @@ Use browser-native elements where possible:
 - `<span>` for sentences and selectable text.
 - Small inline button or gutter marker for sentence-gap insertion comments.
 
-The UI chrome and controls should be Chinese-English bilingual. Keep saved JSON enum values in English, but display dropdown labels and status messages as Chinese label plus English enum/value. Chapter titles and section titles should use the same bilingual split rendering as sentence text whenever the source title contains both languages or explicit line breaks.
+The UI chrome and controls should be Chinese-English bilingual. Keep saved JSON enum values in English, but display dropdown labels and status messages as Chinese label plus English enum/value. Chapter titles and section titles must prefer explicit object-library fields: `title_en`, `title_zh`, and `bilingual_title`. Fall back to split rendering only when those fields are missing and the source title itself contains both languages or explicit line breaks. The chapter stepper may use only `title_en` or compact source `title`, but it must remain in one line.
 
 For bilingual sentence text, preserve the source object text and render visible Chinese and English drafts on separate lines when the object text already contains explicit line breaks or an English/Chinese boundary. This display split must not overwrite `manuscript_objects.json` or change the annotation schema. Span annotations should continue to store character offsets against the normalized source sentence text.
 
@@ -552,6 +552,9 @@ Expected object library shape may vary slightly, so the service should normalize
   "node_type": "section",
   "id": "SEC_2_1",
   "title": "2.1 ...",
+  "title_en": "2.1 ...",
+  "title_zh": "2.1 ...",
+  "bilingual_title": "2.1 ...\n2.1 ...",
   "children": []
 }
 ```

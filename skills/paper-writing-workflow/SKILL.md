@@ -1,11 +1,11 @@
 ---
 name: paper-writing-workflow
-description: "Plan, draft, revise, and integrate academic papers, theses, dissertations, review papers, experimental papers, and manuscript chapters from verified evidence. Use when the user asks for chapter outlines, paper structure, academic prose, bilingual Chinese-English writing, literature-backed claims, section-by-section drafting, revision, supervisor or reviewer comment response planning, introduction logic, abbreviation-first-use checks, evidence-gap marking, field terminology control, integrated manuscript assembly, or multi-agent/sub-agent parallel checks for writing evidence support, subsection language audit, citation-distance audit, or reviewer-comment action decomposition. Chinese triggers: 论文写作, 章节写作, 论文润色, 综述写作, 毕业论文正文, 学术表达, 引言逻辑, 文献缺口, 待补证据, 评审意见修改, 术语规范, 多agent写作审查, 子agent证据检查, 并行语言审查."
+description: "Plan, draft, revise, and integrate academic papers, theses, dissertations, review papers, experimental papers, and manuscript chapters from verified evidence. Use when the user asks for chapter outlines, paper structure, academic prose, bilingual Chinese-English writing, literature-backed claims, section-by-section drafting, revision, supervisor or reviewer comment response planning, introduction logic, abbreviation-first-use checks, evidence-gap marking, field terminology control, integrated manuscript assembly, data-figure body narration, rhetorical-depth calibration for正文 vs summary transitions, or multi-agent/sub-agent parallel checks for writing evidence support, subsection language audit, citation-distance audit, or reviewer-comment action decomposition. Chinese triggers: 论文写作, 章节写作, 论文润色, 综述写作, 毕业论文正文, 学术表达, 引言逻辑, 文献缺口, 待补证据, 评审意见修改, 术语规范, 数据图解读, 正文图表分析, 深度改写, 多agent写作审查, 子agent证据检查, 并行语言审查."
 ---
 
 # Paper Writing Workflow
 
-Use this skill for academic writing after the writing goal and evidence baseline are clear. It owns structure, argument, detailed design documents, chapter drafting, ordinary prose revision, and integration.
+Use this skill for academic writing after the writing goal and evidence baseline are clear. It owns structure, argument, detailed design documents, chapter drafting, ordinary prose revision, section-level figure narration, and integration.
 
 ## Boundaries
 
@@ -42,16 +42,19 @@ Do not:
 7. Preserve the user's required language and citation style.
 8. Do not overwrite the only working draft.
 9. Stop for confirmation after each major chapter or integrated manuscript.
-10. During drafting and ordinary revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass.
+10. During drafting and ordinary revision, prioritize accurate, direct, concise, understandable prose; reserve style elevation for the final polishing pass unless the target section is a正文机理段、数据图解读段、摘要、引言、结论, or other section that needs a calibrated rhetorical mode.
 11. From the first body-text section onward, write the full term followed by the abbreviation in parentheses on first use unless the target style guide says otherwise; title, abstract, and highlights are exempt by default.
 12. Judge manuscript quality by whether the problem is clear, the method is reasonable, the experiments support the conclusion, and the contribution is explicit.
 13. For body text and rebuttal text, stop when factual, boundary, subjective, novelty, contribution, or limitation claims lack concrete support; title, abstract, highlights, and graphical abstract are exempt unless the target rules require otherwise.
 14. Give each chapter, major section, and subsection a clear local purpose without forcing artificial transitions.
-15. After an initial full draft, hand complex sentence-by-sentence revision, pass/fail confirmation, and latest-draft state management to `$revision-control`.
-16. Apply the shared citation-proximity gate when placing or revising citations.
-17. Route strict language-style diagnosis to `$language-style-review`; use local language checks only as part of drafting or ordinary revision.
-18. Apply the shared equation/formula standard when writing or revising formulas, equations, inline math, chemical notation, unit notation, or equation cross-references. Use LaTeX as the canonical source. If no journal or school rule is supplied, use the default formula standard; if a target journal/template rule exists, follow it.
-19. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
+15. For正文 data-figure commentary, describe the figure's role, quantitative pattern, best/worst region, concentration or sparsity, and implication before polishing the prose.
+16. After an initial full draft, hand complex sentence-by-sentence revision, pass/fail confirmation, and latest-draft state management to `$revision-control`.
+17. Apply the shared citation-proximity gate when placing or revising citations.
+18. Route strict language-style diagnosis to `$language-style-review`; use local language checks only as part of drafting or ordinary revision.
+19. Apply [academic-rhetorical-depth-modes.md](references/academic-rhetorical-depth-modes.md) when the user wants a denser正文机理版 or a紧凑摘要/引言/过渡版.
+20. Apply [data-figure-body-analysis.md](references/data-figure-body-analysis.md) when writing正文 about a data figure and the paragraph must explain the figure's purpose, quantitative pattern, and implication.
+21. Apply the shared equation/formula standard when writing or revising formulas, equations, inline math, chemical notation, unit notation, or equation cross-references. Use LaTeX as the canonical source. If no journal or school rule is supplied, use the default formula standard; if a target journal/template rule exists, follow it.
+22. For substantial writing reviews, evidence checks, strict language audits, or reviewer-comment decomposition, plan multi-agent parallel checks by default; start sub-agents only after user confirmation unless prior full or automatic-execution permission exists.
 
 ## Intake
 
@@ -116,6 +119,10 @@ Read [academic-prose-and-claim-standards.md](references/academic-prose-and-claim
 Read [introduction-logic-playbook.md](references/introduction-logic-playbook.md) when drafting or revising an Introduction, background, problem statement, or thesis-opening chapter.
 
 Read [chapter-drafting-checklist.md](references/chapter-drafting-checklist.md) when drafting long chapters, responding to supervisor comments, or integrating multiple sections.
+
+Read [academic-rhetorical-depth-modes.md](references/academic-rhetorical-depth-modes.md) when the user needs two writing outputs: a dense正文机理版 and a compact摘要/引言/过渡版.
+
+Read [data-figure-body-analysis.md](references/data-figure-body-analysis.md) when the user asks for正文 text that interprets a data figure by pattern, extremum, concentration, sparsity, or implication.
 
 Read [writing-output-templates.md](references/writing-output-templates.md) when creating a paper design document, evidence-to-section map, section draft packet, benchmark-calibrated section packet, or revision report.
 

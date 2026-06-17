@@ -1,11 +1,11 @@
 ---
 name: academic-figure-workflow
-description: "Plan, create, revise, and validate academic figures for papers, theses, dissertations, and technical reports. Use for SVG mechanism diagrams, conceptual models, Nature-grade multi-panel Matplotlib figures, data-driven plots, draw.io engineering diagrams, workflow charts, use-case diagrams, architecture diagrams, tables-as-figures, figure captions, publication visual standards, export/editability QA, accessibility/color checks, and user-confirmed OpenAI image generation. Chinese triggers: 论文作图, 机理图, SVG绘图, Nature风格多面板图, matplotlib作图, drawio流程图, 用例图, 架构图, 论文插图标准, 图片投稿标准, 大模型绘图API."
+description: "Plan, create, revise, and validate academic figures for papers, theses, dissertations, and technical reports. Use for SVG mechanism diagrams, conceptual models, Nature-grade multi-panel Matplotlib figures, data-driven plots,正文 figure interpretation handoff, draw.io engineering diagrams, workflow charts, use-case diagrams, architecture diagrams, tables-as-figures, figure captions, publication visual standards, export/editability QA, accessibility/color checks, and user-confirmed OpenAI image generation. Chinese triggers: 论文作图, 机理图, SVG绘图, Nature风格多面板图, matplotlib作图, 数据图正文分析, 图的作用阐释, drawio流程图, 用例图, 架构图, 论文插图标准, 图片投稿标准, 大模型绘图API."
 ---
 
 # Academic Figure Workflow
 
-Use this skill for academic and thesis figures. Choose the method by figure type, evidence needs, editability, and reproducibility.
+Use this skill for academic and thesis figures. Choose the method by figure type, evidence needs, editability, and reproducibility. For data-backed plots, also prepare the paragraph-level figure argument so正文 text can explain the plot's purpose, quantitative pattern, and implication.
 
 ## Boundaries
 
@@ -76,14 +76,15 @@ Read [figure-method-selection.md](references/figure-method-selection.md) when a 
 2. For complex, multi-panel, submission-bound, code-backed, or data-backed figures, apply [figure-argument-contract.md](references/figure-argument-contract.md).
 3. For submission-quality or journal-facing figures, apply [publication-visual-standards.md](references/publication-visual-standards.md), [export-and-editability-standards.md](references/export-and-editability-standards.md), and [accessibility-and-color-standards.md](references/accessibility-and-color-standards.md).
 4. For data-backed plots, chart-choice questions, user-provided CSV/Excel/DataFrame files, or risky user-specified chart types, apply [data-visualization-advisor.md](references/data-visualization-advisor.md) before plotting.
-5. For Nature-style or multi-panel Matplotlib figures, apply [nature-matplotlib-protocol.md](references/nature-matplotlib-protocol.md), [multi-panel-layout-patterns.md](references/multi-panel-layout-patterns.md), and [chart-type-visual-standards.md](references/chart-type-visual-standards.md).
-6. For SVG mechanism diagrams or Draw.io engineering diagrams, apply [svg-and-drawio-diagrams.md](references/svg-and-drawio-diagrams.md); for Draw.io code-backed or engineering diagrams, also apply [drawio-engineering-diagram-standards.md](references/drawio-engineering-diagram-standards.md).
-7. For image plates, photographs, microscopy, heatmaps over images, or mixed raster/vector panels, apply [image-panel-integrity.md](references/image-panel-integrity.md).
-8. For AI-generated bitmap assets, apply [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before generation.
-9. When a venue-specific requirement, external visual example, or numeric artwork standard matters, apply [publisher-visual-source-map.md](references/publisher-visual-source-map.md) and verify the current official guide when possible.
-10. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure labels, formulas, superscripts/subscripts, citations, or cross-references may be converted.
-11. For any submission-quality generated or revised figure, apply [rendered-figure-qa.md](references/rendered-figure-qa.md) before calling it ready.
-12. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, rendered QA result, and unresolved issues.
+   - For正文 narration of a data-backed plot, also apply the writing-workflow reference for data-figure body analysis so the manuscript states the figure role, best/worst region, concentration or sparsity, and supported conclusion.
+6. For Nature-style or multi-panel Matplotlib figures, apply [nature-matplotlib-protocol.md](references/nature-matplotlib-protocol.md), [multi-panel-layout-patterns.md](references/multi-panel-layout-patterns.md), and [chart-type-visual-standards.md](references/chart-type-visual-standards.md).
+7. For SVG mechanism diagrams or Draw.io engineering diagrams, apply [svg-and-drawio-diagrams.md](references/svg-and-drawio-diagrams.md); for Draw.io code-backed or engineering diagrams, also apply [drawio-engineering-diagram-standards.md](references/drawio-engineering-diagram-standards.md).
+8. For image plates, photographs, microscopy, heatmaps over images, or mixed raster/vector panels, apply [image-panel-integrity.md](references/image-panel-integrity.md).
+9. For AI-generated bitmap assets, apply [ai-image-generation-gate.md](references/ai-image-generation-gate.md) before generation.
+10. When a venue-specific requirement, external visual example, or numeric artwork standard matters, apply [publisher-visual-source-map.md](references/publisher-visual-source-map.md) and verify the current official guide when possible.
+11. Apply [notation-and-conversion-integrity-gate.md](../../shared/notation-and-conversion-integrity-gate.md) when figure labels, formulas, superscripts/subscripts, citations, or cross-references may be converted.
+12. For any submission-quality generated or revised figure, apply [rendered-figure-qa.md](references/rendered-figure-qa.md) before calling it ready.
+13. Provide the editable source, exports if generated, caption draft, placement recommendation, evidence/code trace, rendered QA result, and unresolved issues.
 
 ## Validation
 

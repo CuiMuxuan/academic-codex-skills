@@ -7,6 +7,8 @@ Use this reference for revision modes, output packets, and final quality checks 
 | Mode | Action |
 |---|---|
 | `logic` | Strengthen argument sequence, transitions, and section roles |
+| `logic_depth` | Upgrade a paragraph into a deeper mechanism, boundary, or engineering-consequence argument while keeping evidence scope fixed |
+| `data_figure_analysis` | Interpret a data figure in正文 by role, quantitative pattern, best/worst region, concentration/sparsity, and supported implication |
 | `evidence` | Add, remove, or flag claims based on verified evidence |
 | `style` | Improve academic tone, precision, concision, and bilingual consistency |
 | `structure` | Reorganize headings, paragraph order, and chapter balance |
@@ -59,6 +61,7 @@ Before claiming a writing task is complete, check:
 - grouped citations state a clear evidence role or grouping basis when sources differ;
 - first-use abbreviations follow `full term (abbreviation)` unless the target style says otherwise;
 - field-specific terminology matches the confirmed field and target venue;
+- data-backed figure paragraphs state the figure's role, quantitative pattern, best/worst region, concentration or sparsity, and implication instead of only restating that the figure exists;
 - repeated expressions across subsections have been removed, merged, or justified;
 - each sentence has been checked for ambiguity, vague abstraction, undefined referents, concepts introduced without setup, and the object-condition-consequence rule in [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md);
 - logic connectors, source-role wording, table/figure sentences, and bilingual sentence structure follow [cross-disciplinary-language-review-gate.md](../../../shared/cross-disciplinary-language-review-gate.md);

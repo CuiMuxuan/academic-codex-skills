@@ -34,6 +34,21 @@ Before selecting a chart, inspect or summarize:
 
 When source data are available, prefer a small profiling script or notebook cell that prints column dtypes, row counts, missingness, group counts, descriptive statistics, and candidate warnings. Do not silently coerce identifiers into continuous numeric variables.
 
+## Body-Text Interpretation Handoff
+
+For data-backed figures that will be discussed in正文, include a short interpretation handoff:
+
+- figure role in the paper;
+- best or strongest region;
+- worst or weakest region;
+- most concentrated region or cluster;
+- sparsest region or cluster;
+- main trend, separation, plateau, or inflection;
+- supported judgment or conclusion;
+- limits, uncertainty, or exceptions.
+
+Do not treat this handoff as a caption. It should help the writing workflow explain what the figure means in the manuscript argument.
+
 ## Argument To Chart Mapping
 
 | user argument | default chart | avoid |
@@ -95,6 +110,7 @@ Before plotting, report:
 Figure argument:
 Data inspected:
 Key data facts:
+Body-text interpretation handoff:
 Recommended chart:
 Why this chart:
 Alternatives:

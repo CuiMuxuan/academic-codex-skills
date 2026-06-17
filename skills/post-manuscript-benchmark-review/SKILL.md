@@ -1,6 +1,6 @@
 ---
 name: post-manuscript-benchmark-review
-description: "Post-draft academic manuscript review against benchmark papers. Use only after an initial full manuscript draft, thesis chapter draft, or journal paper draft exists and the user asks for review, grading, gap analysis, target-paper comparison, SCI/Q1 readiness assessment, benchmark-literature comparison, reviewer-comment response planning, next-version optimization planning, or multi-agent/sub-agent parallel review across structure logic, evidence support, language audit, citation proximity, figure/format QA, and reviewer-comment action planning. Do not use during outline planning, literature search, figure generation, citation verification, formatting, or de-AI polishing unless a complete draft exists. Chinese triggers: 初版论文后评审, 论文生成后评审, 对标文献差距, SCI一区评审, 论文质量评判, 下一版优化方案, 与对标论文比较, 审稿意见处理, 多agent论文评审, 子agent并行评审, 多智能体稿件审查."
+description: "Post-draft academic manuscript review against benchmark papers and editorial standards. Use only after an initial full manuscript draft, thesis chapter draft, or journal paper draft exists and the user asks for review, grading, gap analysis, target-paper comparison, SCI/Q1 or Applied Energy-style readiness assessment, desk-reject risk review, page/paragraph/sentence-level audit, benchmark-literature comparison, reviewer-comment response planning, next-version optimization planning, or multi-agent/sub-agent parallel review across scope fit, novelty, scientific logic, evidence support, language audit, citation proximity, figure/format QA, and reviewer-comment action planning. Do not use during outline planning, literature search, figure generation, citation verification, formatting, or de-AI polishing unless a complete draft exists. Chinese triggers: 初版论文后评审, 论文生成后评审, 对标文献差距, SCI一区评审, 论文质量评判, 下一版优化方案, 与对标论文比较, 审稿意见处理, 多agent论文评审, 子agent并行评审, 多智能体稿件审查, 期刊匹配度审查, 创新性审查, 科学逻辑审查."
 ---
 
 # Post-Manuscript Benchmark Review
@@ -21,6 +21,8 @@ Do:
 - Identify manuscript gaps, claim risks, evidence needs, and next-version P0/P1/P2 actions.
 - Analyze reviewer/editor/supervisor comments in the context of a complete draft.
 - Produce a ten-dimension 100-point quality review and target-readiness judgment.
+- When the user requests an editorial-style SCI/Q1 audit, delegate bounded checks to a standards-review agent for scope fit, novelty, and scientific logic before final judgment.
+- Use page, paragraph, and sentence anchors whenever the source format exposes them.
 
 Do not:
 
@@ -50,13 +52,14 @@ If key inputs are unavailable, produce a provisional review plan and materials r
 1. Confirm the post-draft gate and review target.
 2. Build or validate the 3-10 benchmark set with [benchmark-selection-and-extraction.md](references/benchmark-selection-and-extraction.md).
 3. Apply the ten-dimension 100-point review, four-criterion diagnostic lens, and claim triage in [review-rubric.md](references/review-rubric.md).
-4. Use [benchmark-report-schema.md](references/benchmark-report-schema.md) to keep benchmark facts, access limits, manuscript claim records, gap severity, and next-version actions auditable.
-5. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
-6. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before approving factual, boundary, subjective, contribution, limitation, or rebuttal judgments.
-7. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when formal review output must judge abstract wording, undefined local labels, operation-record prose, sentence purpose, citation proximity, proxy validity, or bilingual claim-strength consistency.
-8. Use [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent review checks for structure logic, evidence support, language gate issues, citation proximity, figure/format QA, or reviewer-comment action planning.
-9. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, and next-version plans.
-10. Return readiness level, ten-dimension scores, evidence limits, benchmark gaps, P0/P1/P2 actions, material requests, rollback risks, and `$revision-control` handoff packets.
+4. If the user asks for editorial-style SCI/Q1 screening, run [standards-review-agent.md](references/standards-review-agent.md) and merge its scope-fit, novelty, and scientific-logic findings before the final judgment.
+5. Use [benchmark-report-schema.md](references/benchmark-report-schema.md) to keep benchmark facts, access limits, manuscript claim records, gap severity, and next-version actions auditable.
+6. Use [reviewer-comment-response-workflow.md](references/reviewer-comment-response-workflow.md) and [reviewer-comment-action-plan-gate.md](../../shared/reviewer-comment-action-plan-gate.md) when concrete reviewer, editor, committee, or supervisor comments are provided for a complete draft.
+7. Use [main-text-and-rebuttal-claim-support-gate.md](../../shared/main-text-and-rebuttal-claim-support-gate.md) before approving factual, boundary, subjective, contribution, limitation, or rebuttal judgments.
+8. Use [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinary-language-review-gate.md) when formal review output must judge abstract wording, undefined local labels, operation-record prose, sentence purpose, citation proximity, proxy validity, or bilingual claim-strength consistency.
+9. Use [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) before launching independent review checks for structure logic, evidence support, language gate issues, citation proximity, figure/format QA, reviewer-comment action planning, or editorial-style standards screening.
+10. Use [review-output-template.md](references/review-output-template.md) for formal Chinese reports, readiness judgments, benchmark gap tables, standards-audit tables, and next-version plans.
+11. Return readiness level, ten-dimension scores, evidence limits, benchmark gaps, standards-audit findings, P0/P1/P2 actions, material requests, rollback risks, and `$revision-control` handoff packets.
 
 ## Quality Gate
 
@@ -70,6 +73,7 @@ The review is high quality only if it:
 - turns two or more review comments into a triaged action plan before manuscript rewriting.
 - applies the cross-disciplinary language review gate when wording quality, terminology clarity, sentence purpose, or support distance is part of the review.
 - plans multi-agent parallel checks by default for substantial benchmark review, language audit, evidence-support review, figure/format QA, or reviewer-comment decomposition, then merges findings before final judgment.
+- uses page, paragraph, and sentence anchors whenever the source format exposes them.
 - does not directly edit the manuscript; it sends confirmed modification tasks to `$revision-control`.
 
 ## Reference
@@ -91,5 +95,7 @@ Read [cross-disciplinary-language-review-gate.md](../../shared/cross-disciplinar
 Read [multi-agent-academic-workflow-gate.md](../../shared/multi-agent-academic-workflow-gate.md) when a complete draft review can be split into parallel checks. Use it for sub-agent scope, output format, confirmation gates, conflict handling, and main-agent merge rules.
 
 Read [review-output-template.md](references/review-output-template.md) when producing a formal report, Chinese evaluation, SCI/Q1 readiness judgment, or benchmark gap table.
+
+Read [standards-review-agent.md](references/standards-review-agent.md) when the user asks for editorial-style SCI/Q1 screening, desk-reject risk review, Applied Energy-level comparison, or page-by-page, paragraph-by-paragraph, and sentence-by-sentence audit.
 
 Read [revision-control-contract.md](../../shared/revision-control-contract.md) when turning review findings into a formal revision queue.

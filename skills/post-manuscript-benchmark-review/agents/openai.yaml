@@ -1,4 +1,4 @@
 interface:
   display_name: "Post-Manuscript Benchmark Review"
-  short_description: "Review complete drafts against benchmark papers."
-  default_prompt: "After an initial academic manuscript draft is generated, use $post-manuscript-benchmark-review to compare it against 3-10 benchmark papers, judge readiness, triage claims, handle reviewer comments when provided, and propose the next revision plan."
+  short_description: "Review complete drafts against benchmark papers and editorial standards."
+  default_prompt: "After an initial academic manuscript draft is generated, use $post-manuscript-benchmark-review to compare it against 3-10 benchmark papers, run editorial-style SCI/Q1 screening when requested, judge scope fit, novelty, and scientific logic, triage claims, handle reviewer comments when provided, and propose the next revision plan."
